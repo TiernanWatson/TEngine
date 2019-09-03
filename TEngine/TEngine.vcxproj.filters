@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Core\Math">
       <UniqueIdentifier>{3a1f9f30-9468-49a9-9212-28cc3d38c37a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\IO">
+      <UniqueIdentifier>{a4ab71c4-5ead-4932-83a3-35f5bf0df0ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\IO">
+      <UniqueIdentifier>{66b3af21-a737-42be-8f17-a9d61cbe5f01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TEngine.cpp">
@@ -42,10 +48,16 @@
     <ClCompile Include="Core\Memory\PoolAllocator.cpp">
       <Filter>Source Files\Core\Memory</Filter>
     </ClCompile>
-    <ClCompile Include="Core\IO\FileSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Math\Vector4.cpp">
+      <Filter>Source Files\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\IO\FileSystem.cpp">
+      <Filter>Source Files\Core\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Math\Vector3.cpp">
+      <Filter>Source Files\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Math\Matrix4.cpp">
       <Filter>Source Files\Core\Math</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,10 +71,19 @@
     <ClInclude Include="Core\Memory\StackAllocator.h">
       <Filter>Header Files\Core\Memory</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Math\Vector4.h">
+      <Filter>Header Files\Core\Math</Filter>
+    </ClInclude>
     <ClInclude Include="Core\IO\FileSystem.h">
+      <Filter>Header Files\Core\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Math\Vector4.h">
+    <ClInclude Include="Core\Math\Vector3.h">
+      <Filter>Header Files\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Math\Matrix4.h">
       <Filter>Header Files\Core\Math</Filter>
     </ClInclude>
   </ItemGroup>

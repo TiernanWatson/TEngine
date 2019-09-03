@@ -2,19 +2,20 @@
 #include "../PortableTypes.h"
 #include <string>
 
-namespace TEngine {
+namespace TEngine 
+{
 	class Vector4
 	{
 	public:
-		f32 x, y, z, w;
+		float32 x, y, z, w;
 
 	public:
 		Vector4() : x(0), y(0), z(0), w(0) {};
-		Vector4(f32 x, f32 y, f32 z, f32 w) : x(x), y(y), z(z), w(w) {};
+		Vector4(float32 x, float32 y, float32 z, float32 w) : x(x), y(y), z(z), w(w) {};
 		~Vector4() {};
 
-		f32 Magnitude() const;
-		f32 SqrMagnitude() const;
+		float32 Magnitude() const;
+		float32 SqrMagnitude() const;
 
 		void Normalize();
 		Vector4 Normalized() const;

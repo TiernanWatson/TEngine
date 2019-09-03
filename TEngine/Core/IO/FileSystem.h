@@ -1,6 +1,7 @@
 #pragma once
 
-namespace TEngine {
+namespace TEngine 
+{
 	class FileSystem
 	{
 	};

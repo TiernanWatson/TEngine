@@ -1,7 +1,8 @@
 #pragma once
 #include "../PortableTypes.h"
 
-namespace TEngine {
+namespace TEngine 
+{
 	class PoolAllocator
 	{
 	public:
@@ -12,6 +13,6 @@ namespace TEngine {
 	private:
 		size blockSize;
 		size maxElements;
-		size currentCount;
+		size currentCount = 0;
 	};
 }
