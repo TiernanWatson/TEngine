@@ -3,6 +3,12 @@
 
 namespace TEngine 
 {
+	#if defined(_MSC_VER)
+	#define _FORCE_INLINE_ __forceinline
+	#else
+	#define _FORCE_INLINE_ inline
+	#endif
+
 	// Important to know exactly what size types are for
 	// good memory management, and easy to switch out on 
 	// different platforms/compilers if needed

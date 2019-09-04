@@ -4,5 +4,7 @@ namespace TEngine
 {
 	class FileSystem
 	{
+	public:
+		FileSystem();
 	};
 }

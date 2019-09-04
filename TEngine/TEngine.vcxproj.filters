@@ -60,6 +60,9 @@
     <ClCompile Include="Core\Math\Matrix4.cpp">
       <Filter>Source Files\Core\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Math\TMath.cpp">
+      <Filter>Source Files\Core\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\PortableTypes.h">
@@ -84,6 +87,9 @@
       <Filter>Header Files\Core\Math</Filter>
     </ClInclude>
     <ClInclude Include="Core\Math\Matrix4.h">
+      <Filter>Header Files\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Math\TMath.h">
       <Filter>Header Files\Core\Math</Filter>
     </ClInclude>
   </ItemGroup>
