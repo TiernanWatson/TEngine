@@ -3,6 +3,9 @@
 
 namespace TEngine 
 {
+	/**
+	* Stack of pre-defined size allocating blocks of various sized memory
+	**/
 	class StackAllocator
 	{
 	public:
@@ -10,7 +13,7 @@ namespace TEngine
 		explicit StackAllocator(const size stackSizeInBytes);
 		~StackAllocator();
 
-		void* Alloc(const size sizeInBytes);
+		void* Alloc(const size sizeInBytes, const uint8 alignment);
 
 		size GetMarker() const { return currentMarker; }
 

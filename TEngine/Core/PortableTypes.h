@@ -5,6 +5,8 @@ namespace TEngine
 {
 	#if defined(_MSC_VER)
 	#define _FORCE_INLINE_ __forceinline
+	#elif defined(__GNUC__)
+	#define _FORCE_INLINE_ __attribute__((always_inline))
 	#else
 	#define _FORCE_INLINE_ inline
 	#endif
@@ -30,4 +32,5 @@ namespace TEngine
 
 	typedef uintptr_t uintptr;
 	typedef intptr_t intptr;
+	typedef ptrdiff_t ptrdiff;
 }

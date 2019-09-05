@@ -4,7 +4,8 @@
 #include <iostream>
 #include "Core/PortableTypes.h"
 #include "Core/Memory/StackAllocator.h"
-#include "Core/Math/Vector4.h"
+#include "Core/Math/Vector3.h"
+#include "Core/Math/Matrix4.h"
 #include "Core/Math/TMath.h"
 
 using namespace TEngine;
@@ -18,5 +19,7 @@ int main()
 	std::cout << "EPSILON: " << TMath::EPSILON << std::endl;
 	std::cout << "RAD2DEG: " << TMath::RAD2DEG << std::endl;
 	std::cout << "DEG2RAD: " << TMath::DEG2RAD << std::endl;
+	
+	std::cout << "Float size is: " << sizeof(float32) << " and Matrix4 is: " << sizeof(Matrix4) << std::endl;
 }
 

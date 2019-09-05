@@ -4,6 +4,9 @@
 
 namespace TEngine
 {
+	/**
+	* Collection of common math functions
+	**/
 	class TMath
 	{
 	private:

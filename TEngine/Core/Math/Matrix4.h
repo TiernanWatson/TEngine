@@ -3,6 +3,9 @@
 
 namespace TEngine
 {
+	/**
+	* Class describing a 4x4 float32 matrix, 64 bytes
+	**/
 	class Matrix4
 	{
 	private:

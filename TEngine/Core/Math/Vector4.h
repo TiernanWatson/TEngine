@@ -4,6 +4,9 @@
 
 namespace TEngine 
 {
+	/**
+	* Class describing a 4D vector, 16-byte aligned
+	**/
 	class Vector4
 	{
 	public:
