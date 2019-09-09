@@ -47,6 +47,48 @@ namespace TEngine
 		return Vector3(x, y, z);
 	}
 
+	Vector3 Vector3::operator*(const float32& rhs) const
+	{
+		return Vector3(rhs * x, rhs * y, rhs * z);
+	}
+
+	Vector3& Vector3::operator*=(const float32& rhs)
+	{
+		x *= rhs;
+		y *= rhs;
+		z *= rhs;
+
+		return *this;
+	}
+
+	Vector3 Vector3::operator+(const Vector3& rhs) const
+	{
+		return Vector3(x + rhs.x, y + rhs.y, z + rhs.z);
+	}
+
+	Vector3 Vector3::operator-(const Vector3& rhs) const
+	{
+		return Vector3(x - rhs.x, y - rhs.y, z - rhs.z);
+	}
+
+	Vector3& Vector3::operator+=(const Vector3& rhs)
+	{
+		x += rhs.x;
+		y += rhs.y;
+		z += rhs.z;
+
+		return *this;
+	}
+
+	Vector3& Vector3::operator-=(const Vector3& rhs)
+	{
+		x -= rhs.x;
+		y -= rhs.y;
+		z -= rhs.z;
+
+		return *this;
+	}
+
 	std::string Vector3::ToString() const
 	{
 		return "(" + std::to_string(x) + ", " + std::to_string(y)

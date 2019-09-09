@@ -25,7 +25,7 @@ namespace TEngine
 		static _FORCE_INLINE_ float32 Cos(float32 value) { return cosf(value); }
 		static _FORCE_INLINE_ float32 Tan(float32 value) { return tanf(value); }
 
-		static _FORCE_INLINE_ float32 Asin(float32 value) { return atanf(value); }
+		static _FORCE_INLINE_ float32 Asin(float32 value) { return asinf(value); }
 		static _FORCE_INLINE_ float32 Acos(float32 value) { return acosf(value); }
 		static _FORCE_INLINE_ float32 Atan(float32 value) { return atanf(value); }
 

@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="Core\IO\FileSystem.cpp" />
     <ClCompile Include="Core\Math\Matrix4.cpp" />
+    <ClCompile Include="Core\Math\Quat.cpp" />
     <ClCompile Include="Core\Math\TMath.cpp" />
     <ClCompile Include="Core\Math\Vector3.cpp" />
     <ClCompile Include="Core\Math\Vector4.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Core\Core.h" />
     <ClInclude Include="Core\IO\FileSystem.h" />
     <ClInclude Include="Core\Math\Matrix4.h" />
+    <ClInclude Include="Core\Math\Quat.h" />
     <ClInclude Include="Core\Math\TMath.h" />
     <ClInclude Include="Core\Math\Vector3.h" />
     <ClInclude Include="Core\Math\Vector4.h" />
