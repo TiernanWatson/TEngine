@@ -46,6 +46,12 @@
     <Filter Include="Source Files\Window">
       <UniqueIdentifier>{f3d05e26-6a49-4362-bf7c-8f6b4b9d4701}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Time">
+      <UniqueIdentifier>{9e2099da-9101-436b-9835-b015e6caeece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Time">
+      <UniqueIdentifier>{6bcc23b8-2641-4bfe-875f-80020f3ced89}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TEngine.cpp">
@@ -84,6 +90,9 @@
     <ClCompile Include="Window\WindowManager.cpp">
       <Filter>Source Files\Window</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Time\Clock.cpp">
+      <Filter>Source Files\Core\Time</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\PortableTypes.h">
@@ -121,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="Window\WindowManager.h">
       <Filter>Header Files\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Time\Clock.h">
+      <Filter>Header Files\Core\Time</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
