@@ -1,7 +1,7 @@
 #pragma once
-#include "PortableTypes.h"
-#include "Time/Clock.h"
-#include "../Window/WindowManager.h"
+#include "Core/PortableTypes.h"
+#include "Core/Time/Clock.h"
+#include "Window/WindowManager.h"
 
 namespace TEngine
 {
