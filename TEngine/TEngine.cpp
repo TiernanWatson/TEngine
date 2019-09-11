@@ -3,14 +3,21 @@
 
 #include <iostream>
 #include "Loop.h"
+#include "Core/IO/FileSystem.h"
 
 using namespace TEngine;
 
 int main()
 {
-	Loop& loop = Loop::Instance();
+	char* result = FileSystem::Instance().ReadString("D:\\TEngine\\TEngine\\Engine.ini");
 
-	loop.Run();
+	std::cout << result << std::endl;
+
+	std::cout << "strlen: " << strlen(result) << std::endl;
+
+	/*Loop& loop = Loop::Instance();
+
+	loop.Run();*/
 
 	return 0;
 }
