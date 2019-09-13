@@ -1,4 +1,5 @@
 #include "Loop.h"
+#include "Core/Config/Config.h"
 
 namespace TEngine
 {
@@ -35,6 +36,7 @@ namespace TEngine
 
 	void Loop::StartUp()
 	{
+		Config::Instance().LoadFrom("D:\\TEngine\\TEngine\\Engine.ini");
 		windowManager->StartUp();
 	}
 

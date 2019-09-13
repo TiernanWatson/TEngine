@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include "Core/Config/Config.h"
 #include "Loop.h"
 #include "Core/IO/FileSystem.h"
 
@@ -9,15 +10,9 @@ using namespace TEngine;
 
 int main()
 {
-	char* result = FileSystem::Instance().ReadString("D:\\TEngine\\TEngine\\Engine.ini");
+	Loop& loop = Loop::Instance();
 
-	std::cout << result << std::endl;
-
-	std::cout << "strlen: " << strlen(result) << std::endl;
-
-	/*Loop& loop = Loop::Instance();
-
-	loop.Run();*/
+	loop.Run();
 
 	return 0;
 }

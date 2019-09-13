@@ -52,6 +52,12 @@
     <Filter Include="Source Files\Core\Time">
       <UniqueIdentifier>{6bcc23b8-2641-4bfe-875f-80020f3ced89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Config">
+      <UniqueIdentifier>{b13e45ed-0a3f-47d5-ae63-8f37a6f56056}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Config">
+      <UniqueIdentifier>{aefedaa3-5def-43ac-844f-7fc70431833a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TEngine.cpp">
@@ -93,6 +99,12 @@
     <ClCompile Include="Loop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Config\Config.cpp">
+      <Filter>Source Files\Core\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Config\ConfigVar.cpp">
+      <Filter>Source Files\Core\Config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\PortableTypes.h">
@@ -133,6 +145,12 @@
     </ClInclude>
     <ClInclude Include="Loop.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Config\Config.h">
+      <Filter>Header Files\Core\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Config\ConfigVar.h">
+      <Filter>Header Files\Core\Config</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
