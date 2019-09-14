@@ -5,6 +5,7 @@
 #include "Core/Config/Config.h"
 #include "Loop.h"
 #include "Core/IO/FileSystem.h"
+#include "Core/Memory/Memory.h"
 
 using namespace TEngine;
 

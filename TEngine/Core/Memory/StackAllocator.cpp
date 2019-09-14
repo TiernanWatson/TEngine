@@ -1,5 +1,6 @@
 #include "StackAllocator.h"
 #include <stdlib.h>
+#include <assert.h>
 #include <iostream>
 #include <string>
 
@@ -10,7 +11,6 @@ namespace TEngine
 	{
 		topRawPtr = malloc(stackSizeInBytes);
 		topPtr = reinterpret_cast<uintptr>(topRawPtr);
-		std::cout << std::to_string(topPtr) << std::endl;
 	}
 
 	StackAllocator::~StackAllocator()
@@ -20,8 +20,7 @@ namespace TEngine
 
 	void* StackAllocator::Alloc(const size sizeInBytes, const uint8 alignment)
 	{
-		if ((alignment & (alignment - 1)) != 0)
-			throw std::invalid_argument("Alignment was not a power of 2");
+		assert((alignment & (alignment - 1)) == 0);
 
 		uintptr testAddress = topPtr + currentMarker;
 		uintptr misalign = testAddress & (alignment - 1); // check for 1's to right of power of 2

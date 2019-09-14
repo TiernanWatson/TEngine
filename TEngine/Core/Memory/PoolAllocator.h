@@ -13,9 +13,19 @@ namespace TEngine
 		explicit PoolAllocator(size blockSize, size maxElements);
 		~PoolAllocator();
 
+		void* Alloc();
+		void Free(void* address);
+
 	private:
+		struct Block {
+			Block* next;
+			Block(Block* next) : next(next) {}
+		};
+
 		size blockSize;
 		size maxElements;
-		size currentCount = 0;
+
+		void* top;
+		Block* freeBlock;
 	};
 }
