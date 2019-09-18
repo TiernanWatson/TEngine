@@ -185,6 +185,8 @@
     <ClCompile Include="ECS\System.cpp" />
     <ClCompile Include="External\stb_image.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Input\Input.cpp" />
+    <ClCompile Include="Input\InputSystem.cpp" />
     <ClCompile Include="Loop.cpp" />
     <ClCompile Include="Render\Models\Mesh.cpp" />
     <ClCompile Include="Render\Models\Model.cpp" />
@@ -219,6 +221,9 @@
     <ClInclude Include="ECS\System.h" />
     <ClInclude Include="External\stb_image.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Input\InputSystem.h" />
+    <ClInclude Include="Input\KeyCode.h" />
     <ClInclude Include="Loop.h" />
     <ClInclude Include="Render\Models\Mesh.h" />
     <ClInclude Include="Render\Models\Model.h" />
@@ -229,6 +234,7 @@
     <ClInclude Include="Window\WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="cpp.hint" />
     <None Include="Engine.ini" />
     <None Include="Shaders\Fragment\default.frag" />
     <None Include="Shaders\Vertex\default.vert" />

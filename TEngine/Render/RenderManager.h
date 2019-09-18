@@ -15,7 +15,6 @@ namespace TEngine
 		Shader shader;
 		Texture texture;
 		Model model;
-		uint32 VBO, VAO, EBO;
 
 		void SetupVertexData();
 

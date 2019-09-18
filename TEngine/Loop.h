@@ -2,6 +2,7 @@
 #include "Core/PortableTypes.h"
 #include "Core/Time/Clock.h"
 #include "Window/WindowManager.h"
+#include "Input/InputSystem.h"
 #include "Render/RenderManager.h"
 
 namespace TEngine
@@ -17,6 +18,7 @@ namespace TEngine
 		Clock gameClock;
 
 		WindowManager* windowManager;
+		InputSystem* inputSystem;
 		RenderManager* renderManager;
 
 		Loop(); // singleton

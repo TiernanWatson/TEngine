@@ -94,6 +94,12 @@
     <Filter Include="Source Files\Render\Models">
       <UniqueIdentifier>{06a06f35-42c2-4b5c-9fb1-3c7e88e85991}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{2f42084d-e1e2-4341-b11e-50f1bcaede73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{a0e37d66-2366-4cd0-9c32-ac5ead3a9625}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TEngine.cpp">
@@ -188,6 +194,12 @@
     </ClCompile>
     <ClCompile Include="ECS\ComponentManager.cpp">
       <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\InputSystem.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Input.cpp">
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -284,6 +296,15 @@
     <ClInclude Include="ECS\ComponentManager.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="Input\InputSystem.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Input.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\KeyCode.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine.ini" />
@@ -293,5 +314,6 @@
     <None Include="Shaders\Fragment\default.frag">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

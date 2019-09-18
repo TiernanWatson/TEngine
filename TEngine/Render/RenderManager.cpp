@@ -62,15 +62,11 @@ namespace TEngine
 
 		model.Draw(shader);
 
-		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
 
 	void RenderManager::ShutDown()
 	{
 		this->window = nullptr;
-
-		glDeleteVertexArrays(1, &VAO);
-		glDeleteBuffers(1, &VBO);
 	}
 }
