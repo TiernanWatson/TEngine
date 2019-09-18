@@ -3,11 +3,17 @@
 
 namespace TEngine
 {
+	class Vector3;
+
 	/**
 	* Class describing a 4x4 float32 matrix, 64 bytes
 	**/
 	class Matrix4
 	{
+	public:
+		static const Matrix4 one;
+		static const Matrix4 identity;
+
 	private:
 		static const size ELEMENTS = 16;
 		static const size ROWS = 4;
@@ -27,19 +33,36 @@ namespace TEngine
 
 		float32 Determinant() const;
 
+		Matrix4 Transpose() const;
+
+		Matrix4 Inverse() const;
+
 		bool operator==(const Matrix4& rhs) const;
 		bool operator!=(const Matrix4& rhs) const;
 
 		Matrix4 operator+(const Matrix4& rhs) const;
 		Matrix4 operator-(const Matrix4& rhs) const;
 		Matrix4 operator*(const Matrix4& rhs) const;
+		Matrix4 operator*(const float32& rhs) const;
 
 		Matrix4& operator+=(const Matrix4& rhs);
 		Matrix4& operator-=(const Matrix4& rhs);
 		Matrix4& operator*=(const Matrix4& rhs);
+		Matrix4& operator*=(const float32& rhs);
 
 	public:
-		static const Matrix4 one;
-		static const Matrix4 identity;
+		/**
+		* Used to return the Camera-to-Clip space matrix for rendering
+		**/
+		static Matrix4 Projection(float32 fovRad, float32 aspect, float32 farDist, float32 nearDist);
+
+		/**
+		* Used to return the Model-to-World space matrix for rendering
+		**/
+		static Matrix4 ModelToWorld(const Vector3& trans, const Vector3& scale, const Vector3& rotation);
+
+		static Matrix4 RotateX(float32 radians);
+		static Matrix4 RotateY(float32 radians);
+		static Matrix4 RotateZ(float32 radians);
 	};
 }

@@ -2,6 +2,7 @@
 #include "Core/PortableTypes.h"
 #include "Core/Time/Clock.h"
 #include "Window/WindowManager.h"
+#include "Render/RenderManager.h"
 
 namespace TEngine
 {
@@ -16,6 +17,7 @@ namespace TEngine
 		Clock gameClock;
 
 		WindowManager* windowManager;
+		RenderManager* renderManager;
 
 		Loop(); // singleton
 		~Loop();
@@ -25,7 +27,15 @@ namespace TEngine
 
 		Clock& GetClock();
 
+		/**
+		* Starts the main game loop (usually called from Game::)
+		**/
 		void Run();
+
+		/**
+		* After the in-progress update finishes, the loop will stop and shut down
+		**/
+		void Stop();
 
 	private:
 		void StartUp();

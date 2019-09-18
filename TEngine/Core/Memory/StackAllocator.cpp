@@ -6,7 +6,7 @@
 
 namespace TEngine
 {
-	StackAllocator::StackAllocator(const size stackSizeInBytes)
+	StackAllocator::StackAllocator(size stackSizeInBytes)
 		: stackSizeInBytes(stackSizeInBytes)
 	{
 		topRawPtr = malloc(stackSizeInBytes);
@@ -18,7 +18,7 @@ namespace TEngine
 		free(topRawPtr);
 	}
 
-	void* StackAllocator::Alloc(const size sizeInBytes, const uint8 alignment)
+	void* StackAllocator::Alloc(size sizeInBytes, uint8 alignment)
 	{
 		assert((alignment & (alignment - 1)) == 0);
 
@@ -39,7 +39,7 @@ namespace TEngine
 		return reinterpret_cast<void*>(alignedAddress);
 	}
 
-	void StackAllocator::FreeUpTo(const size marker)
+	void StackAllocator::FreeUpTo(size marker)
 	{
 		currentMarker = marker;
 	}

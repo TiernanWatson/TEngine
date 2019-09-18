@@ -2,18 +2,11 @@
 //
 
 #include <iostream>
-#include "Core/Config/Config.h"
-#include "Loop.h"
-#include "Core/IO/FileSystem.h"
-#include "Core/Memory/Memory.h"
-
-using namespace TEngine;
+#include "Game.h"
 
 int main()
 {
-	Loop& loop = Loop::Instance();
-
-	loop.Run();
+	TEngine::Game::Start();
 
 	return 0;
 }

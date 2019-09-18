@@ -1,8 +1,11 @@
 #include "WindowManager.h"
+#include "../Game.h"
+#include <iostream>
 #include <assert.h>
 #include <exception>
 #include <glad/glad.h>
 #include <glfw3.h>
+#include "../Core/IO/FileSystem.h"
 
 namespace TEngine
 {
@@ -39,11 +42,14 @@ namespace TEngine
 
 	void WindowManager::Update(float32 deltaTime)
 	{
-		if (!glfwWindowShouldClose(window))
+		if (glfwWindowShouldClose(window))
 		{
-			glfwSwapBuffers(window);
-			glfwPollEvents();
+			Game::Exit();
+			return;
 		}
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
 	}
 
 	void WindowManager::ShutDown()

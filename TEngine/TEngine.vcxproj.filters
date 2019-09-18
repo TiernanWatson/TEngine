@@ -58,6 +58,42 @@
     <Filter Include="Source Files\Core\Config">
       <UniqueIdentifier>{aefedaa3-5def-43ac-844f-7fc70431833a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Render">
+      <UniqueIdentifier>{7dab1fbd-7632-4422-b29c-5a7fbb4424af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render">
+      <UniqueIdentifier>{94e1ca6a-3556-4a87-b582-9c35535de45d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Render\Shader">
+      <UniqueIdentifier>{66426074-a810-4efa-bd14-5b9a3ded94b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render\Shader">
+      <UniqueIdentifier>{48718b2b-95ca-48aa-9e74-5df1d21ed18f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render\Texture">
+      <UniqueIdentifier>{cb1b5f17-9f1a-412f-84e3-6a04be17b873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Render\Texture">
+      <UniqueIdentifier>{0abb90f6-b399-489b-b1dc-0808b7f6807f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ECS">
+      <UniqueIdentifier>{ed174215-b032-4bf7-a16e-87c140c87ad5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ECS">
+      <UniqueIdentifier>{3abb6b90-0033-4be1-8b35-3b9962c38049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ECS\Components">
+      <UniqueIdentifier>{59a9cf53-16da-4fc1-8c37-88b10af92f29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ECS\Components">
+      <UniqueIdentifier>{d6cc6071-9479-4029-8270-175de25f96cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Render\Models">
+      <UniqueIdentifier>{0d6b3ae9-2cb9-4630-b35b-172918f26b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render\Models">
+      <UniqueIdentifier>{06a06f35-42c2-4b5c-9fb1-3c7e88e85991}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TEngine.cpp">
@@ -104,6 +140,54 @@
     </ClCompile>
     <ClCompile Include="Core\Config\ConfigVar.cpp">
       <Filter>Source Files\Core\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Memory\Memory.cpp">
+      <Filter>Source Files\Core\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderManager.cpp">
+      <Filter>Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Shader\Shader.cpp">
+      <Filter>Source Files\Render\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Texture\Texture.cpp">
+      <Filter>Source Files\Render\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="External\stb_image.cpp">
+      <Filter>External</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entity.cpp">
+      <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Component.cpp">
+      <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Components\MeshComponent.cpp">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\System.cpp">
+      <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Models\Mesh.cpp">
+      <Filter>Source Files\Render\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Models\Vertex.cpp">
+      <Filter>Source Files\Render\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Math\Vector2.cpp">
+      <Filter>Source Files\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Components\Transform.cpp">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Models\Model.cpp">
+      <Filter>Source Files\Render\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\ComponentManager.cpp">
+      <Filter>Source Files\ECS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,8 +236,62 @@
     <ClInclude Include="Core\Config\ConfigVar.h">
       <Filter>Header Files\Core\Config</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Memory\Memory.h">
+      <Filter>Header Files\Core\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderManager.h">
+      <Filter>Header Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Shader\Shader.h">
+      <Filter>Header Files\Render\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Texture\Texture.h">
+      <Filter>Header Files\Render\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="External\stb_image.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entity.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Component.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Components\MeshComponent.h">
+      <Filter>Header Files\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\System.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Models\Mesh.h">
+      <Filter>Header Files\Render\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Models\Vertex.h">
+      <Filter>Header Files\Render\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Math\Vector2.h">
+      <Filter>Header Files\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Components\Transform.h">
+      <Filter>Header Files\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Models\Model.h">
+      <Filter>Header Files\Render\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\ComponentManager.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine.ini" />
+    <None Include="Shaders\Vertex\default.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Shaders\Fragment\default.frag">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

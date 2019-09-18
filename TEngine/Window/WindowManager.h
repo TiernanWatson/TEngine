@@ -22,7 +22,6 @@ namespace TEngine
 		void Update(float32 deltaTime);
 		void ShutDown();
 
-	public:
-		//void framebufferSizeCallback(GLFWwindow* window, int width, int height);
+		GLFWwindow* GetWindow() { return window; }
 	};
 }

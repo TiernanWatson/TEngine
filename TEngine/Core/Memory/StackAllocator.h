@@ -10,14 +10,14 @@ namespace TEngine
 	{
 	public:
 		StackAllocator() = delete;
-		explicit StackAllocator(const size stackSizeInBytes);
+		explicit StackAllocator(size stackSizeInBytes);
 		~StackAllocator();
 
-		void* Alloc(const size sizeInBytes, const uint8 alignment);
+		void* Alloc(size sizeInBytes, uint8 alignment);
 
 		size GetMarker() const { return currentMarker; }
 
-		void FreeUpTo(const size marker);
+		void FreeUpTo(size marker);
 
 		void Clear();
 

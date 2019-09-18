@@ -72,23 +72,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -103,7 +103,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,7 +119,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,7 +139,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,7 +159,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -170,12 +170,28 @@
     <ClCompile Include="Core\Math\Matrix4.cpp" />
     <ClCompile Include="Core\Math\Quat.cpp" />
     <ClCompile Include="Core\Math\TMath.cpp" />
+    <ClCompile Include="Core\Math\Vector2.cpp" />
     <ClCompile Include="Core\Math\Vector3.cpp" />
     <ClCompile Include="Core\Math\Vector4.cpp" />
+    <ClCompile Include="Core\Memory\Memory.cpp" />
     <ClCompile Include="Core\Memory\PoolAllocator.cpp" />
     <ClCompile Include="Core\Memory\StackAllocator.cpp" />
     <ClCompile Include="Core\Time\Clock.cpp" />
+    <ClCompile Include="ECS\Component.cpp" />
+    <ClCompile Include="ECS\ComponentManager.cpp" />
+    <ClCompile Include="ECS\Components\MeshComponent.cpp" />
+    <ClCompile Include="ECS\Components\Transform.cpp" />
+    <ClCompile Include="ECS\Entity.cpp" />
+    <ClCompile Include="ECS\System.cpp" />
+    <ClCompile Include="External\stb_image.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Loop.cpp" />
+    <ClCompile Include="Render\Models\Mesh.cpp" />
+    <ClCompile Include="Render\Models\Model.cpp" />
+    <ClCompile Include="Render\Models\Vertex.cpp" />
+    <ClCompile Include="Render\RenderManager.cpp" />
+    <ClCompile Include="Render\Shader\Shader.cpp" />
+    <ClCompile Include="Render\Texture\Texture.cpp" />
     <ClCompile Include="TEngine.cpp" />
     <ClCompile Include="Window\WindowManager.cpp" />
   </ItemGroup>
@@ -187,17 +203,35 @@
     <ClInclude Include="Core\Math\Matrix4.h" />
     <ClInclude Include="Core\Math\Quat.h" />
     <ClInclude Include="Core\Math\TMath.h" />
+    <ClInclude Include="Core\Math\Vector2.h" />
     <ClInclude Include="Core\Math\Vector3.h" />
     <ClInclude Include="Core\Math\Vector4.h" />
+    <ClInclude Include="Core\Memory\Memory.h" />
     <ClInclude Include="Core\Memory\PoolAllocator.h" />
     <ClInclude Include="Core\Memory\StackAllocator.h" />
     <ClInclude Include="Core\PortableTypes.h" />
     <ClInclude Include="Core\Time\Clock.h" />
+    <ClInclude Include="ECS\Component.h" />
+    <ClInclude Include="ECS\ComponentManager.h" />
+    <ClInclude Include="ECS\Components\MeshComponent.h" />
+    <ClInclude Include="ECS\Components\Transform.h" />
+    <ClInclude Include="ECS\Entity.h" />
+    <ClInclude Include="ECS\System.h" />
+    <ClInclude Include="External\stb_image.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Loop.h" />
+    <ClInclude Include="Render\Models\Mesh.h" />
+    <ClInclude Include="Render\Models\Model.h" />
+    <ClInclude Include="Render\Models\Vertex.h" />
+    <ClInclude Include="Render\RenderManager.h" />
+    <ClInclude Include="Render\Shader\Shader.h" />
+    <ClInclude Include="Render\Texture\Texture.h" />
     <ClInclude Include="Window\WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine.ini" />
+    <None Include="Shaders\Fragment\default.frag" />
+    <None Include="Shaders\Vertex\default.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
