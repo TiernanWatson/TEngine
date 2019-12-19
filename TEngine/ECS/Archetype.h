@@ -11,6 +11,6 @@ namespace TEngine
 	struct Archetype
 	{
 		std::vector<Metatype> types;
-		DataChunk* firstChunk;
+		struct DataChunk* firstChunk;
 	};
 }

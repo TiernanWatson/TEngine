@@ -177,9 +177,11 @@
     <ClCompile Include="Core\Memory\PoolAllocator.cpp" />
     <ClCompile Include="Core\Memory\StackAllocator.cpp" />
     <ClCompile Include="Core\Time\Clock.cpp" />
-    <ClCompile Include="ECS\ComponentManager.cpp" />
+    <ClCompile Include="ECS\Archetype.cpp" />
     <ClCompile Include="ECS\Components\MeshComponent.cpp" />
     <ClCompile Include="ECS\Components\Transform.cpp" />
+    <ClCompile Include="ECS\DataChunk.cpp" />
+    <ClCompile Include="ECS\Metatype.cpp" />
     <ClCompile Include="ECS\EntityManager.cpp" />
     <ClCompile Include="External\stb_image.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -211,9 +213,11 @@
     <ClInclude Include="Core\Memory\StackAllocator.h" />
     <ClInclude Include="Core\PortableTypes.h" />
     <ClInclude Include="Core\Time\Clock.h" />
-    <ClInclude Include="ECS\ComponentManager.h" />
+    <ClInclude Include="ECS\Archetype.h" />
     <ClInclude Include="ECS\Components\MeshComponent.h" />
     <ClInclude Include="ECS\Components\Transform.h" />
+    <ClInclude Include="ECS\DataChunk.h" />
+    <ClInclude Include="ECS\Metatype.h" />
     <ClInclude Include="ECS\EntityManager.h" />
     <ClInclude Include="External\stb_image.h" />
     <ClInclude Include="Game.h" />

@@ -41,14 +41,14 @@ namespace TEngine
 		/**
 		* Returns the archetype that matches the list of metatypes, nullptr if none found
 		**/
-		Archetype* FindArchetype(Metatype** types, size count);
+		Archetype* FindArchetype(Metatype* types, size count);
 
 		//void ForEach()
 
 		static EntityManager& Main();
 
 	private:
-		std::vector<Archetype> archetypes;
+		std::vector<Archetype*> archetypes;
 
 		std::queue<uint32> unusedID;
 
@@ -63,7 +63,7 @@ namespace TEngine
 		size count = sizeof...(Comps);
 		Metatype types[] = { Metatype::Create<Comps>()... };
 
-		Archetype* a = FindArchetype(&types, count);
+		Archetype* a = FindArchetype(types, count);
 
 		if (a == nullptr)
 		{
@@ -82,7 +82,7 @@ namespace TEngine
 		uint8* p = a->firstChunk->data;
 		for (int i = 0; i < a->types.size(); i++)
 		{
-			a->types[i].construct((void*)p);
+			//a->types[i].construct((void*)p);
 			p += a->types[i].bytes;
 		}
 

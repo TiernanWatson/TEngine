@@ -1,5 +1,7 @@
 #pragma once
 #include "../Core/PortableTypes.h"
+#include <functional>
+#include <typeinfo>
 
 namespace TEngine
 {
@@ -14,8 +16,8 @@ namespace TEngine
 		size bytes;
 		uint8 align;
 
-		void* construct;
-		void* destruct;
+		std::function<void(void*)> construct;
+		std::function<void(void*)> destruct;
 
 		template<typename T>
 		static constexpr Metatype Create();
@@ -24,7 +26,7 @@ namespace TEngine
 	template<typename T>
 	inline constexpr Metatype Metatype::Create()
 	{
-		type_info info = typeid(T);
+		const type_info& info = typeid(T);
 		
 		Metatype t;
 		t.hash = info.hash_code();

@@ -180,9 +180,6 @@
     <ClCompile Include="Render\Models\Model.cpp">
       <Filter>Source Files\Render\Models</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\ComponentManager.cpp">
-      <Filter>Source Files\ECS</Filter>
-    </ClCompile>
     <ClCompile Include="Input\InputSystem.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
@@ -193,6 +190,15 @@
       <Filter>Source Files\Render</Filter>
     </ClCompile>
     <ClCompile Include="ECS\EntityManager.cpp">
+      <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Archetype.cpp">
+      <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Metatype.cpp">
+      <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\DataChunk.cpp">
       <Filter>Source Files\ECS</Filter>
     </ClCompile>
   </ItemGroup>
@@ -275,9 +281,6 @@
     <ClInclude Include="Render\Models\Model.h">
       <Filter>Header Files\Render\Models</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\ComponentManager.h">
-      <Filter>Header Files\ECS</Filter>
-    </ClInclude>
     <ClInclude Include="Input\InputSystem.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
@@ -291,6 +294,15 @@
       <Filter>Header Files\Render</Filter>
     </ClInclude>
     <ClInclude Include="ECS\EntityManager.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Metatype.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\DataChunk.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Archetype.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
   </ItemGroup>

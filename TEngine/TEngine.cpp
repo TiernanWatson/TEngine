@@ -13,15 +13,6 @@ int main()
 {
 	TEngine::Game::Start();
 
-	TEngine::Matrix4 view = Matrix4::ModelToWorld(Vector3::forward * 10.f, Vector3::one, Vector3(0.f, TMath::PI, 0.f)).Inverse();
-
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			std::cout << view.m[i][j] << ", ";
-		}
-		std::cout << std::endl;
-	}
-
 	return 0;
 }
 

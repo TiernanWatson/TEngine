@@ -12,7 +12,7 @@ namespace TEngine
 	uint32 EntityManager::NewEntity()
 	{
 		uint32 id;
-		if (unusedID.size != 0)
+		if (unusedID.size() != 0)
 		{
 			id = unusedID.front();
 			unusedID.pop();
@@ -32,24 +32,24 @@ namespace TEngine
 		entityCount--;
 	}
 
-	Archetype* EntityManager::FindArchetype(Metatype** types, size count)
+	Archetype* EntityManager::FindArchetype(Metatype* types, size count)
 	{
-		for (int i = 0; i < archetypes.size; i++)
+		for (int i = 0; i < archetypes.size(); i++)
 		{
-			if (archetypes[i].types.size != count)
+			if (archetypes[i]->types.size() != count)
 				continue;
 
 			bool matches = true;
-			for (int j = 0; j < archetypes[i].types.size(); j++)
+			for (int j = 0; j < archetypes[i]->types.size(); j++)
 			{
-				if (types[j]->hash != archetypes[j].types[j].hash)
+				if (types[j].hash != archetypes[j]->types[j].hash)
 				{
 					matches = false;
 					break;
 				}
 			}
 
-			if (matches) return &archetypes[i];
+			if (matches) return archetypes[i];
 		}
 
 		return nullptr;
