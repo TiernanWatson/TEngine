@@ -1,20 +1,17 @@
 #pragma once
 #include <cstdint>
+#include <assert.h>
+
+#if defined(_MSC_VER)
+#define _FORCE_INLINE_ __forceinline
+#elif defined(__GNUC__)
+#define _FORCE_INLINE_ __attribute__((always_inline))
+#else
+#define _FORCE_INLINE_ inline
+#endif
 
 namespace TEngine 
 {
-	#if defined(_MSC_VER)
-	#define _FORCE_INLINE_ __forceinline
-	#elif defined(__GNUC__)
-	#define _FORCE_INLINE_ __attribute__((always_inline))
-	#else
-	#define _FORCE_INLINE_ inline
-	#endif
-
-	// Important to know exactly what size types are for
-	// good memory management, and easy to switch out on 
-	// different platforms/compilers if needed
-
 	typedef uint8_t uint8;
 	typedef uint16_t uint16;
 	typedef uint32_t uint32;

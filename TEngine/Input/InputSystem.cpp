@@ -20,6 +20,8 @@ namespace TEngine
 	void InputSystem::ShutDown()
 	{
 		window = nullptr;
+
+		Input::input = nullptr;
 	}
 
 	bool InputSystem::GetKey(KeyCode key)

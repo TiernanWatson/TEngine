@@ -3,7 +3,7 @@
 #include "Core/Time/Clock.h"
 #include "Window/WindowManager.h"
 #include "Input/InputSystem.h"
-#include "Render/RenderManager.h"
+#include "Render/RenderSystem.h"
 
 namespace TEngine
 {
@@ -11,15 +11,15 @@ namespace TEngine
 	{
 	private:
 		bool isRunning = true;
-		uint8 maxFixedSteps = 8;
-		float32 fixedTimeStep = 0.02f;
-		float64 accumulatedTime = 0.f;
+		uint8 maxFixedSteps = 8;  // Maximum number of fixed steps in one iteration
+		float32 fixedTimeStep = 0.02f;  // Period of time step
+		float64 accumulatedTime = 0.f;  // Time accumulated since last update
 
 		Clock gameClock;
 
 		WindowManager* windowManager;
 		InputSystem* inputSystem;
-		RenderManager* renderManager;
+		RenderSystem* renderSystem;
 
 		Loop(); // singleton
 		~Loop();

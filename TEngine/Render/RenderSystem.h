@@ -8,7 +8,7 @@ struct GLFWwindow;
 
 namespace TEngine
 {
-	class RenderManager
+	class RenderSystem
 	{
 	private:
 		GLFWwindow* window;
@@ -18,8 +18,10 @@ namespace TEngine
 
 		void SetupVertexData();
 
+		void SetupMesh(const Mesh& mesh, uint32& VAO, uint32& VBO, uint32& EBO);
+
 	public:
-		RenderManager();
+		RenderSystem();
 
 		void StartUp(GLFWwindow* window);
 		void Update(float32 deltaTime);

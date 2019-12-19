@@ -153,9 +153,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Render\RenderManager.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
     <ClCompile Include="Render\Shader\Shader.cpp">
       <Filter>Source Files\Render\Shader</Filter>
     </ClCompile>
@@ -165,17 +162,8 @@
     <ClCompile Include="External\stb_image.cpp">
       <Filter>External</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Entity.cpp">
-      <Filter>Source Files\ECS</Filter>
-    </ClCompile>
-    <ClCompile Include="ECS\Component.cpp">
-      <Filter>Source Files\ECS</Filter>
-    </ClCompile>
     <ClCompile Include="ECS\Components\MeshComponent.cpp">
       <Filter>Source Files\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="ECS\System.cpp">
-      <Filter>Source Files\ECS</Filter>
     </ClCompile>
     <ClCompile Include="Render\Models\Mesh.cpp">
       <Filter>Source Files\Render\Models</Filter>
@@ -200,6 +188,12 @@
     </ClCompile>
     <ClCompile Include="Input\Input.cpp">
       <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderSystem.cpp">
+      <Filter>Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\EntityManager.cpp">
+      <Filter>Source Files\ECS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -254,9 +248,6 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Render\RenderManager.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
     <ClInclude Include="Render\Shader\Shader.h">
       <Filter>Header Files\Render\Shader</Filter>
     </ClInclude>
@@ -266,17 +257,8 @@
     <ClInclude Include="External\stb_image.h">
       <Filter>External</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\Entity.h">
-      <Filter>Header Files\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\Component.h">
-      <Filter>Header Files\ECS</Filter>
-    </ClInclude>
     <ClInclude Include="ECS\Components\MeshComponent.h">
       <Filter>Header Files\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\System.h">
-      <Filter>Header Files\ECS</Filter>
     </ClInclude>
     <ClInclude Include="Render\Models\Mesh.h">
       <Filter>Header Files\Render\Models</Filter>
@@ -304,6 +286,12 @@
     </ClInclude>
     <ClInclude Include="Input\KeyCode.h">
       <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderSystem.h">
+      <Filter>Header Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\EntityManager.h">
+      <Filter>Header Files\ECS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

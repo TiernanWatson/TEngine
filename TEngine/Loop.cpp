@@ -7,12 +7,12 @@ namespace TEngine
 	{
 		windowManager = new WindowManager();
 		inputSystem = new InputSystem();
-		renderManager = new RenderManager();
+		renderSystem = new RenderSystem();
 	}
 
 	Loop::~Loop()
 	{
-		delete renderManager;
+		delete renderSystem;
 		delete inputSystem;
 		delete windowManager;
 	}
@@ -48,12 +48,12 @@ namespace TEngine
 		Config::Instance().LoadFrom("D:\\TEngine\\TEngine\\Engine.ini");
 		windowManager->StartUp();
 		inputSystem->StartUp(windowManager->GetWindow());
-		renderManager->StartUp(windowManager->GetWindow());
+		renderSystem->StartUp(windowManager->GetWindow());
 	}
 
 	void Loop::ShutDown()
 	{
-		renderManager->ShutDown();
+		renderSystem->ShutDown();
 		inputSystem->ShutDown();
 		windowManager->ShutDown();
 	}
@@ -93,7 +93,7 @@ namespace TEngine
 	void Loop::VariableUpdate(const float32 deltaTime)
 	{
 		inputSystem->Update();
-		renderManager->Update(deltaTime);
+		renderSystem->Update(deltaTime);
 		windowManager->Update(deltaTime);
 	}
 }

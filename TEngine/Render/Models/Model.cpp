@@ -23,6 +23,16 @@ namespace TEngine
 			meshes[i].Draw(shader);
 	}
 
+	Mesh Model::GetMeshCopy(size index)
+	{
+		return meshes[index];
+	}
+
+	size Model::GetMeshCount()
+	{
+		return meshes.size();
+	}
+
 	void Model::LoadModel(std::string path)
 	{
 		Assimp::Importer import;

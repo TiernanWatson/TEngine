@@ -12,10 +12,10 @@ namespace TEngine
 		/**
 		* Allocates bytes at a certain alignment using standard malloc
 		**/
-		static void* AlignedAlloc(size bytes, uint8 alignment);
+		static void* AlignedMalloc(size bytes, uint8 alignment);
 
 		/**
-		* Deallocates memory that was allocated using AlignedAlloc
+		* Deallocates memory that was allocated using AlignedMalloc
 		**/
 		static void AlignedFree(void* address);
 	};

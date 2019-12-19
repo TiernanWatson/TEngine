@@ -4,7 +4,7 @@
 
 namespace TEngine
 {
-	void* Memory::AlignedAlloc(size bytes, uint8 alignment)
+	void* Memory::AlignedMalloc(size bytes, uint8 alignment)
 	{
 		assert(alignment >= 8 && alignment <= 128);
 		assert((alignment & (alignment - 1)) == 0); // power of 2
