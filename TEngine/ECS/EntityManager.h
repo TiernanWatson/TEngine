@@ -5,6 +5,7 @@
 #include "DataChunk.h"
 #include <queue>
 #include <vector>
+#include <unordered_map>
 
 namespace TEngine
 {
@@ -43,12 +44,28 @@ namespace TEngine
 		**/
 		Archetype* FindArchetype(Metatype* types, size count);
 
+		/**
+		* Adds a new archetype descriving the metatypes and returns a pointer to it
+		**/
+		Archetype* AddArchetype(Metatype* types, size count);
+
 		//void ForEach()
 
 		static EntityManager& Main();
 
 	private:
+		void* NewArchetypeInstance(Archetype* a, size& outChunk, size& outIndex);
+
+		struct EntityDetails 
+		{
+			Archetype* archetype;
+			size chunk;
+			size index;
+		};
+
 		std::vector<Archetype*> archetypes;
+
+		std::unordered_map<uint32, EntityDetails> entityStorageMap;
 
 		std::queue<uint32> unusedID;
 
@@ -65,26 +82,12 @@ namespace TEngine
 
 		Archetype* a = FindArchetype(types, count);
 
-		if (a == nullptr)
-		{
-			a = new Archetype();
-
-			for (Metatype& t : types)
-				a->types.push_back(t);
-
-			a->firstChunk = new DataChunk();
-			a->firstChunk->archetype = a;
-			a->firstChunk->next = nullptr;
-
-			archetypes.push_back(a);
-		}
+		if (a == nullptr) a = AddArchetype(types, count);
 		
-		uint8* p = a->firstChunk->data;
-		for (int i = 0; i < a->types.size(); i++)
-		{
-			//a->types[i].construct((void*)p);
-			p += a->types[i].bytes;
-		}
+		size chunk, index;
+		NewArchetypeInstance(a, chunk, index);
+
+		entityStorageMap[id] = EntityDetails{ a, chunk, index };
 
 		return id;
 	}

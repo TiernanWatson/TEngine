@@ -12,5 +12,6 @@ namespace TEngine
 	{
 		std::vector<Metatype> types;
 		struct DataChunk* firstChunk;
+		size width;
 	};
 }
