@@ -1,1 +1,2 @@
 TEngine/External linguist-detectable=false
+TEngine/External/stb_image.h linguist-language=c++
