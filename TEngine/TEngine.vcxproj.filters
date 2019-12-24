@@ -100,6 +100,18 @@
     <Filter Include="Source Files\Input">
       <UniqueIdentifier>{a0e37d66-2366-4cd0-9c32-ac5ead3a9625}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\World">
+      <UniqueIdentifier>{6dee01fc-86b5-48ce-b240-41f1c5477500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\World">
+      <UniqueIdentifier>{2d5d18b5-66d7-419b-a7d5-955bbcb2b8d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Render\Material">
+      <UniqueIdentifier>{06d7f07f-e58e-4df3-b7a4-452aee529dbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render\Material">
+      <UniqueIdentifier>{c81239d6-599e-4a80-a4ae-4b5dfaa5b3c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TEngine.cpp">
@@ -201,6 +213,18 @@
     <ClCompile Include="ECS\DataChunk.cpp">
       <Filter>Source Files\ECS</Filter>
     </ClCompile>
+    <ClCompile Include="World\World.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="World\WorldScript.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="World\WorldSystem.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Material\Material.cpp">
+      <Filter>Source Files\Render\Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\PortableTypes.h">
@@ -290,9 +314,6 @@
     <ClInclude Include="Input\KeyCode.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Render\RenderSystem.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
     <ClInclude Include="ECS\EntityManager.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
@@ -304,6 +325,21 @@
     </ClInclude>
     <ClInclude Include="ECS\Archetype.h">
       <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="World\World.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="World\WorldScript.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="World\WorldSystem.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderSystem.h">
+      <Filter>Header Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Material\Material.h">
+      <Filter>Header Files\Render\Material</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -22,7 +22,7 @@ namespace TEngine
 	typedef int32_t int32;
 	typedef int64_t int64;
 
-	typedef size_t size;
+	typedef size_t maxint;
 
 	typedef float float32;
 	typedef double float64;

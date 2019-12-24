@@ -40,9 +40,9 @@ namespace TEngineTests
 
 			Matrix4 m3 = m1 * m2;
 
-			for (size i = 0; i < 4; i++)
+			for (size_t i = 0; i < 4; i++)
 			{
-				for (size j = 0; j < 4; j++)
+				for (size_t j = 0; j < 4; j++)
 				{
 					if (i == j)
 						Assert::AreEqual(m3.m[i][j], 6.f);
@@ -81,9 +81,9 @@ namespace TEngineTests
 
 			m1 *= m2;
 
-			for (size i = 0; i < 4; i++)
+			for (size_t i = 0; i < 4; i++)
 			{
-				for (size j = 0; j < 4; j++)
+				for (size_t j = 0; j < 4; j++)
 				{
 					if (i == j)
 						Assert::AreEqual(m1.m[i][j], 6.f);

@@ -11,7 +11,7 @@ namespace TEngine
 	struct Archetype
 	{
 		std::vector<Metatype> types;
+		std::vector<maxint> offsets;
 		struct DataChunk* firstChunk;
-		size width;
 	};
 }

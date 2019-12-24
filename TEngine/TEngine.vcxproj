@@ -188,6 +188,7 @@
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\InputSystem.cpp" />
     <ClCompile Include="Loop.cpp" />
+    <ClCompile Include="Render\Material\Material.cpp" />
     <ClCompile Include="Render\Models\Mesh.cpp" />
     <ClCompile Include="Render\Models\Model.cpp" />
     <ClCompile Include="Render\Models\Vertex.cpp" />
@@ -196,6 +197,9 @@
     <ClCompile Include="Render\Texture\Texture.cpp" />
     <ClCompile Include="TEngine.cpp" />
     <ClCompile Include="Window\WindowManager.cpp" />
+    <ClCompile Include="World\World.cpp" />
+    <ClCompile Include="World\WorldScript.cpp" />
+    <ClCompile Include="World\WorldSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Config\Config.h" />
@@ -225,6 +229,7 @@
     <ClInclude Include="Input\InputSystem.h" />
     <ClInclude Include="Input\KeyCode.h" />
     <ClInclude Include="Loop.h" />
+    <ClInclude Include="Render\Material\Material.h" />
     <ClInclude Include="Render\Models\Mesh.h" />
     <ClInclude Include="Render\Models\Model.h" />
     <ClInclude Include="Render\Models\Vertex.h" />
@@ -232,6 +237,9 @@
     <ClInclude Include="Render\Shader\Shader.h" />
     <ClInclude Include="Render\Texture\Texture.h" />
     <ClInclude Include="Window\WindowManager.h" />
+    <ClInclude Include="World\World.h" />
+    <ClInclude Include="World\WorldScript.h" />
+    <ClInclude Include="World\WorldSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

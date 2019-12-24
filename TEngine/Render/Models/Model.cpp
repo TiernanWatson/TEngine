@@ -19,16 +19,16 @@ namespace TEngine
 {
 	void Model::Draw(Shader shader)
 	{
-		for (size i = 0; i < meshes.size(); i++)
+		for (maxint i = 0; i < meshes.size(); i++)
 			meshes[i].Draw(shader);
 	}
 
-	Mesh Model::GetMeshCopy(size index)
+	Mesh Model::GetMeshCopy(maxint index)
 	{
 		return meshes[index];
 	}
 
-	size Model::GetMeshCount()
+	maxint Model::GetMeshCount()
 	{
 		return meshes.size();
 	}
@@ -51,13 +51,13 @@ namespace TEngine
 	void Model::ProcessNode(aiNode* node, const aiScene* scene)
 	{
 		// process all the node's meshes (if any)
-		for (size i = 0; i < node->mNumMeshes; i++)
+		for (maxint i = 0; i < node->mNumMeshes; i++)
 		{
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 			meshes.push_back(ProcessMesh(mesh, scene));
 		}
 		// then do the same for each of its children
-		for (size i = 0; i < node->mNumChildren; i++)
+		for (maxint i = 0; i < node->mNumChildren; i++)
 		{
 			ProcessNode(node->mChildren[i], scene);
 		}
@@ -69,7 +69,7 @@ namespace TEngine
 		std::vector<uint32> indices;
 		std::vector<Texture> textures;
 
-		for (size i = 0; i < mesh->mNumVertices; i++)
+		for (maxint i = 0; i < mesh->mNumVertices; i++)
 		{
 			Vertex vertex;
 			
@@ -103,10 +103,10 @@ namespace TEngine
 		}
 
 		// Process indices
-		for (size i = 0; i < mesh->mNumFaces; i++)
+		for (maxint i = 0; i < mesh->mNumFaces; i++)
 		{
 			aiFace face = mesh->mFaces[i];
-			for (size j = 0; j < face.mNumIndices; j++)
+			for (maxint j = 0; j < face.mNumIndices; j++)
 				indices.push_back(face.mIndices[j]);
 		}
 		

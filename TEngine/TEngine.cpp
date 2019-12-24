@@ -3,9 +3,6 @@
 
 #include <iostream>
 #include "Game.h"
-#include "Core/Math/TMath.h"
-#include "Core/Math/Vector3.h"
-#include "Core/Math/Matrix4.h"
 
 using namespace TEngine;
 

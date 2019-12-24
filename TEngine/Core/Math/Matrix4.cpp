@@ -145,7 +145,7 @@ namespace TEngine
 
 	bool Matrix4::operator==(const Matrix4& rhs) const
 	{
-		for (size i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < ELEMENTS; i++) {
 			if (flat[i] != rhs.flat[i]) 
 				return false;
 		}
@@ -155,7 +155,7 @@ namespace TEngine
 
 	bool Matrix4::operator!=(const Matrix4& rhs) const
 	{
-		for (size i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < ELEMENTS; i++) {
 			if (flat[i] != rhs.flat[i])
 				return true;
 		}
@@ -167,7 +167,7 @@ namespace TEngine
 	{
 		Matrix4 ret = Matrix4();
 
-		for (size i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < ELEMENTS; i++) {
 			ret.flat[i] = flat[i] + rhs.flat[i];
 		}
 
@@ -178,7 +178,7 @@ namespace TEngine
 	{
 		Matrix4 ret = Matrix4();
 
-		for (size i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < ELEMENTS; i++) {
 			ret.flat[i] = flat[i] - rhs.flat[i];
 		}
 
@@ -189,9 +189,9 @@ namespace TEngine
 	{
 		Matrix4 ret = Matrix4();
 
-		for (size i = 0; i < ROWS; i++) {
-			for (size j = 0; j < ROWS; j++) {
-				for (size k = 0; k < ROWS; k++) {
+		for (maxint i = 0; i < ROWS; i++) {
+			for (maxint j = 0; j < ROWS; j++) {
+				for (maxint k = 0; k < ROWS; k++) {
 					ret.m[i][j] += m[i][k] * rhs.m[k][j];
 				}
 			}
@@ -214,7 +214,7 @@ namespace TEngine
 
 	Matrix4& Matrix4::operator+=(const Matrix4& rhs) 
 	{
-		for (size i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < ELEMENTS; i++) {
 			flat[i] += rhs.flat[i];
 		}
 		
@@ -223,7 +223,7 @@ namespace TEngine
 
 	Matrix4& Matrix4::operator-=(const Matrix4& rhs)
 	{
-		for (size i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < ELEMENTS; i++) {
 			flat[i] -= rhs.flat[i];
 		}
 
@@ -234,15 +234,15 @@ namespace TEngine
 	{
 		Matrix4 tmp = Matrix4();
 
-		for (size i = 0; i < ROWS; i++) {
-			for (size j = 0; j < ROWS; j++) {
-				for (size k = 0; k < ROWS; k++) {
+		for (maxint i = 0; i < ROWS; i++) {
+			for (maxint j = 0; j < ROWS; j++) {
+				for (maxint k = 0; k < ROWS; k++) {
 					tmp.m[i][j] += m[i][k] * rhs.m[k][j];
 				}
 			}
 		}
 
-		for (size i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < ELEMENTS; i++) {
 			flat[i] = tmp.flat[i];
 		}
 

@@ -24,8 +24,8 @@ namespace TEngine
 
 		void Draw(Shader shader);
 
-		Mesh GetMeshCopy(size index);
-		size GetMeshCount();
+		Mesh GetMeshCopy(maxint index);
+		maxint GetMeshCount();
 
 	private:
 		std::vector<Mesh> meshes;

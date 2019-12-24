@@ -4,17 +4,18 @@
 namespace TEngine
 {
 	Loop::Loop() 
+		: systemsStack(sizeof(WindowManager) + sizeof(InputSystem)
+			+ sizeof(WorldSystem) + sizeof(RenderSystem))
 	{
-		windowManager = new WindowManager();
-		inputSystem = new InputSystem();
-		renderSystem = new RenderSystem();
+		windowManager = systemsStack.NewOnStack<WindowManager>();
+		inputSystem = systemsStack.NewOnStack<InputSystem>();
+		worldSystem = systemsStack.NewOnStack<WorldSystem>();
+		renderSystem = systemsStack.NewOnStack<RenderSystem>();
 	}
 
 	Loop::~Loop()
 	{
-		delete renderSystem;
-		delete inputSystem;
-		delete windowManager;
+		// Subsystems will be freed as stack is deconstructed
 	}
 
 	Loop& Loop::Instance()
@@ -48,12 +49,14 @@ namespace TEngine
 		Config::Instance().LoadFrom("D:\\TEngine\\TEngine\\Engine.ini");
 		windowManager->StartUp();
 		inputSystem->StartUp(windowManager->GetWindow());
-		renderSystem->StartUp(windowManager->GetWindow());
+		worldSystem->StartUp();
+		renderSystem->StartUp(windowManager->GetWindow(), worldSystem);
 	}
 
 	void Loop::ShutDown()
 	{
 		renderSystem->ShutDown();
+		worldSystem->ShutDown();
 		inputSystem->ShutDown();
 		windowManager->ShutDown();
 	}
@@ -80,11 +83,11 @@ namespace TEngine
 	}
 
 	/**
-	* Updates at a fixed time step, defaulted to 50FPS
+	* Updates at a fixed time step, defaulted to 50Hz
 	**/
 	void Loop::FixedUpdate(const float32 timeStep)
 	{
-		
+		worldSystem->FixedUpdate(timeStep);
 	}
 
 	/**
@@ -93,6 +96,7 @@ namespace TEngine
 	void Loop::VariableUpdate(const float32 deltaTime)
 	{
 		inputSystem->Update();
+		worldSystem->Update(deltaTime);
 		renderSystem->Update(deltaTime);
 		windowManager->Update(deltaTime);
 	}

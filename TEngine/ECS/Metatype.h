@@ -11,9 +11,9 @@ namespace TEngine
 	**/
 	struct Metatype
 	{
-		size hash;
+		maxint hash;
 
-		size bytes;
+		maxint size;
 		uint8 align;
 
 		std::function<void(void*)> construct;
@@ -30,7 +30,7 @@ namespace TEngine
 		
 		Metatype t;
 		t.hash = info.hash_code();
-		t.bytes = sizeof(T);
+		t.size = sizeof(T);
 		t.align = alignof(T);
 
 		t.construct = [](void* address) {

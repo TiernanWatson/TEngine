@@ -8,22 +8,20 @@ struct GLFWwindow;
 
 namespace TEngine
 {
+	class WorldSystem;
+	class World;
+
 	class RenderSystem
 	{
 	private:
 		GLFWwindow* window;
-		Shader shader;
-		Texture texture;
-		Model model;
-
-		void SetupVertexData();
-
-		void SetupMesh(const Mesh& mesh, uint32& VAO, uint32& VBO, uint32& EBO);
+		WorldSystem* worlds;
+		World* world;
 
 	public:
 		RenderSystem();
 
-		void StartUp(GLFWwindow* window);
+		void StartUp(GLFWwindow* window, WorldSystem* worlds);
 		void Update(float32 deltaTime);
 		void ShutDown();
 	};

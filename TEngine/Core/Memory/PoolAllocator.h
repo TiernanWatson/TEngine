@@ -4,13 +4,13 @@
 namespace TEngine 
 {
 	/**
-	* Pool of pre-defined size allocating fixed-size memory with no order restrictions
+	* Pool of pre-defined maxint allocating fixed-maxint memory with no order restrictions
 	**/
 	class PoolAllocator
 	{
 	public:
 		PoolAllocator() = delete;
-		explicit PoolAllocator(size blockSize, size maxElements);
+		explicit PoolAllocator(maxint blockSize, maxint maxElements);
 		~PoolAllocator();
 
 		void* Alloc();
@@ -22,8 +22,8 @@ namespace TEngine
 			Block(Block* next) : next(next) {}
 		};
 
-		size blockSize;
-		size maxElements;
+		maxint blockSize;
+		maxint maxElements;
 
 		void* top;
 		Block* freeBlock;

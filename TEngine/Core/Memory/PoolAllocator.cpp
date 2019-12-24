@@ -5,7 +5,7 @@
 
 namespace TEngine
 {
-	PoolAllocator::PoolAllocator(size blockSize, size maxElements)
+	PoolAllocator::PoolAllocator(maxint blockSize, maxint maxElements)
 		: blockSize(blockSize), maxElements(maxElements)
 	{
 		assert(blockSize > sizeof(Block));

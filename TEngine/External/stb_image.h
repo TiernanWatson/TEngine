@@ -182,11 +182,11 @@ RECENT REVISION HISTORY:
 //
 // I/O callbacks allow you to read from arbitrary sources, like packaged
 // files or some other source. Data read from callbacks are processed
-// through a small internal buffer (currently 128 bytes) to try to reduce
+// through a small internal buffer (currently 128 size) to try to reduce
 // overhead.
 //
-// The three functions you must define are "read" (reads some bytes of data),
-// "skip" (skips some bytes of data), "eof" (reports if the stream is at the end).
+// The three functions you must define are "read" (reads some size of data),
+// "skip" (skips some size of data), "eof" (reports if the stream is at the end).
 //
 // ===========================================================================
 //
@@ -340,8 +340,8 @@ extern "C" {
 
 	typedef struct
 	{
-		int      (*read)  (void* user, char* data, int size);   // fill 'data' with 'size' bytes.  return number of bytes actually read
-		void     (*skip)  (void* user, int n);                 // skip the next 'n' bytes, or 'unget' the last -n bytes if negative
+		int      (*read)  (void* user, char* data, int size);   // fill 'data' with 'maxint' size.  return number of size actually read
+		void     (*skip)  (void* user, int n);                 // skip the next 'n' size, or 'unget' the last -n size if negative
 		int      (*eof)   (void* user);                       // returns nonzero if we are at end of file/data
 	} stbi_io_callbacks;
 
@@ -557,7 +557,7 @@ typedef uint32_t stbi__uint32;
 typedef int32_t  stbi__int32;
 #endif
 
-// should produce compiler error if size is wrong
+// should produce compiler error if maxint is wrong
 typedef unsigned char validate_uint32[sizeof(stbi__uint32) == 4 ? 1 : -1];
 
 #ifdef _MSC_VER
@@ -778,7 +778,7 @@ static void stbi__rewind(stbi__context* s)
 {
 	// conceptually rewind SHOULD rewind to the beginning of the stream,
 	// but we just rewind to the beginning of the initial buffer, because
-	// we only use it after doing 'test', which only ever looks at at most 92 bytes
+	// we only use it after doing 'test', which only ever looks at at most 92 size
 	s->img_buffer = s->img_buffer_original;
 	s->img_buffer_end = s->img_buffer_original_end;
 }
@@ -873,12 +873,12 @@ static void* stbi__malloc(size_t size)
 }
 
 // stb_image uses ints pervasively, including for offset calculations.
-// therefore the largest decoded image size we can support with the
+// therefore the largest decoded image maxint we can support with the
 // current code, even on 64-bit targets, is INT_MAX. this is not a
 // significant limitation for the intended use case.
 //
-// we do, however, need to make sure our size calculations don't
-// overflow. hence a few helper functions for size calculations that
+// we do, however, need to make sure our maxint calculations don't
+// overflow. hence a few helper functions for maxint calculations that
 // multiply integers together, making sure that they're non-negative
 // and no overflow occurs.
 
@@ -926,7 +926,7 @@ static int stbi__mad4sizes_valid(int a, int b, int c, int d, int add)
 }
 #endif
 
-// mallocs with size overflow checking
+// mallocs with maxint overflow checking
 static void* stbi__malloc_mad2(int a, int b, int add)
 {
 	if (!stbi__mad2sizes_valid(a, b, add)) return NULL;
@@ -1719,7 +1719,7 @@ static stbi_uc* stbi__hdr_to_ldr(float* data, int x, int y, int comp)
 //      - doesn't try to recover corrupt jpegs
 //      - doesn't allow partial loading, loading multiple at once
 //      - still fast on x86 (copying globals into locals doesn't help x86)
-//      - allocates lots of intermediate memory (full size of all components)
+//      - allocates lots of intermediate memory (full maxint of all components)
 //        - non-interleaved case requires this anyway
 //        - allows good upsampling (see next)
 //    high-quality
@@ -1804,7 +1804,7 @@ static int stbi__build_huffman(stbi__huffman* h, int* count)
 {
 	int i, j, k = 0;
 	unsigned int code;
-	// build size list for each symbol (from JPEG spec)
+	// build maxint list for each symbol (from JPEG spec)
 	for (i = 0; i < 16; ++i)
 		for (j = 0; j < count[i]; ++j)
 			h->size[k++] = (stbi_uc)(i + 1);
@@ -1821,7 +1821,7 @@ static int stbi__build_huffman(stbi__huffman* h, int* count)
 				h->code[k++] = (stbi__uint16)(code++);
 			if (code - 1 >= (1u << j)) return stbi__err("bad code lengths", "Corrupt JPEG");
 		}
-		// compute largest code + 1 for this size, preshifted as needed later
+		// compute largest code + 1 for this maxint, preshifted as needed later
 		h->maxcode[j] = code << (16 - j);
 		code <<= 1;
 	}
@@ -1875,7 +1875,7 @@ static void stbi__grow_buffer_unsafe(stbi__jpeg* j)
 		unsigned int b = j->nomore ? 0 : stbi__get8(j->s);
 		if (b == 0xff) {
 			int c = stbi__get8(j->s);
-			while (c == 0xff) c = stbi__get8(j->s); // consume fill bytes
+			while (c == 0xff) c = stbi__get8(j->s); // consume fill size
 			if (c != 0) {
 				j->marker = (unsigned char)c;
 				j->nomore = 1;
@@ -2663,7 +2663,7 @@ static void stbi__idct_simd(stbi_uc* out, int out_stride, short data[64])
 #define dct_trn8_32(x, y) { uint32x2x2_t t = vtrn_u32(vreinterpret_u32_u8(x), vreinterpret_u32_u8(y)); x = vreinterpret_u8_u32(t.val[0]); y = vreinterpret_u8_u32(t.val[1]); }
 
 	  // sadly can't use interleaved stores here since we only write
-	  // 8 bytes to each scan line!
+	  // 8 size to each scan line!
 
 	  // 8x8 8-bit transpose pass 1
 		dct_trn8_8(p0, p1);
@@ -2720,7 +2720,7 @@ static stbi_uc stbi__get_marker(stbi__jpeg * j)
 	x = stbi__get8(j->s);
 	if (x != 0xff) return STBI__MARKER_none;
 	while (x == 0xff)
-		x = stbi__get8(j->s); // consume repeated 0xff fill bytes
+		x = stbi__get8(j->s); // consume repeated 0xff fill size
 	return x;
 }
 
@@ -3998,7 +3998,7 @@ static int stbi__zhuffman_decode_slowpath(stbi__zbuf* a, stbi__zhuffman* z)
 		if (k < z->maxcode[s])
 			break;
 	if (s == 16) return -1; // invalid code!
-	// code size is s, so:
+	// code maxint is s, so:
 	b = (k >> (16 - s)) - z->firstcode[s] + z->firstsymbol[s];
 	STBI_ASSERT(z->size[b] == s);
 	a->code_buffer >>= s;
@@ -4020,7 +4020,7 @@ stbi_inline static int stbi__zhuffman_decode(stbi__zbuf* a, stbi__zhuffman* z)
 	return stbi__zhuffman_decode_slowpath(a, z);
 }
 
-static int stbi__zexpand(stbi__zbuf* z, char* zout, int n)  // need to make room for n bytes
+static int stbi__zexpand(stbi__zbuf* z, char* zout, int n)  // need to make room for n size
 {
 	char* q;
 	int cur, limit, old_limit;
@@ -4427,7 +4427,7 @@ static int stbi__create_png_image_raw(stbi__png* a, stbi_uc* raw, stbi__uint32 r
 	int width = x;
 
 	STBI_ASSERT(out_n == s->img_n || out_n == s->img_n + 1);
-	a->out = (stbi_uc*)stbi__malloc_mad3(x, y, output_bytes, 0); // extra bytes to write off the end into
+	a->out = (stbi_uc*)stbi__malloc_mad3(x, y, output_bytes, 0); // extra size to write off the end into
 	if (!a->out) return stbi__err("outofmem", "Out of memory");
 
 	if (!stbi__mad3sizes_valid(img_n, x, depth, 7)) return stbi__err("too large", "Corrupt PNG");
@@ -4449,7 +4449,7 @@ static int stbi__create_png_image_raw(stbi__png* a, stbi_uc* raw, stbi__uint32 r
 
 		if (depth < 8) {
 			STBI_ASSERT(img_width_bytes <= x);
-			cur += x * out_n - img_width_bytes; // store output to the rightmost img_len bytes, so we can decode in place
+			cur += x * out_n - img_width_bytes; // store output to the rightmost img_len size, so we can decode in place
 			filter_bytes = 1;
 			width = img_width_bytes;
 		}
@@ -4945,8 +4945,8 @@ static int stbi__parse_png_file(stbi__png* z, int scan, int req_comp)
 			if (first) return stbi__err("first not IHDR", "Corrupt PNG");
 			if (scan != STBI__SCAN_load) return 1;
 			if (z->idata == NULL) return stbi__err("no IDAT", "Corrupt PNG");
-			// initial guess for decoded data size to avoid unnecessary reallocs
-			bpl = (s->img_x * z->depth + 7) / 8; // bytes per line, per component
+			// initial guess for decoded data maxint to avoid unnecessary reallocs
+			bpl = (s->img_x * z->depth + 7) / 8; // size per line, per component
 			raw_len = bpl * s->img_y * s->img_n /* pixels */ + s->img_y /* filter mode per row */;
 			z->expanded = (stbi_uc*)stbi_zlib_decode_malloc_guesssize_headerflag((char*)z->idata, ioff, raw_len, (int*)& raw_len, !is_iphone);
 			if (z->expanded == NULL) return 0; // zlib should set error
@@ -5240,7 +5240,7 @@ static void* stbi__bmp_parse_header(stbi__context* s, stbi__bmp_data* info)
 			if (hsz == 124) {
 				stbi__get32le(s); // discard rendering intent
 				stbi__get32le(s); // discard offset of profile data
-				stbi__get32le(s); // discard size of profile data
+				stbi__get32le(s); // discard maxint of profile data
 				stbi__get32le(s); // discard reserved
 			}
 		}
@@ -5290,7 +5290,7 @@ static void* stbi__bmp_load(stbi__context* s, int* x, int* y, int* comp, int req
 	else
 		target = s->img_n; // if they want monochrome, we'll post-convert
 
-	 // sanity-check size
+	 // sanity-check maxint
 	if (!stbi__mad3sizes_valid(target, s->img_x, s->img_y, 0))
 		return stbi__errpuc("too large", "Corrupt BMP");
 
@@ -5502,7 +5502,7 @@ static int stbi__tga_info(stbi__context* s, int* x, int* y, int* comp)
 	stbi__get8(s); // ignore alpha bits
 	if (tga_colormap_bpp != 0) {
 		if ((tga_bits_per_pixel != 8) && (tga_bits_per_pixel != 16)) {
-			// when using a colormap, tga_bits_per_pixel is the size of the indexes
+			// when using a colormap, tga_bits_per_pixel is the maxint of the indexes
 			// I don't think anything but 8 or 16bit indexes makes sense
 			stbi__rewind(s);
 			return 0;
@@ -5544,7 +5544,7 @@ static int stbi__tga_test(stbi__context* s)
 	if (stbi__get16le(s) < 1) goto errorEnd;      //   test width
 	if (stbi__get16le(s) < 1) goto errorEnd;      //   test height
 	sz = stbi__get8(s);   //   bits per pixel
-	if ((tga_color_type == 1) && (sz != 8) && (sz != 16)) goto errorEnd; // for colormapped images, bpp is size of an index
+	if ((tga_color_type == 1) && (sz != 8) && (sz != 16)) goto errorEnd; // for colormapped images, bpp is maxint of an index
 	if ((sz != 8) && (sz != 15) && (sz != 16) && (sz != 24) && (sz != 32)) goto errorEnd;
 
 	res = 1; // if we got this far, everything's good and we can return 1 instead of 0
@@ -5800,7 +5800,7 @@ static int stbi__psd_decode_rle(stbi__context* s, stbi_uc* p, int pixelCount)
 			// No-op.
 		}
 		else if (len < 128) {
-			// Copy next len+1 bytes literally.
+			// Copy next len+1 size literally.
 			len++;
 			if (len > nleft) return 0; // corrupt data
 			count += len;
@@ -5812,7 +5812,7 @@ static int stbi__psd_decode_rle(stbi__context* s, stbi_uc* p, int pixelCount)
 		}
 		else if (len > 128) {
 			stbi_uc   val;
-			// Next -len+1 bytes in the dest are replicated from next source byte.
+			// Next -len+1 size in the dest are replicated from next source byte.
 			// (Interpret len as a negative 8-bit int.)
 			len = 257 - len;
 			if (len > nleft) return 0; // corrupt data
@@ -5847,7 +5847,7 @@ static void* stbi__psd_load(stbi__context* s, int* x, int* y, int* comp, int req
 	if (stbi__get16be(s) != 1)
 		return stbi__errpuc("wrong version", "Unsupported version of PSD image");
 
-	// Skip 6 reserved bytes.
+	// Skip 6 reserved size.
 	stbi__skip(s, 6);
 
 	// Read the number of channels (R, G, B, A, etc).
@@ -5894,7 +5894,7 @@ static void* stbi__psd_load(stbi__context* s, int* x, int* y, int* comp, int req
 	if (compression > 1)
 		return stbi__errpuc("bad compression", "PSD has an unknown compression format");
 
-	// Check size
+	// Check maxint
 	if (!stbi__mad3sizes_valid(4, w, h, 0))
 		return stbi__errpuc("too large", "Corrupt PSD");
 
@@ -5916,9 +5916,9 @@ static void* stbi__psd_load(stbi__context* s, int* x, int* y, int* comp, int req
 	// Finally, the image data.
 	if (compression) {
 		// RLE as used by .PSD and .TIFF
-		// Loop until you get the number of unpacked bytes you are expecting:
+		// Loop until you get the number of unpacked size you are expecting:
 		//     Read the next source byte into n.
-		//     If n is between 0 and 127 inclusive, copy the next n+1 bytes literally.
+		//     If n is between 0 and 127 inclusive, copy the next n+1 size literally.
 		//     Else if n is between -127 and -1 inclusive, copy the next byte -n+1 times.
 		//     Else if n is 128, noop.
 		// Endloop

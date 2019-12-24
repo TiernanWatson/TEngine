@@ -4,6 +4,8 @@
 #include "Window/WindowManager.h"
 #include "Input/InputSystem.h"
 #include "Render/RenderSystem.h"
+#include "World/WorldSystem.h"
+#include "Core/Memory/StackAllocator.h"
 
 namespace TEngine
 {
@@ -17,9 +19,12 @@ namespace TEngine
 
 		Clock gameClock;
 
+		StackAllocator systemsStack;
+
 		WindowManager* windowManager;
 		InputSystem* inputSystem;
 		RenderSystem* renderSystem;
+		WorldSystem* worldSystem;
 
 		Loop(); // singleton
 		~Loop();

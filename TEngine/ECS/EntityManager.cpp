@@ -1,6 +1,8 @@
 #include "EntityManager.h"
 #include <assert.h>
 #include <iostream>
+#include "../Core/Memory/Memory.h"
+#include "DataChunk.h"
 
 namespace TEngine
 {
@@ -36,7 +38,7 @@ namespace TEngine
 		entityCount--;
 	}
 
-	Archetype* EntityManager::FindArchetype(Metatype* types, size count)
+	Archetype* EntityManager::FindArchetype(Metatype* types, maxint count) const
 	{
 		for (int i = 0; i < archetypes.size(); i++)
 		{
@@ -46,7 +48,7 @@ namespace TEngine
 			bool matches = true;
 			for (int j = 0; j < archetypes[i]->types.size(); j++)
 			{
-				if (types[j].hash != archetypes[j]->types[j].hash)
+				if (types[j].hash != archetypes[i]->types[j].hash)
 				{
 					matches = false;
 					break;
@@ -59,16 +61,31 @@ namespace TEngine
 		return nullptr;
 	}
 
-	Archetype* EntityManager::AddArchetype(Metatype* types, size count)
+	Archetype* EntityManager::AddArchetype(Metatype* types, maxint count)
 	{
 		Archetype* a = new Archetype();
 
-		for (size i = 0; i < count; i++)
+		maxint totalSize = 0;
+		for (maxint i = 0; i < count; i++)
+		{
 			a->types.push_back(types[i]);
+			totalSize += types[i].size;
+		}
 
-		a->firstChunk = new DataChunk();
+		void* alignedPointer = Memory::AlignedMalloc(sizeof(DataChunk), Memory::CACHE_LINE_SIZE);
+		a->firstChunk = new (alignedPointer) DataChunk();
 		a->firstChunk->archetype = a;
 		a->firstChunk->next = nullptr;
+
+		a->offsets.push_back(0);
+		for (maxint i = 1; i < count; i++)
+		{
+			// Offset for i is determined by how much mem previous takes up
+			maxint offset = (types[i - 1].size / totalSize) * MEM_16K_BYTES;
+			uint8 misalign = offset & (Memory::CACHE_LINE_SIZE - 1);
+
+			a->offsets.push_back(offset - misalign);
+		}
 
 		archetypes.push_back(a);
 
@@ -81,22 +98,21 @@ namespace TEngine
 		return instance;
 	}
 
-	void* EntityManager::NewArchetypeInstance(Archetype* a, size& outChunk, size& outIndex)
+	void EntityManager::NewArchetypeInstance(Archetype* a, maxint& outChunk, maxint& outIndex)
 	{
-		uint8* start = a->firstChunk->data + a->firstChunk->lastIndex * a->width;
+		maxint index = a->firstChunk->lastIndex;
+		uint8* start = a->firstChunk->data;
 
-		uint8* p = start;
+		// Loop all types and instantiate them at correct place (non-interleaved)
 		for (int i = 0; i < a->types.size(); i++)
 		{
-			a->types[i].construct((void*)p);
-			p += a->types[i].bytes;
+			uint8* comp = start + a->offsets[i] + a->types[i].size * index;
+			a->types[i].construct((void*)comp);
 		}
 
 		outChunk = 0;
-		outIndex = a->firstChunk->lastIndex;
+		outIndex = index;
 
 		a->firstChunk->lastIndex++;
-
-		return (void*)start;
 	}
 }

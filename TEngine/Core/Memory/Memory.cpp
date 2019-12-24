@@ -4,12 +4,12 @@
 
 namespace TEngine
 {
-	void* Memory::AlignedMalloc(size bytes, uint8 alignment)
+	void* Memory::AlignedMalloc(maxint bytes, uint8 alignment)
 	{
 		assert(alignment >= 8 && alignment <= 128);
 		assert((alignment & (alignment - 1)) == 0); // power of 2
 
-		size totalSize = bytes + alignment;
+		maxint totalSize = bytes + alignment;
 		
 		uintptr rawAddress = reinterpret_cast<uintptr>(malloc(totalSize));
 

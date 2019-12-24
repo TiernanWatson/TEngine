@@ -6,7 +6,7 @@
 
 namespace TEngine
 {
-	StackAllocator::StackAllocator(size stackSizeInBytes)
+	StackAllocator::StackAllocator(maxint stackSizeInBytes)
 		: stackSizeInBytes(stackSizeInBytes)
 	{
 		topRawPtr = malloc(stackSizeInBytes);
@@ -18,7 +18,7 @@ namespace TEngine
 		free(topRawPtr);
 	}
 
-	void* StackAllocator::Alloc(size sizeInBytes, uint8 alignment)
+	void* StackAllocator::Alloc(maxint sizeInBytes, uint8 alignment)
 	{
 		assert((alignment & (alignment - 1)) == 0);
 
@@ -28,7 +28,7 @@ namespace TEngine
 
 		correction = correction & (alignment - 1); // stops skipping block if misalign = 0
 
-		size newMarker = currentMarker + correction + sizeInBytes;
+		maxint newMarker = currentMarker + correction + sizeInBytes;
 
 		if (newMarker > topPtr + stackSizeInBytes)
 			throw std::overflow_error("StackAllocator::Alloc not enough memory to allocate");
@@ -39,7 +39,7 @@ namespace TEngine
 		return reinterpret_cast<void*>(alignedAddress);
 	}
 
-	void StackAllocator::FreeUpTo(size marker)
+	void StackAllocator::FreeUpTo(maxint marker)
 	{
 		currentMarker = marker;
 	}

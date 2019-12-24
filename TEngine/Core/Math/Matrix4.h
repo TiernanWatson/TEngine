@@ -6,7 +6,7 @@ namespace TEngine
 	class Vector3;
 
 	/**
-	* Class describing a 4x4 float32 matrix, 64 bytes
+	* Class describing a 4x4 float32 matrix, 64 size
 	**/
 	class Matrix4
 	{
@@ -15,8 +15,8 @@ namespace TEngine
 		static const Matrix4 identity;
 
 	private:
-		static const size ELEMENTS = 16;
-		static const size ROWS = 4;
+		static const maxint ELEMENTS = 16;
+		static const maxint ROWS = 4;
 
 	public:
 		union {

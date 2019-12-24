@@ -3,20 +3,20 @@
 
 namespace TEngine
 {
-	class Memory
-	{
-	private:
-		Memory(); // static class
+	class StackAllocator;
 
-	public:
+	namespace Memory
+	{
+		constexpr uint8 CACHE_LINE_SIZE = 64;
+
 		/**
-		* Allocates bytes at a certain alignment using standard malloc
+		* Allocates size at a certain alignment using standard malloc
 		**/
-		static void* AlignedMalloc(size bytes, uint8 alignment);
+		void* AlignedMalloc(maxint bytes, uint8 alignment);
 
 		/**
 		* Deallocates memory that was allocated using AlignedMalloc
 		**/
-		static void AlignedFree(void* address);
-	};
+		void AlignedFree(void* address);
+	}
 }
