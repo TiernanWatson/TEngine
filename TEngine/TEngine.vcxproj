@@ -72,23 +72,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\include;D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\build\Debug;D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\include;D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\build\Debug;D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\include;D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\build\Release;D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\include;D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\build\Release;D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -103,7 +103,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp-vc140-mt.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetyped.lib;assimp-vc140-mt.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,7 +119,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp-vc140-mt.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetyped.lib;assimp-vc140-mt.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,7 +139,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp-vc140-mt.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;assimp-vc140-mt.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,7 +159,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp-vc140-mt.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;assimp-vc140-mt.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -171,6 +171,7 @@
     <ClCompile Include="Core\Math\Quat.cpp" />
     <ClCompile Include="Core\Math\TMath.cpp" />
     <ClCompile Include="Core\Math\Vector2.cpp" />
+    <ClCompile Include="Core\Math\Vector2Int.cpp" />
     <ClCompile Include="Core\Math\Vector3.cpp" />
     <ClCompile Include="Core\Math\Vector4.cpp" />
     <ClCompile Include="Core\Memory\Memory.cpp" />
@@ -178,6 +179,7 @@
     <ClCompile Include="Core\Memory\StackAllocator.cpp" />
     <ClCompile Include="Core\Time\Clock.cpp" />
     <ClCompile Include="ECS\Archetype.cpp" />
+    <ClCompile Include="ECS\Components\Camera.cpp" />
     <ClCompile Include="ECS\Components\MeshComponent.cpp" />
     <ClCompile Include="ECS\Components\Transform.cpp" />
     <ClCompile Include="ECS\DataChunk.cpp" />
@@ -185,6 +187,8 @@
     <ClCompile Include="ECS\EntityManager.cpp" />
     <ClCompile Include="External\stb_image.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Helpers\Debug.cpp" />
+    <ClCompile Include="Helpers\DebugSystem.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\InputSystem.cpp" />
     <ClCompile Include="Loop.cpp" />
@@ -195,6 +199,8 @@
     <ClCompile Include="Render\RenderSystem.cpp" />
     <ClCompile Include="Render\Shader\Shader.cpp" />
     <ClCompile Include="Render\Texture\Texture.cpp" />
+    <ClCompile Include="Render\UI\Character.cpp" />
+    <ClCompile Include="Render\UI\Font.cpp" />
     <ClCompile Include="TEngine.cpp" />
     <ClCompile Include="Window\WindowManager.cpp" />
     <ClCompile Include="World\World.cpp" />
@@ -210,6 +216,7 @@
     <ClInclude Include="Core\Math\Quat.h" />
     <ClInclude Include="Core\Math\TMath.h" />
     <ClInclude Include="Core\Math\Vector2.h" />
+    <ClInclude Include="Core\Math\Vector2Int.h" />
     <ClInclude Include="Core\Math\Vector3.h" />
     <ClInclude Include="Core\Math\Vector4.h" />
     <ClInclude Include="Core\Memory\Memory.h" />
@@ -218,6 +225,7 @@
     <ClInclude Include="Core\PortableTypes.h" />
     <ClInclude Include="Core\Time\Clock.h" />
     <ClInclude Include="ECS\Archetype.h" />
+    <ClInclude Include="ECS\Components\Camera.h" />
     <ClInclude Include="ECS\Components\MeshComponent.h" />
     <ClInclude Include="ECS\Components\Transform.h" />
     <ClInclude Include="ECS\DataChunk.h" />
@@ -225,6 +233,8 @@
     <ClInclude Include="ECS\EntityManager.h" />
     <ClInclude Include="External\stb_image.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Helpers\Debug.h" />
+    <ClInclude Include="Helpers\DebugSystem.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Input\InputSystem.h" />
     <ClInclude Include="Input\KeyCode.h" />
@@ -236,6 +246,8 @@
     <ClInclude Include="Render\RenderSystem.h" />
     <ClInclude Include="Render\Shader\Shader.h" />
     <ClInclude Include="Render\Texture\Texture.h" />
+    <ClInclude Include="Render\UI\Character.h" />
+    <ClInclude Include="Render\UI\Font.h" />
     <ClInclude Include="Window\WindowManager.h" />
     <ClInclude Include="World\World.h" />
     <ClInclude Include="World\WorldScript.h" />
@@ -244,8 +256,7 @@
   <ItemGroup>
     <None Include="cpp.hint" />
     <None Include="Engine.ini" />
-    <None Include="Shaders\Fragment\default.frag" />
-    <None Include="Shaders\Vertex\default.vert" />
+    <None Include="Resources\ExampleScene\example.world" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -174,7 +174,9 @@ namespace TEngine
 
 		assert(index != -1);
 
-		uint8* p = (uint8*)chunk->data + detail.archetype->offsets[index] + detail.index * sizeof(T);
+		uint8* p = (uint8*)chunk->data			// data start
+			+ detail.archetype->offsets[index]  // subarray for T
+			+ detail.index * sizeof(T);			// entity position
 
 		return *(T*)p;
 	}

@@ -112,6 +112,18 @@
     <Filter Include="Source Files\Render\Material">
       <UniqueIdentifier>{c81239d6-599e-4a80-a4ae-4b5dfaa5b3c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Render\UI">
+      <UniqueIdentifier>{63e1ce34-2990-4ae0-9e10-fdb2bd557519}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render\UI">
+      <UniqueIdentifier>{fb8f36b7-774a-4ad5-a253-f9c328fe84ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helpers">
+      <UniqueIdentifier>{eb4ce34e-b7b8-4827-8e18-462b9d50a96c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helpers">
+      <UniqueIdentifier>{9771c5cf-ffce-4f5a-9231-8fb5eb73e54c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TEngine.cpp">
@@ -224,6 +236,24 @@
     </ClCompile>
     <ClCompile Include="Render\Material\Material.cpp">
       <Filter>Source Files\Render\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\UI\Font.cpp">
+      <Filter>Source Files\Render\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\UI\Character.cpp">
+      <Filter>Source Files\Render\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Math\Vector2Int.cpp">
+      <Filter>Source Files\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Helpers\DebugSystem.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Helpers\Debug.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Components\Camera.cpp">
+      <Filter>Source Files\ECS\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -341,15 +371,28 @@
     <ClInclude Include="Render\Material\Material.h">
       <Filter>Header Files\Render\Material</Filter>
     </ClInclude>
+    <ClInclude Include="Render\UI\Font.h">
+      <Filter>Header Files\Render\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\UI\Character.h">
+      <Filter>Header Files\Render\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Math\Vector2Int.h">
+      <Filter>Header Files\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\DebugSystem.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\Debug.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Components\Camera.h">
+      <Filter>Header Files\ECS\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine.ini" />
-    <None Include="Shaders\Vertex\default.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Shaders\Fragment\default.frag">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="cpp.hint" />
+    <None Include="Resources\ExampleScene\example.world" />
   </ItemGroup>
 </Project>

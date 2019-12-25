@@ -24,7 +24,7 @@ namespace TEngine
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		window = glfwCreateWindow(width, height, "T-Engine", nullptr, nullptr);
+		window = glfwCreateWindow(width, height, "Odyssey", nullptr, nullptr);
 		if (!window)
 		{
 			throw std::exception("WindowManager::StartUp: Could not create GLFW window.");

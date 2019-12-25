@@ -6,7 +6,11 @@
 namespace TEngine
 {
 	class WorldScript;
+	struct Camera;
 
+	/**
+	* Describes a world in the game (i.e. all its entities, etc..)
+	**/
 	class World
 	{
 	public:
@@ -17,10 +21,13 @@ namespace TEngine
 		void Stop();
 
 		EntityManager& GetEntities();
+		uint32 GetMainCameraEnt() const;
 
 	private:
 		EntityManager entities;
-
 		std::vector<WorldScript> scripts;
+		uint32 mainCameraEntity;
+
+		friend class WorldSystem;
 	};
 }

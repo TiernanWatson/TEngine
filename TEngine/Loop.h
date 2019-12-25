@@ -9,6 +9,8 @@
 
 namespace TEngine
 {
+	class DebugSystem;
+
 	class Loop
 	{
 	private:
@@ -25,6 +27,10 @@ namespace TEngine
 		InputSystem* inputSystem;
 		RenderSystem* renderSystem;
 		WorldSystem* worldSystem;
+
+#if _DEBUG
+		DebugSystem* debugSystem;
+#endif
 
 		Loop(); // singleton
 		~Loop();

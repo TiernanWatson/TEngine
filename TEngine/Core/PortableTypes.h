@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <assert.h>
+#include "../Helpers/Debug.h"
 
 #if defined(_MSC_VER)
 #define _FORCE_INLINE_ __forceinline

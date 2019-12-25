@@ -1,5 +1,8 @@
 #include "Loop.h"
 #include "Core/Config/Config.h"
+#include "Helpers/DebugSystem.h"
+
+//#undef _DEBUG
 
 namespace TEngine
 {
@@ -11,11 +14,18 @@ namespace TEngine
 		inputSystem = systemsStack.NewOnStack<InputSystem>();
 		worldSystem = systemsStack.NewOnStack<WorldSystem>();
 		renderSystem = systemsStack.NewOnStack<RenderSystem>();
+#ifdef _DEBUG
+		debugSystem = new DebugSystem();
+#endif
 	}
 
 	Loop::~Loop()
 	{
 		// Subsystems will be freed as stack is deconstructed
+#ifdef _DEBUG
+		delete debugSystem;
+#endif
+
 	}
 
 	Loop& Loop::Instance()
@@ -51,10 +61,16 @@ namespace TEngine
 		inputSystem->StartUp(windowManager->GetWindow());
 		worldSystem->StartUp();
 		renderSystem->StartUp(windowManager->GetWindow(), worldSystem);
+#ifdef _DEBUG
+		debugSystem->StartUp(windowManager->GetWindow());
+#endif
 	}
 
 	void Loop::ShutDown()
 	{
+#ifdef _DEBUG
+		debugSystem->ShutDown();
+#endif
 		renderSystem->ShutDown();
 		worldSystem->ShutDown();
 		inputSystem->ShutDown();
@@ -88,6 +104,9 @@ namespace TEngine
 	void Loop::FixedUpdate(const float32 timeStep)
 	{
 		worldSystem->FixedUpdate(timeStep);
+#ifdef _DEBUG
+		debugSystem->FixedUpdate(timeStep);
+#endif
 	}
 
 	/**
@@ -98,6 +117,9 @@ namespace TEngine
 		inputSystem->Update();
 		worldSystem->Update(deltaTime);
 		renderSystem->Update(deltaTime);
+#ifdef _DEBUG
+		debugSystem->VariableUpdate(deltaTime);
+#endif
 		windowManager->Update(deltaTime);
 	}
 }

@@ -145,7 +145,7 @@ namespace TEngine
 
 	bool Matrix4::operator==(const Matrix4& rhs) const
 	{
-		for (maxint i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < 16; i++) {
 			if (flat[i] != rhs.flat[i]) 
 				return false;
 		}
@@ -155,7 +155,7 @@ namespace TEngine
 
 	bool Matrix4::operator!=(const Matrix4& rhs) const
 	{
-		for (maxint i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < 16; i++) {
 			if (flat[i] != rhs.flat[i])
 				return true;
 		}
@@ -167,7 +167,7 @@ namespace TEngine
 	{
 		Matrix4 ret = Matrix4();
 
-		for (maxint i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < 16; i++) {
 			ret.flat[i] = flat[i] + rhs.flat[i];
 		}
 
@@ -178,7 +178,7 @@ namespace TEngine
 	{
 		Matrix4 ret = Matrix4();
 
-		for (maxint i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < 16; i++) {
 			ret.flat[i] = flat[i] - rhs.flat[i];
 		}
 
@@ -189,9 +189,9 @@ namespace TEngine
 	{
 		Matrix4 ret = Matrix4();
 
-		for (maxint i = 0; i < ROWS; i++) {
-			for (maxint j = 0; j < ROWS; j++) {
-				for (maxint k = 0; k < ROWS; k++) {
+		for (maxint i = 0; i < 4; i++) {
+			for (maxint j = 0; j < 4; j++) {
+				for (maxint k = 0; k < 4; k++) {
 					ret.m[i][j] += m[i][k] * rhs.m[k][j];
 				}
 			}
@@ -214,7 +214,7 @@ namespace TEngine
 
 	Matrix4& Matrix4::operator+=(const Matrix4& rhs) 
 	{
-		for (maxint i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < 16; i++) {
 			flat[i] += rhs.flat[i];
 		}
 		
@@ -223,7 +223,7 @@ namespace TEngine
 
 	Matrix4& Matrix4::operator-=(const Matrix4& rhs)
 	{
-		for (maxint i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < 16; i++) {
 			flat[i] -= rhs.flat[i];
 		}
 
@@ -234,15 +234,15 @@ namespace TEngine
 	{
 		Matrix4 tmp = Matrix4();
 
-		for (maxint i = 0; i < ROWS; i++) {
-			for (maxint j = 0; j < ROWS; j++) {
-				for (maxint k = 0; k < ROWS; k++) {
+		for (maxint i = 0; i < 4; i++) {
+			for (maxint j = 0; j < 4; j++) {
+				for (maxint k = 0; k < 4; k++) {
 					tmp.m[i][j] += m[i][k] * rhs.m[k][j];
 				}
 			}
 		}
 
-		for (maxint i = 0; i < ELEMENTS; i++) {
+		for (maxint i = 0; i < 16; i++) {
 			flat[i] = tmp.flat[i];
 		}
 
@@ -272,6 +272,22 @@ namespace TEngine
 		result.m[2][3] = (2.f * farDist * nearDist) / (nearDist - farDist);
 
 		result.m[3][2] = -1.f;
+
+		return result;
+	}
+
+	Matrix4 Matrix4::Orthographic(float32 near, float32 far, float32 left, float32 right, float32 bottom, float32 top)
+	{
+		Matrix4 result;
+
+		result.m[0][0] = 2.f / (right - left);
+		result.m[1][1] = 2.f / (top - bottom);
+		result.m[2][2] = -2.f / (far - near);
+
+		result.m[0][3] = -(right + left) / (right - left);
+		result.m[1][3] = -(top + bottom) / (top - bottom);
+		result.m[2][3] = -(far + near) / (far - near);
+		result.m[3][3] = 1.f;
 
 		return result;
 	}

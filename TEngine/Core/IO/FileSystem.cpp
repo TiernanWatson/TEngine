@@ -1,4 +1,5 @@
 #include "FileSystem.h"
+#include <Windows.h>
 #include <exception>
 #include <assert.h>
 

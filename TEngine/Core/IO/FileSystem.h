@@ -1,7 +1,5 @@
 #pragma once
 #include "../PortableTypes.h"
-#include <Windows.h>
-#include <iostream>
 
 namespace TEngine 
 {

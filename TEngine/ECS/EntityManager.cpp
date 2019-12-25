@@ -1,6 +1,5 @@
 #include "EntityManager.h"
 #include <assert.h>
-#include <iostream>
 #include "../Core/Memory/Memory.h"
 #include "DataChunk.h"
 
@@ -8,7 +7,6 @@ namespace TEngine
 {
 	EntityManager::EntityManager()
 	{
-		
 	}
 
 	uint32 EntityManager::NewEntity()
@@ -77,11 +75,13 @@ namespace TEngine
 		a->firstChunk->archetype = a;
 		a->firstChunk->next = nullptr;
 
+		// First offset is always 0
 		a->offsets.push_back(0);
 		for (maxint i = 1; i < count; i++)
 		{
 			// Offset for i is determined by how much mem previous takes up
-			maxint offset = (types[i - 1].size / totalSize) * MEM_16K_BYTES;
+			// Amount of memory is proportional to the type size
+			maxint offset = ((float32)types[i - 1].size / totalSize) * MEM_16K_BYTES;
 			uint8 misalign = offset & (Memory::CACHE_LINE_SIZE - 1);
 
 			a->offsets.push_back(offset - misalign);

@@ -18,7 +18,6 @@ namespace TEngine
 		void SetVec4(const std::string& name, const Vector4& value);
 		void SetMat4(const std::string& name, const Matrix4& value);
 
-	private:
 		uint32 shaderProgram;
 	};
 }

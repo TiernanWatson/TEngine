@@ -33,7 +33,12 @@ namespace TEngine
 			s.Stop();
 	}
 
-	EntityManager& World::GetEntities()
+	uint32 World::GetMainCameraEnt() const
+	{
+		return mainCameraEntity;
+	}
+
+	EntityManager& World::GetEntities() 
 	{
 		return entities;
 	}

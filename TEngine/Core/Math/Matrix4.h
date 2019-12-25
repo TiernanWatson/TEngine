@@ -6,7 +6,7 @@ namespace TEngine
 	class Vector3;
 
 	/**
-	* Class describing a 4x4 float32 matrix, 64 size
+	* Class describing a 4x4 float32 matrix, 64 byte size
 	**/
 	class Matrix4
 	{
@@ -14,14 +14,10 @@ namespace TEngine
 		static const Matrix4 one;
 		static const Matrix4 identity;
 
-	private:
-		static const maxint ELEMENTS = 16;
-		static const maxint ROWS = 4;
-
 	public:
 		union {
-			float32 flat[ELEMENTS];
-			float32 m[ROWS][ROWS];
+			float32 flat[16];
+			float32 m[4][4];
 		};
 
 		Matrix4(); 
@@ -55,6 +51,11 @@ namespace TEngine
 		* Used to return the Camera-to-Clip space matrix for rendering
 		**/
 		static Matrix4 Projection(float32 fovRad, float32 aspect, float32 farDist, float32 nearDist);
+
+		/**
+		* Computes an orthographic projection matrix
+		**/
+		static Matrix4 Orthographic(float32 near, float32 far, float32 left, float32 right, float32 bottom, float32 top);
 
 		/**
 		* Used to return the Model-to-World space matrix for rendering

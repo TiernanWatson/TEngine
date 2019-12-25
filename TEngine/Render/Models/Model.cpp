@@ -19,8 +19,8 @@ namespace TEngine
 {
 	void Model::Draw(Shader shader)
 	{
-		for (maxint i = 0; i < meshes.size(); i++)
-			meshes[i].Draw(shader);
+		/*for (maxint i = 0; i < meshes.size(); i++)
+			meshes[i].Draw(shader);*/
 	}
 
 	Mesh Model::GetMeshCopy(maxint index)
