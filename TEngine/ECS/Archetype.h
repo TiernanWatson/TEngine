@@ -2,6 +2,7 @@
 #include "../Core/PortableTypes.h"
 #include "Metatype.h"
 #include <vector>
+#include <set>
 
 namespace TEngine
 {
@@ -10,6 +11,7 @@ namespace TEngine
 	**/
 	struct Archetype
 	{
+		std::set<maxint> hashes;
 		std::vector<Metatype> types;
 		std::vector<maxint> offsets;
 		struct DataChunk* firstChunk;

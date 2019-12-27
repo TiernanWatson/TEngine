@@ -12,11 +12,6 @@ namespace TEngine
 	// Must declare this here because of type error if under TEngine::
 	void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 
-	WindowManager::WindowManager(int16 width, int16 height)
-		: width(width), height(height)
-	{
-	}
-
 	void WindowManager::StartUp()
 	{
 		glfwInit();

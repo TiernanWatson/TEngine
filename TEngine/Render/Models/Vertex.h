@@ -8,6 +8,8 @@ namespace TEngine
 	{
 		Vector3 position;
 		Vector3 normal;
-		Vector2 textCoords;
+		Vector3 tangent;
+		Vector3 bitangent;
+		Vector2 textCoord;
 	};
 }

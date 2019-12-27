@@ -1,5 +1,6 @@
 #pragma once
 #include "../Core/PortableTypes.h"
+#include "InputSystem.h"
 #include "KeyCode.h"
 
 namespace TEngine
@@ -10,13 +11,14 @@ namespace TEngine
 	class Input
 	{
 	public:
-		static _FORCE_INLINE_ bool GetKey(KeyCode key);
+		Input() = delete;
 
-		static class InputSystem* GetSystem() { return input; }
+		static _FORCE_INLINE_ bool GetKey(KeyCode key) 
+		{
+			return input->GetKey(key);
+		};
 
 	private:
-		Input();
-
 		static class InputSystem* input;
 		friend class InputSystem;
 	};

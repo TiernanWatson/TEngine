@@ -83,12 +83,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\include;D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\build\Release;D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\build\Release;D:\Libs\assimp-4.1.0\Build\code\Release;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\include;D:\Libs\assimp-4.1.0\Build\include;D:\Libs\assimp-4.1.0\include;D:\Libs\glad\include;D:\Libs\glfw3.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\build\Release;D:\Libs\assimp-4.1.0\Build\code\Debug;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Libs\freetype-2.10.1.tar\freetype-2.10.1\build\Release;D:\Libs\assimp-4.1.0\Build\code\Release;D:\Libs\glfw3.3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -181,6 +181,7 @@
     <ClCompile Include="ECS\Archetype.cpp" />
     <ClCompile Include="ECS\Components\Camera.cpp" />
     <ClCompile Include="ECS\Components\MeshComponent.cpp" />
+    <ClCompile Include="ECS\Components\PointLight.cpp" />
     <ClCompile Include="ECS\Components\Transform.cpp" />
     <ClCompile Include="ECS\DataChunk.cpp" />
     <ClCompile Include="ECS\Metatype.cpp" />
@@ -193,14 +194,17 @@
     <ClCompile Include="Input\InputSystem.cpp" />
     <ClCompile Include="Loop.cpp" />
     <ClCompile Include="Render\Material\Material.cpp" />
+    <ClCompile Include="Render\Material\Shaders.cpp" />
     <ClCompile Include="Render\Models\Mesh.cpp" />
     <ClCompile Include="Render\Models\Model.cpp" />
     <ClCompile Include="Render\Models\Vertex.cpp" />
     <ClCompile Include="Render\RenderSystem.cpp" />
     <ClCompile Include="Render\Shader\Shader.cpp" />
     <ClCompile Include="Render\Texture\Texture.cpp" />
+    <ClCompile Include="Render\Texture\Textures.cpp" />
     <ClCompile Include="Render\UI\Character.cpp" />
     <ClCompile Include="Render\UI\Font.cpp" />
+    <ClCompile Include="Resources\ExampleScene\Scripts\MoveCamera.cpp" />
     <ClCompile Include="TEngine.cpp" />
     <ClCompile Include="Window\WindowManager.cpp" />
     <ClCompile Include="World\World.cpp" />
@@ -227,6 +231,7 @@
     <ClInclude Include="ECS\Archetype.h" />
     <ClInclude Include="ECS\Components\Camera.h" />
     <ClInclude Include="ECS\Components\MeshComponent.h" />
+    <ClInclude Include="ECS\Components\PointLight.h" />
     <ClInclude Include="ECS\Components\Transform.h" />
     <ClInclude Include="ECS\DataChunk.h" />
     <ClInclude Include="ECS\Metatype.h" />
@@ -240,14 +245,17 @@
     <ClInclude Include="Input\KeyCode.h" />
     <ClInclude Include="Loop.h" />
     <ClInclude Include="Render\Material\Material.h" />
+    <ClInclude Include="Render\Material\Shaders.h" />
     <ClInclude Include="Render\Models\Mesh.h" />
     <ClInclude Include="Render\Models\Model.h" />
     <ClInclude Include="Render\Models\Vertex.h" />
     <ClInclude Include="Render\RenderSystem.h" />
     <ClInclude Include="Render\Shader\Shader.h" />
     <ClInclude Include="Render\Texture\Texture.h" />
+    <ClInclude Include="Render\Texture\Textures.h" />
     <ClInclude Include="Render\UI\Character.h" />
     <ClInclude Include="Render\UI\Font.h" />
+    <ClInclude Include="Resources\ExampleScene\Scripts\MoveCamera.h" />
     <ClInclude Include="Window\WindowManager.h" />
     <ClInclude Include="World\World.h" />
     <ClInclude Include="World\WorldScript.h" />

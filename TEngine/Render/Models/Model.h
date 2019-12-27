@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "Mesh.h"
+#include "../Texture/Texture.h"
 
 struct aiScene;
 struct aiNode;
@@ -22,12 +23,10 @@ namespace TEngine
 			LoadModel(path);
 		}
 
-		void Draw(Shader shader);
-
 		Mesh GetMeshCopy(maxint index);
 		maxint GetMeshCount();
 
-	private:
+	public:
 		std::vector<Mesh> meshes;
 		std::string directory;
 

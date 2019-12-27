@@ -4,12 +4,17 @@
 #include <iostream>
 #include "Game.h"
 
-using namespace TEngine;
-
 int main()
 {
-	TEngine::Game::Start();
+	try 
+	{
+		TEngine::Game::Start();
+	}
+	catch (std::exception ex) 
+	{
+		std::cout << "Unhandled exception: " << ex.what() << std::endl;
+		return -1;
+	}
 
 	return 0;
 }
-

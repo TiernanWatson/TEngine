@@ -124,6 +124,24 @@
     <Filter Include="Source Files\Helpers">
       <UniqueIdentifier>{9771c5cf-ffce-4f5a-9231-8fb5eb73e54c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Resources">
+      <UniqueIdentifier>{9588cbef-a7c1-4493-9c05-7b56ef9ddf34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resources\ExampleScene">
+      <UniqueIdentifier>{8494c84f-1d2d-4c42-82c4-9a1b42633018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resources\ExampleScene\Scripts">
+      <UniqueIdentifier>{fdf47e24-658a-42f5-85a6-56493b820a00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Resources">
+      <UniqueIdentifier>{e4cbccae-6117-4b3c-b5c2-5519ccab2839}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Resources\ExampleScene">
+      <UniqueIdentifier>{0df6bbec-845f-44ba-8f11-6573e2926390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Resources\ExampleScene\Scripts">
+      <UniqueIdentifier>{64cfe10e-7f30-4958-b72e-f4b6e0ce5f40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TEngine.cpp">
@@ -254,6 +272,18 @@
     </ClCompile>
     <ClCompile Include="ECS\Components\Camera.cpp">
       <Filter>Source Files\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Components\PointLight.cpp">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Material\Shaders.cpp">
+      <Filter>Source Files\Render\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Texture\Textures.cpp">
+      <Filter>Source Files\Render\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\ExampleScene\Scripts\MoveCamera.cpp">
+      <Filter>Source Files\Resources\ExampleScene\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -388,6 +418,18 @@
     </ClInclude>
     <ClInclude Include="ECS\Components\Camera.h">
       <Filter>Header Files\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Components\PointLight.h">
+      <Filter>Header Files\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Material\Shaders.h">
+      <Filter>Header Files\Render\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Texture\Textures.h">
+      <Filter>Header Files\Render\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\ExampleScene\Scripts\MoveCamera.h">
+      <Filter>Header Files\Resources\ExampleScene\Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 
 namespace TEngine
 {
-	Material::Material(Texture* texture, Shader* shader)
+	Material::Material(Texture* texture, uint32 shader)
 	{
 		this->texture = texture;
 		this->shader = shader;
@@ -13,7 +13,7 @@ namespace TEngine
 		return texture;
 	}
 
-	Shader* Material::GetShader() const
+	uint32 Material::GetShader() const
 	{
 		return shader;
 	}

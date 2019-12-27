@@ -1,28 +1,20 @@
 #include "Model.h"
-
 #include "Mesh.h"
 #include "Vertex.h"
-
 #include "../../Core/PortableTypes.h"
 #include "../../Core/Math/Vector3.h"
 #include "../../Core/Math/Vector2.h"
 #include "../Shader/Shader.h"
 #include "../Texture/Texture.h"
-
+#include "../../Helpers/Debug.h"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <stdexcept>
-#include <iostream>
+
 
 namespace TEngine
 {
-	void Model::Draw(Shader shader)
-	{
-		/*for (maxint i = 0; i < meshes.size(); i++)
-			meshes[i].Draw(shader);*/
-	}
-
 	Mesh Model::GetMeshCopy(maxint index)
 	{
 		return meshes[index];
@@ -46,6 +38,8 @@ namespace TEngine
 		directory = path.substr(0, path.find_last_of('\\'));
 
 		ProcessNode(scene->mRootNode, scene);
+
+		CONSOLE_PRINT("Loaded model " + path + " with: " + std::to_string(meshes.size()) + " meshes");
 	}
 
 	void Model::ProcessNode(aiNode* node, const aiScene* scene)
@@ -86,17 +80,29 @@ namespace TEngine
 			vector.z = mesh->mNormals[i].z;
 			vertex.normal = vector;
 
+			// Process vertex tangent
+			/*vector.x = mesh->mTangents[i].x;
+			vector.y = mesh->mTangents[i].y;
+			vector.z = mesh->mTangents[i].z;
+			vertex.tangent = vector;
+
+			// Process vertex bitangent
+			vector.x = mesh->mBitangents[i].x;
+			vector.y = mesh->mBitangents[i].y;
+			vector.z = mesh->mBitangents[i].z;
+			vertex.bitangent = vector;*/
+
 			// Process the texture co-ordinates
 			if (mesh->mTextureCoords[0]) 
 			{
 				Vector2 vec;
 				vec.x = mesh->mTextureCoords[0][i].x;
 				vec.y = mesh->mTextureCoords[0][i].y;
-				vertex.textCoords = vec;
+				vertex.textCoord = vec;
 			}
 			else 
 			{
-				vertex.textCoords = Vector2(0.0f, 0.0f);
+				vertex.textCoord = Vector2(0.0f, 0.0f);
 			}
 
 			vertices.push_back(vertex);
@@ -122,7 +128,17 @@ namespace TEngine
 			std::vector<Texture> specularMaps = LoadMaterialTextures(material,
 				aiTextureType_SPECULAR, TexType::specular);
 			textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+
+			/*std::vector<Texture> normalMaps = LoadMaterialTextures(material,
+				aiTextureType_HEIGHT, TexType::normal);
+			textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+
+			std::vector<Texture> heightMaps = LoadMaterialTextures(material,
+				aiTextureType_AMBIENT, TexType::height);
+			textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());*/
 		}
+
+		assert(vertices.size() != 0 && indices.size() != 0);
 
 		return Mesh(vertices, indices, textures);
 	}
@@ -130,12 +146,14 @@ namespace TEngine
 	std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, TexType typeName)
 	{
 		std::vector<Texture> textures;
-		for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
+		for (maxint i = 0; i < mat->GetTextureCount(type); i++)
 		{
 			aiString str;
 			mat->GetTexture(type, i, &str);
-			Texture texture(directory + "\\" + str.C_Str(), typeName);
-			texture.Load();
+			Texture texture;
+			texture.path = directory + "\\" + str.C_Str();
+			texture.type = typeName;
+			//texture.Load();
 			textures.push_back(texture);
 		}
 

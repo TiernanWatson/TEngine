@@ -1,3 +1,4 @@
+#ifdef _DEBUG
 #include "DebugSystem.h"
 #include "Debug.h"
 #include "../Core/Math/Matrix4.h"
@@ -82,6 +83,9 @@ namespace TEngine
 								float32 scale,
 								const Vector3& color)
 	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 		glUniform3f(glGetUniformLocation(shader->shaderProgram, "textColor"), color.x, color.y, color.z);
@@ -128,5 +132,8 @@ namespace TEngine
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+
+		glDisable(GL_BLEND);
 	}
 }
+#endif

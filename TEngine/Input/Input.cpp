@@ -5,9 +5,4 @@
 namespace TEngine
 {
 	InputSystem* Input::input = nullptr;
-
-	bool Input::GetKey(KeyCode key)
-	{
-		return input->GetKey(key);
-	}
 }

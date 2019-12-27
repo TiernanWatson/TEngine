@@ -1,8 +1,9 @@
 #pragma once
+
+#ifdef _DEBUG
 #include <vector>
 #include <string>
 
-#ifdef _DEBUG
 #define SCREEN_PRINT(message) TEngine::Debug::ScreenDebugText(message);
 #define CONSOLE_PRINT(message) TEngine::Debug::LogDebugText(message);
 #else
@@ -10,8 +11,11 @@
 #define CONSOLE_PRINT(message)
 #endif
 
+#ifdef _DEBUG
 namespace TEngine
 {
+	class Vector3;
+
 	/**
 	* Class with only static members for debugging purposes
 	* Not a namespace so message list is hidden and only accessed
@@ -32,9 +36,13 @@ namespace TEngine
 		**/
 		static void LogDebugText(std::string message);
 
+		static std::string Vec3ToStr(Vector3& v);
+		static std::string PtrToStr(void* p);
+
 	private:
 		static std::vector<std::string> screenMessages;
 
 		friend class DebugSystem;
 	};
 }
+#endif

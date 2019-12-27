@@ -25,7 +25,6 @@ namespace TEngine
 #ifdef _DEBUG
 		delete debugSystem;
 #endif
-
 	}
 
 	Loop& Loop::Instance()
@@ -86,7 +85,7 @@ namespace TEngine
 
 		accumulatedTime += gameClock.GetDeltaTime();
 
-		// If game lags, make sure fixed update catchs up
+		// If game lags, make sure fixed update catches up
 		uint8 stepCount = 0;
 		while (accumulatedTime >= fixedTimeStep && stepCount <= maxFixedSteps) 
 		{

@@ -25,7 +25,7 @@ namespace TEngine
 
 	private:
 		EntityManager entities;
-		std::vector<WorldScript> scripts;
+		std::vector<WorldScript*> scripts;
 		uint32 mainCameraEntity;
 
 		friend class WorldSystem;

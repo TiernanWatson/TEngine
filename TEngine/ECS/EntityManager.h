@@ -17,6 +17,7 @@ namespace TEngine
 	{
 	public:
 		EntityManager();
+		~EntityManager();
 
 		/**
 		* Creates a new entity with no components
@@ -47,34 +48,48 @@ namespace TEngine
 		void AddToEntity(uint32 id);
 
 		/**
-		* Returns the archetype that exactly matches the list of metatypes, nullptr if none found
-		**/
-		Archetype* FindArchetype(Metatype* types, maxint count) const;
-
-		/**
-		* Adds a new archetype describing the metatypes and returns a pointer to it
-		**/
-		Archetype* AddArchetype(Metatype* types, maxint count);
-
-		/**
-		* Applies the supplied function to the archetypes containing the metatypes
+		* Applies the supplied function to the archetypes containing the specified types
 		**/
 		template<typename ...Comps>
 		void ForEach(std::function<void(Comps*...)> func);
 
 		/**
-		* Gets a reference the component of type T for entity id
+		* Gets a reference the component of type T for entity index
 		**/
 		template<typename T>
 		T& GetComponent(uint32 id) const;
 
-		static EntityManager& Main();
-
 	private:
+		/**
+		* Instantiates an instance of an archetype in the next available slot
+		**/
 		void NewArchetypeInstance(Archetype* a, maxint& outChunk, maxint& outIndex);
 
+		/**
+		* Instantiates an instance of an archetype in the next available slot
+		**/
+		void NewArchetypeInstance(Archetype* a, uint8* data, maxint& outChunk, maxint& outIndex);
+
+		/**
+		* Gets a component of type T from chunk at index index
+		**/
 		template<typename T>
-		T* GetComponentChunkId(DataChunk* chunk, maxint id);
+		T* GetComponentChunkId(DataChunk* chunk, maxint index);
+
+		/**
+		* Returns the archetype that exactly matches the list of metatypes, nullptr if none found
+		**/
+		Archetype* FindArchetype(Metatype* types, maxint count) const;
+
+		/**
+		* Returns all the archetypes that contain the specified metatypes
+		**/
+		std::vector<Archetype*> MatchingArchetypes(Metatype* inc, maxint count) const;
+
+		/**
+		* Adds a new archetype describing the metatypes and returns a pointer to it
+		**/
+		Archetype* AddArchetype(Metatype* types, maxint count);
 
 		struct EntityDetails 
 		{
@@ -144,12 +159,19 @@ namespace TEngine
 		maxint count = sizeof...(Comps);
 		Metatype types[] = { Metatype::Create<Comps>()... };
 
-		Archetype* a = FindArchetype(types, count);
+		std::vector<Archetype*> results = MatchingArchetypes(types, count);
 		
-		DataChunk* d = a->firstChunk;
-		for (maxint i = 0; i < d->lastIndex; i++)
+		for (Archetype* a : results)
 		{
-			func(GetComponentChunkId<Comps>(d, i)...);
+			DataChunk* d = a->firstChunk;
+			while (d != nullptr)
+			{
+				for (maxint i = 0; i < d->lastIndex; i++)
+				{
+					func(GetComponentChunkId<Comps>(d, i)...);
+				}
+				d = d->next;
+			}
 		}
 	}
 
@@ -162,7 +184,7 @@ namespace TEngine
 
 		maxint hash = typeid(T).hash_code();
 
-		maxint index = -1;
+		maxint index = 0;
 		for (maxint i = 0; i < types.size(); i++)
 		{
 			if (hash == types[i].hash)
@@ -172,8 +194,6 @@ namespace TEngine
 			}
 		}
 
-		assert(index != -1);
-
 		uint8* p = (uint8*)chunk->data			// data start
 			+ detail.archetype->offsets[index]  // subarray for T
 			+ detail.index * sizeof(T);			// entity position
@@ -182,7 +202,7 @@ namespace TEngine
 	}
 
 	template<typename T>
-	inline T* EntityManager::GetComponentChunkId(DataChunk* chunk, maxint id)
+	inline T* EntityManager::GetComponentChunkId(DataChunk* chunk, maxint index)
 	{
 		Archetype* a = chunk->archetype;
 
@@ -192,8 +212,10 @@ namespace TEngine
 		{
 			if (hash == a->types[i].hash)
 			{
-				maxint offset = a->offsets[i];
-				uint8* p = chunk->data + offset + sizeof(T) * id;
+				uint8* p = chunk->data		// data start
+					+ a->offsets[i]			// subarray for T
+					+ sizeof(T) * index;	// entity position
+
 				return (T*)p;
 			}
 		}

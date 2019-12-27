@@ -12,9 +12,12 @@ namespace TEngine
 	struct Metatype
 	{
 		maxint hash;
-
 		maxint size;
 		uint8 align;
+
+#if _DEBUG
+		std::string name;
+#endif
 
 		std::function<void(void*)> construct;
 		std::function<void(void*)> destruct;
@@ -40,6 +43,10 @@ namespace TEngine
 		t.destruct = [](void* address) {
 			((T*)address)->~T();
 		};
+
+#if _DEBUG
+		t.name = info.name();
+#endif
 
 		return t;
 	}

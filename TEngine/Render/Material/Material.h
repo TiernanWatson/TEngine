@@ -3,20 +3,20 @@
 
 namespace TEngine
 {
-	class Texture;
+	struct Texture;
 	class Shader;
 
 	class Material
 	{
 	public:
-		Material(Texture* texture, Shader* shader);
+		Material(Texture* texture, uint32 shader);
 
 		Texture* GetTexture() const;
-		Shader* GetShader() const;
+		uint32 GetShader() const;
 
 	private:
 		// These are deleted elsewhere in the program
 		Texture* texture;
-		Shader* shader;
+		uint32 shader;
 	};
 }

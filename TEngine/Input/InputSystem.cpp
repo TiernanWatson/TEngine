@@ -26,7 +26,7 @@ namespace TEngine
 
 	bool InputSystem::GetKey(KeyCode key)
 	{
-		return glfwGetKey(window, GetGlfwKey(key));
+		return glfwGetKey(window, GetGlfwKey(key)) == GLFW_PRESS;
 	}
 
 	// Helper functions
@@ -57,12 +57,12 @@ namespace TEngine
 		case KeyCode::NUM9:
 		case KeyCode::SEMICOLON:
 		case KeyCode::EQUAL:
-			return GLFW_KEY_COMMA - static_cast<int>(KeyCode::COMMA) +
-				static_cast<int>(key);
 		case KeyCode::A:
+			return GLFW_KEY_A;
 		case KeyCode::B:
 		case KeyCode::C:
 		case KeyCode::D:
+			return GLFW_KEY_D;
 		case KeyCode::E:
 		case KeyCode::F:
 		case KeyCode::G:
@@ -78,20 +78,21 @@ namespace TEngine
 		case KeyCode::Q:
 		case KeyCode::R:
 		case KeyCode::S:
+			return GLFW_KEY_S;
 		case KeyCode::T:
 		case KeyCode::U:
 		case KeyCode::V:
 		case KeyCode::W:
+			return GLFW_KEY_W;
 		case KeyCode::X:
 		case KeyCode::Y:
 		case KeyCode::Z:
 		case KeyCode::LEFT_BRACKET:
 		case KeyCode::BACKSLASH:
 		case KeyCode::RIGHT_BRACKET:
-			return
-				GLFW_KEY_A - static_cast<int>(KeyCode::A) + static_cast<int>(key);
+			return GLFW_KEY_RIGHT_BRACKET;
 		case KeyCode::GRAVE_ACCENT:
-			return 96;
+			return GLFW_KEY_GRAVE_ACCENT;
 		case KeyCode::ESCAPE:
 		case KeyCode::ENTER:
 		case KeyCode::TAB:
@@ -106,15 +107,13 @@ namespace TEngine
 		case KeyCode::PAGE_DOWN:
 		case KeyCode::HOME:
 		case KeyCode::END:
-			return GLFW_KEY_ESCAPE - static_cast<int>(KeyCode::ESCAPE) +
-				static_cast<int>(key);
+			return GLFW_KEY_END;
 		case KeyCode::CAPS_LOCK:
 		case KeyCode::SCROLL_LOCK:
 		case KeyCode::NUM_LOCK:
 		case KeyCode::PRINT_SCREEN:
 		case KeyCode::PAUSE:
-			return GLFW_KEY_CAPS_LOCK - static_cast<int>(KeyCode::CAPS_LOCK) +
-				static_cast<int>(key);
+			return GLFW_KEY_PAUSE;
 		case KeyCode::F1:
 		case KeyCode::F2:
 		case KeyCode::F3:
@@ -144,8 +143,6 @@ namespace TEngine
 		case KeyCode::KP_ADD:
 		case KeyCode::KP_ENTER:
 		case KeyCode::KP_EQUAL:
-			return GLFW_KEY_KP_0 - static_cast<int>(KeyCode::KP_0) +
-				static_cast<int>(key);
 		case KeyCode::LEFT_SHIFT:
 		case KeyCode::LEFT_CONTROL:
 		case KeyCode::LEFT_ALT:

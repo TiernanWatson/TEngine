@@ -4,7 +4,7 @@
 
 namespace TEngine
 {
-	constexpr maxint MEM_16K_BYTES = 16384;
+	constexpr uint32 MEM_16K_BYTES = 16384;
 
 	/**
 	* A chunk of memory allocated to store a single archetype
@@ -12,8 +12,8 @@ namespace TEngine
 	struct DataChunk
 	{
 		uint8 data[MEM_16K_BYTES];
-		Archetype* archetype;
-		DataChunk* next;
-		maxint lastIndex;
+		Archetype* archetype = nullptr;
+		DataChunk* next = nullptr;
+		maxint lastIndex = 0;
 	};
 }
