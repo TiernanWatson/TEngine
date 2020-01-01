@@ -18,7 +18,6 @@
 #include "../Helpers/Debug.h"
 #include "UI/Font.h"
 #include "Material/Shaders.h"
-#include "GLRenderInfo.h"
 #include "Vertex.h"
 
 namespace TEngine
@@ -40,11 +39,12 @@ namespace TEngine
 		glEnable(GL_CULL_FACE);
 		glFrontFace(GL_CCW);
 
+		// Create mesh instances and load each mesh onto GPU
 		EntityManager& e = world->GetEntities();
 		e.ForEach<Transform, MeshComponent>(
 			[this](Transform* t, MeshComponent* m)
 			{
-				m->indexCount = m->mesh->GetIndices().size();
+				m->indexCount = (GLsizei)m->mesh->GetIndices().size();
 
 				if (meshInstances.count(m->mesh) != 0)
 				{

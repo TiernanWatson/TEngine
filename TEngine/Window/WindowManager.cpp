@@ -1,11 +1,10 @@
 #include "WindowManager.h"
-#include "../Game.h"
-#include <iostream>
-#include <assert.h>
-#include <exception>
 #include <glad/glad.h>
 #include <glfw3.h>
+#include "../Game.h"
 #include "../Core/IO/FileSystem.h"
+#include "../Core/Config/Config.h"
+#include "../Core/Config/ConfigVar.h"
 
 namespace TEngine
 {
@@ -14,12 +13,28 @@ namespace TEngine
 
 	void WindowManager::StartUp()
 	{
+		ConfigVar titleVar = CONFIG_VAL("Window", "title", ConfigVar("Odyssey"));
+		ConfigVar widthVar = CONFIG_VAL("Window", "width", ConfigVar("800"));
+		ConfigVar heightVar = CONFIG_VAL("Window", "height", ConfigVar("600"));
+		ConfigVar fullscreenVar = CONFIG_VAL("Window", "fullscreen", ConfigVar("false"));
+
+		width = widthVar.GetInt();
+		height = heightVar.GetInt();
+		isFullscreen = fullscreenVar.GetBool();
+
 		glfwInit();
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		window = glfwCreateWindow(width, height, "Odyssey", nullptr, nullptr);
+		window = glfwCreateWindow(
+			width, 
+			height, 
+			titleVar.GetValue().c_str(), 
+			isFullscreen ? glfwGetPrimaryMonitor() : nullptr, 
+			nullptr
+		);
+
 		if (!window)
 		{
 			throw std::exception("WindowManager::StartUp: Could not create GLFW window.");

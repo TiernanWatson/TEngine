@@ -1,8 +1,6 @@
 #pragma once
 #include "../Core/PortableTypes.h"
-#include "GLBufferInfo.h"
 #include "GLTextureInfo.h"
-#include "GLRenderInfo.h"
 #include "GLMeshInstance.h"
 #include <unordered_map>
 

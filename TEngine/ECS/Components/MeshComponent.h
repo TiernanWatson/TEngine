@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Core/PortableTypes.h"
 #ifdef OPENGL
+#include <glad/glad.h>
 #include "../../Render/GLTextureInfo.h"
 #endif
 
@@ -11,15 +12,15 @@ namespace TEngine
 	struct MeshComponent
 	{
 		Mesh* mesh;
-		maxint indexCount;
+		GLsizei indexCount;
 #ifdef OPENGL
 		GLTextureInfo* textures;
-		uint32 VAO;
-		uint32 texCount;
+		GLuint VAO;
+		GLuint texCount;
 #endif
 
 #ifdef OPENGL
-		inline GLTextureInfo& GetTexInfo(uint32 index) 
+		_FORCE_INLINE_ GLTextureInfo& GetTexInfo(uint32 index) 
 		{
 			return textures[index];
 		}

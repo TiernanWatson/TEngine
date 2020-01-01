@@ -46,7 +46,7 @@ namespace TEngine
 				std::string key, value;
 				if (ProcessLine(line, key, value))
 				{
-					valueMap[currentSection][key] = ConfigVar(0);
+					valueMap[currentSection][key] = ConfigVar(value);
 				}
 			}
 

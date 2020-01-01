@@ -20,7 +20,8 @@ namespace TEngine
 	private:
 		GLFWwindow* window = nullptr;  // Game window pointer
 
-		int16 width = 1280;
-		int16 height = 720;
+		int16 width = 1920;
+		int16 height = 1080;
+		bool isFullscreen = false;
 	};
 }

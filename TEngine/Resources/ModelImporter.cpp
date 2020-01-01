@@ -142,7 +142,7 @@ namespace TEngine
 
 	void ModelImporter::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, TexType typeName, std::string& directory, std::vector<Texture*>& result)
 	{
-		for (maxint i = 0; i < mat->GetTextureCount(type); i++)
+		for (uint32 i = 0; i < mat->GetTextureCount(type); i++)
 		{
 			aiString str;
 			mat->GetTexture(type, i, &str);

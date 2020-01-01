@@ -189,9 +189,7 @@
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\InputSystem.cpp" />
     <ClCompile Include="Loop.cpp" />
-    <ClCompile Include="Render\GLBufferInfo.cpp" />
     <ClCompile Include="Render\GLMeshInstance.cpp" />
-    <ClCompile Include="Render\GLRenderInfo.cpp" />
     <ClCompile Include="Render\GLTextureInfo.cpp" />
     <ClCompile Include="Render\Material\Shaders.cpp" />
     <ClCompile Include="Render\GLRenderer.cpp" />
@@ -247,9 +245,7 @@
     <ClInclude Include="Input\KeyCode.h" />
     <ClInclude Include="Loop.h" />
     <ClInclude Include="Render\Color.h" />
-    <ClInclude Include="Render\GLBufferInfo.h" />
     <ClInclude Include="Render\GLMeshInstance.h" />
-    <ClInclude Include="Render\GLRenderInfo.h" />
     <ClInclude Include="Render\GLTextureInfo.h" />
     <ClInclude Include="Render\Material\Shaders.h" />
     <ClInclude Include="Render\GLRenderer.h" />

@@ -255,13 +255,7 @@
     <ClCompile Include="Render\GLRenderer.cpp">
       <Filter>Source Files\Render</Filter>
     </ClCompile>
-    <ClCompile Include="Render\GLRenderInfo.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
     <ClCompile Include="Render\GLTextureInfo.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\GLBufferInfo.cpp">
       <Filter>Source Files\Render</Filter>
     </ClCompile>
     <ClCompile Include="Resources\Types\Material.cpp">
@@ -419,13 +413,7 @@
     <ClInclude Include="Render\GLRenderer.h">
       <Filter>Header Files\Render</Filter>
     </ClInclude>
-    <ClInclude Include="Render\GLRenderInfo.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
     <ClInclude Include="Render\GLTextureInfo.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\GLBufferInfo.h">
       <Filter>Header Files\Render</Filter>
     </ClInclude>
     <ClInclude Include="Resources\Types\Mesh.h">

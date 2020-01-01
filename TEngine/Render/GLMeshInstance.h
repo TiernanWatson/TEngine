@@ -1,6 +1,7 @@
 #pragma once
 #include "../Core/PortableTypes.h"
 #include "GLTextureInfo.h"
+#include <glad/glad.h>
 #include <vector>
 
 namespace TEngine
@@ -23,16 +24,16 @@ namespace TEngine
 
 		const Mesh* GetMesh() const;
 
-		uint32 GetVAO() const;
-		uint32 GetVBO() const;
-		uint32 GetEBO() const;
+		GLuint GetVAO() const;
+		GLuint GetVBO() const;
+		GLuint GetEBO() const;
 		const GLTextureInfo* GetTextures() const;
-		uint32 GetTextureCount() const;
+		GLsizei GetTextureCount() const;
 
 	private:
 		const Mesh* mesh;
 
-		uint32 VAO, VBO, EBO;
+		GLuint VAO, VBO, EBO;
 
 		std::vector<GLTextureInfo> textures;
 

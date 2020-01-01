@@ -72,21 +72,21 @@ namespace TEngine
 		return mesh;
 	}
 
-	uint32 GLMeshInstance::GetVAO() const
+	GLuint GLMeshInstance::GetVAO() const
 	{
 		assert(isLoaded);
 
 		return VAO;
 	}
 
-	uint32 GLMeshInstance::GetVBO() const
+	GLuint GLMeshInstance::GetVBO() const
 	{
 		assert(isLoaded);
 
 		return VBO;
 	}
 
-	uint32 GLMeshInstance::GetEBO() const
+	GLuint GLMeshInstance::GetEBO() const
 	{
 		assert(isLoaded);
 
@@ -98,7 +98,7 @@ namespace TEngine
 		return textures.data();
 	}
 
-	uint32 GLMeshInstance::GetTextureCount() const
+	GLsizei GLMeshInstance::GetTextureCount() const
 	{
 		return textures.size();
 	}

@@ -10,7 +10,7 @@ namespace TEngine
 
 	float32 Vector2Int::SqrMagnitude() const
 	{
-		return x * x + y * y;
+		return (float32)x * x + (float32)y * y;
 	}
 
 	Vector2Int Vector2Int::operator*(const uint32& rhs) const
