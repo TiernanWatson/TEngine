@@ -108,7 +108,7 @@ namespace TEngine
 
 			// Offset for i is determined by how much mem previous takes up
 			// Amount of memory is proportional to the type size
-			maxint offset = ((float64)types[i - 1].size / totalSize) * MEM_16K_BYTES;
+			maxint offset = (maxint)(((float64)types[i - 1].size / totalSize) * MEM_16K_BYTES);
 			uint8 misalign = offset & (Memory::CACHE_LINE_SIZE - 1);
 			a->offsets.push_back(offset - misalign);
 		}
@@ -139,9 +139,5 @@ namespace TEngine
 		outIndex = index;
 
 		a->firstChunk->lastIndex++;
-	}
-
-	void EntityManager::NewArchetypeInstance(Archetype* a, uint8* data, maxint& outChunk, maxint& outIndex)
-	{
 	}
 }

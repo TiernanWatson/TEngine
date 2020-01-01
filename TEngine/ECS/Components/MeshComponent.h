@@ -1,14 +1,28 @@
 #pragma once
-#include "../../Render/Models/Mesh.h"
+#include "../../Core/PortableTypes.h"
+#ifdef OPENGL
+#include "../../Render/GLTextureInfo.h"
+#endif
 
 namespace TEngine
 {
+	class Mesh;
+
 	struct MeshComponent
 	{
-		uint32 VAO;
-		uint32 VBO;
-		uint32 EBO;
-		maxint indexCount;
 		Mesh* mesh;
+		maxint indexCount;
+#ifdef OPENGL
+		GLTextureInfo* textures;
+		uint32 VAO;
+		uint32 texCount;
+#endif
+
+#ifdef OPENGL
+		inline GLTextureInfo& GetTexInfo(uint32 index) 
+		{
+			return textures[index];
+		}
+#endif
 	};
 }

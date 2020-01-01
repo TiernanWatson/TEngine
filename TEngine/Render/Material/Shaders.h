@@ -26,6 +26,8 @@ namespace TEngine
 
 		static uint32 GetShader(const std::string& name);
 
+		static uint32 GetDefault();
+
 		static void SetMat4(uint32 id, const std::string& name, const Matrix4& mat);
 		static void SetVec4(uint32 id, const std::string& name, const Vector4& vec);
 		static void SetVec3(uint32 id, const std::string& name, const Vector3& vec);

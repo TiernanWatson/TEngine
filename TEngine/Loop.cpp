@@ -8,12 +8,12 @@ namespace TEngine
 {
 	Loop::Loop() 
 		: systemsStack(sizeof(WindowManager) + sizeof(InputSystem)
-			+ sizeof(WorldSystem) + sizeof(RenderSystem))
+			+ sizeof(WorldSystem) + sizeof(GLRenderer))
 	{
 		windowManager = systemsStack.NewOnStack<WindowManager>();
 		inputSystem = systemsStack.NewOnStack<InputSystem>();
 		worldSystem = systemsStack.NewOnStack<WorldSystem>();
-		renderSystem = systemsStack.NewOnStack<RenderSystem>();
+		renderSystem = systemsStack.NewOnStack<GLRenderer>();
 #ifdef _DEBUG
 		debugSystem = new DebugSystem();
 #endif
@@ -115,7 +115,7 @@ namespace TEngine
 	{
 		inputSystem->Update();
 		worldSystem->Update(deltaTime);
-		renderSystem->Update(deltaTime);
+		renderSystem->Render(deltaTime);
 #ifdef _DEBUG
 		debugSystem->VariableUpdate(deltaTime);
 #endif

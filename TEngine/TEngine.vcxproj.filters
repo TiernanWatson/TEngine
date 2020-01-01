@@ -64,18 +64,6 @@
     <Filter Include="Source Files\Render">
       <UniqueIdentifier>{94e1ca6a-3556-4a87-b582-9c35535de45d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Render\Shader">
-      <UniqueIdentifier>{66426074-a810-4efa-bd14-5b9a3ded94b4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Render\Shader">
-      <UniqueIdentifier>{48718b2b-95ca-48aa-9e74-5df1d21ed18f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Render\Texture">
-      <UniqueIdentifier>{cb1b5f17-9f1a-412f-84e3-6a04be17b873}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Render\Texture">
-      <UniqueIdentifier>{0abb90f6-b399-489b-b1dc-0808b7f6807f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\ECS">
       <UniqueIdentifier>{ed174215-b032-4bf7-a16e-87c140c87ad5}</UniqueIdentifier>
     </Filter>
@@ -87,12 +75,6 @@
     </Filter>
     <Filter Include="Header Files\ECS\Components">
       <UniqueIdentifier>{d6cc6071-9479-4029-8270-175de25f96cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Render\Models">
-      <UniqueIdentifier>{0d6b3ae9-2cb9-4630-b35b-172918f26b15}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Render\Models">
-      <UniqueIdentifier>{06a06f35-42c2-4b5c-9fb1-3c7e88e85991}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Input">
       <UniqueIdentifier>{2f42084d-e1e2-4341-b11e-50f1bcaede73}</UniqueIdentifier>
@@ -141,6 +123,12 @@
     </Filter>
     <Filter Include="Source Files\Resources\ExampleScene\Scripts">
       <UniqueIdentifier>{64cfe10e-7f30-4958-b72e-f4b6e0ce5f40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resources\Types">
+      <UniqueIdentifier>{01c99613-f90b-402d-8a47-8bdfdc81671a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Resources\Types">
+      <UniqueIdentifier>{ab82d871-e781-4c7d-9cd4-a1b1d41a49b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -195,41 +183,17 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Shader\Shader.cpp">
-      <Filter>Source Files\Render\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Texture\Texture.cpp">
-      <Filter>Source Files\Render\Texture</Filter>
-    </ClCompile>
     <ClCompile Include="External\stb_image.cpp">
       <Filter>External</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Components\MeshComponent.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Models\Mesh.cpp">
-      <Filter>Source Files\Render\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Models\Vertex.cpp">
-      <Filter>Source Files\Render\Models</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Math\Vector2.cpp">
       <Filter>Source Files\Core\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="ECS\Components\Transform.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Models\Model.cpp">
-      <Filter>Source Files\Render\Models</Filter>
     </ClCompile>
     <ClCompile Include="Input\InputSystem.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
     <ClCompile Include="Input\Input.cpp">
       <Filter>Source Files\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\RenderSystem.cpp">
-      <Filter>Source Files\Render</Filter>
     </ClCompile>
     <ClCompile Include="ECS\EntityManager.cpp">
       <Filter>Source Files\ECS</Filter>
@@ -252,9 +216,6 @@
     <ClCompile Include="World\WorldSystem.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Material\Material.cpp">
-      <Filter>Source Files\Render\Material</Filter>
-    </ClCompile>
     <ClCompile Include="Render\UI\Font.cpp">
       <Filter>Source Files\Render\UI</Filter>
     </ClCompile>
@@ -270,20 +231,53 @@
     <ClCompile Include="Helpers\Debug.cpp">
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Components\Camera.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="ECS\Components\PointLight.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Render\Material\Shaders.cpp">
       <Filter>Source Files\Render\Material</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Texture\Textures.cpp">
-      <Filter>Source Files\Render\Texture</Filter>
-    </ClCompile>
     <ClCompile Include="Resources\ExampleScene\Scripts\MoveCamera.cpp">
       <Filter>Source Files\Resources\ExampleScene\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\Resource.cpp">
+      <Filter>Source Files\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\ResourceImporter.cpp">
+      <Filter>Source Files\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\ResourceLoader.cpp">
+      <Filter>Source Files\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\TextureImporter.cpp">
+      <Filter>Source Files\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\Types\Texture.cpp">
+      <Filter>Source Files\Resources\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\GLRenderer.cpp">
+      <Filter>Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\GLRenderInfo.cpp">
+      <Filter>Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\GLTextureInfo.cpp">
+      <Filter>Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\GLBufferInfo.cpp">
+      <Filter>Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\Types\Material.cpp">
+      <Filter>Source Files\Resources\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\Types\Mesh.cpp">
+      <Filter>Source Files\Resources\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\Types\Model.cpp">
+      <Filter>Source Files\Resources\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\ModelImporter.cpp">
+      <Filter>Source Files\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\GLMeshInstance.cpp">
+      <Filter>Source Files\Render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -338,32 +332,17 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Shader\Shader.h">
-      <Filter>Header Files\Render\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Texture\Texture.h">
-      <Filter>Header Files\Render\Texture</Filter>
-    </ClInclude>
     <ClInclude Include="External\stb_image.h">
       <Filter>External</Filter>
     </ClInclude>
     <ClInclude Include="ECS\Components\MeshComponent.h">
       <Filter>Header Files\ECS\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Models\Mesh.h">
-      <Filter>Header Files\Render\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Models\Vertex.h">
-      <Filter>Header Files\Render\Models</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Math\Vector2.h">
       <Filter>Header Files\Core\Math</Filter>
     </ClInclude>
     <ClInclude Include="ECS\Components\Transform.h">
       <Filter>Header Files\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Models\Model.h">
-      <Filter>Header Files\Render\Models</Filter>
     </ClInclude>
     <ClInclude Include="Input\InputSystem.h">
       <Filter>Header Files\Input</Filter>
@@ -395,12 +374,6 @@
     <ClInclude Include="World\WorldSystem.h">
       <Filter>Header Files\World</Filter>
     </ClInclude>
-    <ClInclude Include="Render\RenderSystem.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Material\Material.h">
-      <Filter>Header Files\Render\Material</Filter>
-    </ClInclude>
     <ClInclude Include="Render\UI\Font.h">
       <Filter>Header Files\Render\UI</Filter>
     </ClInclude>
@@ -425,11 +398,56 @@
     <ClInclude Include="Render\Material\Shaders.h">
       <Filter>Header Files\Render\Material</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Texture\Textures.h">
-      <Filter>Header Files\Render\Texture</Filter>
-    </ClInclude>
     <ClInclude Include="Resources\ExampleScene\Scripts\MoveCamera.h">
       <Filter>Header Files\Resources\ExampleScene\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Resource.h">
+      <Filter>Header Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\ResourceImporter.h">
+      <Filter>Header Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\ResourceLoader.h">
+      <Filter>Header Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\TextureImporter.h">
+      <Filter>Header Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Types\Texture.h">
+      <Filter>Header Files\Resources\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\GLRenderer.h">
+      <Filter>Header Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\GLRenderInfo.h">
+      <Filter>Header Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\GLTextureInfo.h">
+      <Filter>Header Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\GLBufferInfo.h">
+      <Filter>Header Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Types\Mesh.h">
+      <Filter>Header Files\Resources\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Types\Material.h">
+      <Filter>Header Files\Resources\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Vertex.h">
+      <Filter>Header Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Color.h">
+      <Filter>Header Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Types\Model.h">
+      <Filter>Header Files\Resources\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\ModelImporter.h">
+      <Filter>Header Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\GLMeshInstance.h">
+      <Filter>Header Files\Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

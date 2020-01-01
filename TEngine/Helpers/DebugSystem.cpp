@@ -3,9 +3,9 @@
 #include "Debug.h"
 #include "../Core/Math/Matrix4.h"
 #include "../Core/IO/FileSystem.h"
-#include "../Render/Shader/Shader.h"
 #include "../Render/UI/Character.h"
 #include "../Render/UI/Font.h"
+#include "../Render/Material/Shaders.h"
 #include <glad/glad.h>
 #include <glfw3.h>
 #include <vector>
@@ -16,7 +16,7 @@ namespace TEngine
 	DebugSystem::DebugSystem()
 		: window(nullptr), 
 		font(nullptr), 
-		shader(nullptr)
+		shader(0)
 	{
 	}
 
@@ -31,9 +31,9 @@ namespace TEngine
 		const char* fragSource = FileSystem::Instance().ReadString(
 			"D:\\TEngine\\TEngine\\Resources\\Shaders\\Fragment\\uitext.frag");
 
-		this->shader = new Shader(vertSource, fragSource);
+		this->shader = Shaders::CreateShader("Text", vertSource, fragSource);
 
-		delete vertSource, fragSource;
+		delete fragSource, vertSource;
 
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
@@ -51,8 +51,9 @@ namespace TEngine
 	void DebugSystem::VariableUpdate(float32 deltaTime)
 	{
 		Matrix4 proj = Matrix4::Orthographic(-1.f, 1.f, 0.0f, 1280.f, 0.0f, 720.f);
-		shader->Use();
-		shader->SetMat4("projection", proj.Transpose());
+		
+		glUseProgram(shader);
+		Shaders::SetMat4(shader, "projection", proj.Transpose());
 
 		float32 FPS = 1.f / deltaTime;
 		std::string title = "Odyssey Game Engine Debug Build: " + std::to_string((int)FPS) + "FPS";
@@ -75,7 +76,7 @@ namespace TEngine
 	{
 		this->window = nullptr;
 		this->font = nullptr;
-		this->shader = nullptr;
+		this->shader = 0;
 	}
 
 	void DebugSystem::RenderText(std::string text,
@@ -88,7 +89,7 @@ namespace TEngine
 
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-		glUniform3f(glGetUniformLocation(shader->shaderProgram, "textColor"), color.x, color.y, color.z);
+		glUniform3f(glGetUniformLocation(shader, "textColor"), color.x, color.y, color.z);
 		glActiveTexture(GL_TEXTURE0);
 		glBindVertexArray(VAO);
 

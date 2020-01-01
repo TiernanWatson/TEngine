@@ -26,7 +26,7 @@ namespace TEngine
 	private:
 		GLFWwindow* window;
 		Font* font;
-		Shader* shader;
+		uint32 shader;
 
 		uint32 VAO, VBO;
 

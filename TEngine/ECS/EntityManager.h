@@ -34,7 +34,7 @@ namespace TEngine
 		* Creates an entity with the specified components and instances
 		**/
 		template<typename ...Comps>
-		uint32 NewEntityWith(Comps ...args);
+		uint32 NewEntityWith(Comps* ...args);
 
 		/**
 		* Removes an entity and its associated components
@@ -64,11 +64,6 @@ namespace TEngine
 		* Instantiates an instance of an archetype in the next available slot
 		**/
 		void NewArchetypeInstance(Archetype* a, maxint& outChunk, maxint& outIndex);
-
-		/**
-		* Instantiates an instance of an archetype in the next available slot
-		**/
-		void NewArchetypeInstance(Archetype* a, uint8* data, maxint& outChunk, maxint& outIndex);
 
 		/**
 		* Gets a component of type T from chunk at index index
@@ -128,7 +123,7 @@ namespace TEngine
 	}
 
 	template<typename ...Comps>
-	inline uint32 EntityManager::NewEntityWith(Comps ...args)
+	inline uint32 EntityManager::NewEntityWith(Comps* ...args)
 	{
 		uint32 id = NewEntity();
 

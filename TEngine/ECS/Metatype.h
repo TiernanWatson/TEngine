@@ -22,6 +22,8 @@ namespace TEngine
 		std::function<void(void*)> construct;
 		std::function<void(void*)> destruct;
 
+		std::function<void(void*, void*)> copy;
+
 		template<typename T>
 		static constexpr Metatype Create();
 	};
@@ -42,6 +44,10 @@ namespace TEngine
 
 		t.destruct = [](void* address) {
 			((T*)address)->~T();
+		};
+
+		t.copy = [](void* dest, void* src) {
+			memcpy(dest, src, sizeof(T));
 		};
 
 #if _DEBUG

@@ -6,8 +6,8 @@
 #include "../ECS/Components/MeshComponent.h"
 #include "../ECS/Components/Camera.h"
 #include "../ECS/Components/PointLight.h"
-#include "../Render/Material/Material.h"
-#include "../Render/Models/Model.h"
+#include "../Resources/Types/Model.h"
+#include "../Resources/ResourceLoader.h"
 #include "../Render/Material/Shaders.h"
 #include "../Core/IO/FileSystem.h"
 #include "../Helpers/Debug.h"
@@ -24,109 +24,27 @@ namespace TEngine
 		currentWorld = new World();
 		EntityManager& e = currentWorld->GetEntities();
 
-		const char* vertSource = FileSystem::Instance().ReadString(
-			"D:\\TEngine\\TEngine\\Resources\\Shaders\\Vertex\\3default.vert");
-
-		const char* fragSource = FileSystem::Instance().ReadString(
-			"D:\\TEngine\\TEngine\\Resources\\Shaders\\Fragment\\3default.frag");
-
-		uint32 s = Shaders::CreateShader("default", vertSource, fragSource);
-
-		delete vertSource, fragSource;
-
 		// Crysuit
-		Model* model = new Model("D:\\3D Models\\nanosuit\\nanosuit.obj");
-		for (Mesh& m : model->meshes)
+		//Model& model = ResourceLoader::Instance().GetModel("D:\\3D Models\\nanosuit\\nanosuit.obj");
+		Model& model = ResourceLoader::Instance().GetModel("D:\\3D Models\\muro\\muro.obj");
+		for (uint32 i = 0; i < 10; i++)
 		{
-			Material* mat = new Material(nullptr, s);
-			m.materials.push_back(mat);
+			/*for (uint32 j = 0; j < 5; j++)
+			{*/
+				for (Mesh* m : model.GetMeshes())
+				{
+					uint32 mId = e.NewEntityWith<Transform, MeshComponent>();
 
-			uint32 mId = e.NewEntityWith<Transform, MeshComponent>();
+					Transform& t = e.GetComponent<Transform>(mId);
+					Vector3 dir = (i % 2 == 0) ? Vector3::right : Vector3::left;
+					t.position = Vector3::down * 1.75f + dir * 2.f /** (float32)j*/ + Vector3::forward * 2.f * (float32)i;
+					t.scale = Vector3::one * 0.02f;
 
-			Transform& t = e.GetComponent<Transform>(mId);
-			t.position = Vector3::down * 1.5f;
-			t.scale = Vector3::one * 0.2f;
-
-			MeshComponent& mc = e.GetComponent<MeshComponent>(mId);
-			mc.mesh = &m;
+					MeshComponent& mc = e.GetComponent<MeshComponent>(mId);
+					mc.mesh = m;
+				}
+			//}
 		}
-
-		// Cube
-		/*
-		uint32 id = e.NewEntityWith<Transform, MeshComponent>();
-		std::vector<Vertex> verts{   
-			Vertex{Vector3(-0.5f, -0.5f, 0.5f)},
-			Vertex{Vector3(0.5f, -0.5f, 0.5f)},
-			Vertex{Vector3(0.5f, 0.5f, 0.5f)},
-			Vertex{Vector3(-0.5f, 0.5f, 0.5f)},
-			Vertex{Vector3(-0.5f, -0.5f, -0.5f)},
-			Vertex{Vector3(0.5f, -0.5f, -0.5f)},
-			Vertex{Vector3(0.5f, 0.5f, -0.5f)},
-			Vertex{Vector3(-0.5f, 0.5f, -0.5f)}
-		};
-		std::vector<uint32> indices{
-			// front
-			0, 1, 2,
-			2, 3, 0,
-			// right
-			1, 5, 6,
-			6, 2, 1,
-			// back
-			7, 6, 5,
-			5, 4, 7,
-			// left
-			4, 0, 3,
-			3, 7, 4,
-			// bottom
-			4, 5, 1,
-			1, 0, 4,
-			// top
-			3, 2, 6,
-			6, 7, 3
-		};
-		std::vector<Vector3> normals{
-			// front
-			Vector3::back,
-			Vector3::back,
-			Vector3::back,
-			Vector3::back,
-			// right
-			Vector3::right,
-			Vector3::right,
-			Vector3::right,
-			Vector3::right,
-			// back
-			Vector3::forward,
-			Vector3::forward,
-			Vector3::forward,
-			Vector3::forward,
-			// left
-			Vector3::left,
-			Vector3::left,
-			Vector3::left,
-			Vector3::left,
-			// bottom
-			Vector3::down,
-			Vector3::down,
-			Vector3::down,
-			Vector3::down,
-			// top
-			Vector3::up,
-			Vector3::up,
-			Vector3::up,
-			Vector3::up
-		};
-		std::vector<Texture> texts;
-		Mesh* mesh = new Mesh(verts, indices, texts);
-		Material* mat = new Material(nullptr, s);
-		mesh->materials.push_back(mat);
-		//mesh->normals = normals;
-
-		MeshComponent& m = e.GetComponent<MeshComponent>(id);
-		m.mesh = mesh;
-
-		Transform& t = e.GetComponent<Transform>(id);
-		t.scale = Vector3::one;*/
 
 		// Main Camera
 		currentWorld->mainCameraEntity = e.NewEntityWith<Transform, Camera>();

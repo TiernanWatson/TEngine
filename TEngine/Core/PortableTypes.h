@@ -11,6 +11,9 @@
 #define _FORCE_INLINE_ inline
 #endif
 
+// Opens possibility for more rendering pipelines
+#define OPENGL 1
+
 namespace TEngine 
 {
 	typedef uint8_t uint8;

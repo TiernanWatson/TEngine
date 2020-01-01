@@ -6,6 +6,8 @@
 
 namespace TEngine
 {
+	struct DataChunk;
+
 	/**
 	* A collection of component metatypes e.g. <position, velocity>
 	**/
@@ -14,6 +16,7 @@ namespace TEngine
 		std::set<maxint> hashes;
 		std::vector<Metatype> types;
 		std::vector<maxint> offsets;
-		struct DataChunk* firstChunk;
+		DataChunk* firstChunk;
+		uint16 totalSize;
 	};
 }

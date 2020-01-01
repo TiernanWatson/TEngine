@@ -3,6 +3,7 @@
 #include "../../Core/Math/Vector4.h"
 #include "../../Core/Math/Vector3.h"
 #include "../../Core/Math/Vector2.h"
+#include "../../Core/IO/FileSystem.h"
 #include <glad/glad.h>
 #include <glfw3.h>
 
@@ -62,6 +63,28 @@ namespace TEngine
 	uint32 Shaders::GetShader(const std::string& name)
 	{
 		return nameToShader[name];
+	}
+
+	uint32 Shaders::GetDefault()
+	{
+		if (nameToShader.count("Default") != 0)
+		{
+			return nameToShader["Default"];
+		}
+		else
+		{
+			const char* vertSource = FileSystem::Instance().ReadString(
+				"D:\\TEngine\\TEngine\\Resources\\Shaders\\Vertex\\3default.vert");
+
+			const char* fragSource = FileSystem::Instance().ReadString(
+				"D:\\TEngine\\TEngine\\Resources\\Shaders\\Fragment\\3default.frag");
+
+			uint32 s = CreateShader("Default", vertSource, fragSource);
+
+			delete vertSource, fragSource;
+
+			return s;
+		}
 	}
 
 	void Shaders::SetMat4(uint32 id, const std::string& name, const Matrix4& mat)
