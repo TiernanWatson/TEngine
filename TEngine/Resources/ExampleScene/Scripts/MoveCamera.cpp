@@ -7,7 +7,7 @@
 
 void MoveCamera::Update(float32 deltaTime)
 {
-	uint32 camId = world->GetMainCameraEnt();
+	/*uint32 camId = world->GetMainCameraEnt();
 	Transform& t = world->GetEntities().GetComponent<Transform>(camId);
 	
 	float32 forward = Input::GetKey(KeyCode::W) ? 1.f : 0.f;
@@ -16,5 +16,5 @@ void MoveCamera::Update(float32 deltaTime)
 	right = Input::GetKey(KeyCode::A) ? -1.f : right;
 
 	Vector3 move = Vector3::forward * forward + Vector3::right * right;
-	t.position += move * deltaTime;
+	t.position += move * deltaTime;*/
 }

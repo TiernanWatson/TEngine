@@ -1,10 +1,12 @@
+#ifdef OPENGL
+
 #include "GLMeshInstance.h"
 #include <glad/glad.h>
 #include <glfw3.h>
-#include "Vertex.h"
-#include "../Resources/Types/Mesh.h"
-#include "../Resources/Types/Texture.h"
-#include "../Resources/Types/Material.h"
+#include "../Vertex.h"
+#include "../../Resources/Types/Mesh.h"
+#include "../../Resources/Types/Texture.h"
+#include "../../Resources/Types/Material.h"
 
 namespace TEngine
 {
@@ -144,3 +146,5 @@ namespace TEngine
 		textures.push_back(texInfo);
 	}
 }
+
+#endif // OPENGL

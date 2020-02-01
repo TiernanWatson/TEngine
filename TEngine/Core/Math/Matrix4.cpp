@@ -2,12 +2,15 @@
 #include "../Math/TMath.h"
 #include "Vector3.h"
 #include <cstring>
-#include <stdexcept>
+#include "../Exception.h"
 
 namespace TEngine
 {
 	const Matrix4 Matrix4::one = Matrix4(1.f);
-	const Matrix4 Matrix4::identity = Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	const Matrix4 Matrix4::identity = Matrix4(1, 0, 0, 0, 
+											0, 1, 0, 0,
+											0, 0, 1, 0, 
+											0, 0, 0, 1);
 
 	Matrix4::Matrix4()
 	{
@@ -68,9 +71,9 @@ namespace TEngine
 	{
 		Matrix4 result;
 
-		for (int i = 0; i < 4; i++)
+		for (uint8 i = 0; i < 4; i++)
 		{
-			for (int j = 0; j < 4; j++)
+			for (uint8 j = 0; j < 4; j++)
 			{
 				result.m[i][j] = m[j][i];
 			}
@@ -81,64 +84,64 @@ namespace TEngine
 
 	Matrix4 Matrix4::Inverse() const
 	{
-		float m11 = flat[5] * flat[10] * flat[15] - flat[5] * flat[11] * flat[14] -
+		float32 m11 = flat[5] * flat[10] * flat[15] - flat[5] * flat[11] * flat[14] -
 			flat[9] * flat[6] * flat[15] + flat[9] * flat[7] * flat[14] +
 			flat[13] * flat[6] * flat[11] - flat[13] * flat[7] * flat[10];
-		float m21 = -flat[4] * flat[10] * flat[15] + flat[4] * flat[11] * flat[14] +
+		float32 m21 = -flat[4] * flat[10] * flat[15] + flat[4] * flat[11] * flat[14] +
 			flat[8] * flat[6] * flat[15] - flat[8] * flat[7] * flat[14] -
 			flat[12] * flat[6] * flat[11] + flat[12] * flat[7] * flat[10];
-		float m31 = flat[4] * flat[9] * flat[15] - flat[4] * flat[11] * flat[13] -
+		float32 m31 = flat[4] * flat[9] * flat[15] - flat[4] * flat[11] * flat[13] -
 			flat[8] * flat[5] * flat[15] + flat[8] * flat[7] * flat[13] +
 			flat[12] * flat[5] * flat[11] - flat[12] * flat[7] * flat[9];
-		float m41 = -flat[4] * flat[9] * flat[14] + flat[4] * flat[10] * flat[13] +
+		float32 m41 = -flat[4] * flat[9] * flat[14] + flat[4] * flat[10] * flat[13] +
 			flat[8] * flat[5] * flat[14] - flat[8] * flat[6] * flat[13] -
 			flat[12] * flat[5] * flat[10] + flat[12] * flat[6] * flat[9];
-		float m12 = -flat[1] * flat[10] * flat[15] + flat[1] * flat[11] * flat[14] +
+		float32 m12 = -flat[1] * flat[10] * flat[15] + flat[1] * flat[11] * flat[14] +
 			flat[9] * flat[2] * flat[15] - flat[9] * flat[3] * flat[14] -
 			flat[13] * flat[2] * flat[11] + flat[13] * flat[3] * flat[10];
-		float m22 = flat[0] * flat[10] * flat[15] - flat[0] * flat[11] * flat[14] -
+		float32 m22 = flat[0] * flat[10] * flat[15] - flat[0] * flat[11] * flat[14] -
 			flat[8] * flat[2] * flat[15] + flat[8] * flat[3] * flat[14] +
 			flat[12] * flat[2] * flat[11] - flat[12] * flat[3] * flat[10];
-		float m32 = -flat[0] * flat[9] * flat[15] + flat[0] * flat[11] * flat[13] +
+		float32 m32 = -flat[0] * flat[9] * flat[15] + flat[0] * flat[11] * flat[13] +
 			flat[8] * flat[1] * flat[15] - flat[8] * flat[3] * flat[13] -
 			flat[12] * flat[1] * flat[11] + flat[12] * flat[3] * flat[9];
-		float m42 = flat[0] * flat[9] * flat[14] - flat[0] * flat[10] * flat[13] -
+		float32 m42 = flat[0] * flat[9] * flat[14] - flat[0] * flat[10] * flat[13] -
 			flat[8] * flat[1] * flat[14] + flat[8] * flat[2] * flat[13] +
 			flat[12] * flat[1] * flat[10] - flat[12] * flat[2] * flat[9];
-		float m13 = flat[1] * flat[6] * flat[15] - flat[1] * flat[7] * flat[14] -
+		float32 m13 = flat[1] * flat[6] * flat[15] - flat[1] * flat[7] * flat[14] -
 			flat[5] * flat[2] * flat[15] + flat[5] * flat[3] * flat[14] +
 			flat[13] * flat[2] * flat[7] - flat[13] * flat[3] * flat[6];
-		float m23 = -flat[0] * flat[6] * flat[15] + flat[0] * flat[7] * flat[14] +
+		float32 m23 = -flat[0] * flat[6] * flat[15] + flat[0] * flat[7] * flat[14] +
 			flat[4] * flat[2] * flat[15] - flat[4] * flat[3] * flat[14] -
 			flat[12] * flat[2] * flat[7] + flat[12] * flat[3] * flat[6];
-		float m33 = flat[0] * flat[5] * flat[15] - flat[0] * flat[7] * flat[13] -
+		float32 m33 = flat[0] * flat[5] * flat[15] - flat[0] * flat[7] * flat[13] -
 			flat[4] * flat[1] * flat[15] + flat[4] * flat[3] * flat[13] +
 			flat[12] * flat[1] * flat[7] - flat[12] * flat[3] * flat[5];
-		float m43 = -flat[0] * flat[5] * flat[14] + flat[0] * flat[6] * flat[13] +
+		float32 m43 = -flat[0] * flat[5] * flat[14] + flat[0] * flat[6] * flat[13] +
 			flat[4] * flat[1] * flat[14] - flat[4] * flat[2] * flat[13] -
 			flat[12] * flat[1] * flat[6] + flat[12] * flat[2] * flat[5];
-		float m14 = -flat[1] * flat[6] * flat[11] + flat[1] * flat[7] * flat[10] +
+		float32 m14 = -flat[1] * flat[6] * flat[11] + flat[1] * flat[7] * flat[10] +
 			flat[5] * flat[2] * flat[11] - flat[5] * flat[3] * flat[10] -
 			flat[9] * flat[2] * flat[7] + flat[9] * flat[3] * flat[6];
-		float m24 = flat[0] * flat[6] * flat[11] - flat[0] * flat[7] * flat[10] -
+		float32 m24 = flat[0] * flat[6] * flat[11] - flat[0] * flat[7] * flat[10] -
 			flat[4] * flat[2] * flat[11] + flat[4] * flat[3] * flat[10] +
 			flat[8] * flat[2] * flat[7] - flat[8] * flat[3] * flat[6];
-		float m34 = -flat[0] * flat[5] * flat[11] + flat[0] * flat[7] * flat[9] +
+		float32 m34 = -flat[0] * flat[5] * flat[11] + flat[0] * flat[7] * flat[9] +
 			flat[4] * flat[1] * flat[11] - flat[4] * flat[3] * flat[9] -
 			flat[8] * flat[1] * flat[7] + flat[8] * flat[3] * flat[5];
-		float m44 = flat[0] * flat[5] * flat[10] - flat[0] * flat[6] * flat[9] -
+		float32 m44 = flat[0] * flat[5] * flat[10] - flat[0] * flat[6] * flat[9] -
 			flat[4] * flat[1] * flat[10] + flat[4] * flat[2] * flat[9] +
 			flat[8] * flat[1] * flat[6] - flat[8] * flat[2] * flat[5];
 
-		float det = flat[0] * m11 + flat[1] * m21 + flat[2] * m31 + flat[3] * m41;
+		float32 det = flat[0] * m11 + flat[1] * m21 + flat[2] * m31 + flat[3] * m41;
 
 		if (det == 0) 
 		{
-			throw std::out_of_range("Matrix4::Inverse => Cannot do inverse when the determinant is zero." );
+			throw EXCEPTION("Matrix4::Inverse => Cannot do inverse when the determinant is zero." );
 		}
 
-		Matrix4 ret( m11, m12, m13, m14, m21, m22, m23, m24,
-					m31, m32, m33, m34, m41, m42, m43, m44 );
+		Matrix4 ret(m11, m12, m13, m14, m21, m22, m23, m24,
+					m31, m32, m33, m34, m41, m42, m43, m44);
 
 		return ret * (1.f / det);
 	}
@@ -251,7 +254,7 @@ namespace TEngine
 
 	Matrix4& Matrix4::operator*=(const float32& rhs)
 	{
-		for (int i = 0; i < 16; i++)
+		for (uint8 i = 0; i < 16; i++)
 		{
 			flat[i] = flat[i] * rhs;
 		}
@@ -344,5 +347,4 @@ namespace TEngine
 					   0,    0,   1, 0,  
 					   0,    0,   0, 1);
 	}
-
 }

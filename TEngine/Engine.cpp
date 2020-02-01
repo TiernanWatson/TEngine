@@ -1,25 +1,29 @@
-#include "Loop.h"
+#include "Engine.h"
 #include "Core/Config/Config.h"
+#include "Render/D3D11/D3D11Renderer.h"
 #include "Helpers/DebugSystem.h"
 
 //#undef _DEBUG
 
 namespace TEngine
 {
-	Loop::Loop() 
+	Engine* Engine::instance = nullptr;
+
+	Engine::Engine() 
 		: systemsStack(sizeof(WindowManager) + sizeof(InputSystem)
-			+ sizeof(WorldSystem) + sizeof(GLRenderer))
+			+ sizeof(WorldSystem) + sizeof(D3D11Renderer))
 	{
 		windowManager = systemsStack.NewOnStack<WindowManager>();
 		inputSystem = systemsStack.NewOnStack<InputSystem>();
 		worldSystem = systemsStack.NewOnStack<WorldSystem>();
-		renderSystem = systemsStack.NewOnStack<GLRenderer>();
+		renderer = systemsStack.NewOnStack<D3D11Renderer>();
 #ifdef _DEBUG
 		debugSystem = new DebugSystem();
 #endif
+		instance = this;
 	}
 
-	Loop::~Loop()
+	Engine::~Engine()
 	{
 		// Subsystems will be freed as stack is deconstructed
 #ifdef _DEBUG
@@ -27,59 +31,49 @@ namespace TEngine
 #endif
 	}
 
-	Loop& Loop::Instance()
-	{
-		static Loop instance;
-		return instance;
-	}
-
-	Clock& Loop::GetClock()
+	Clock& Engine::GetClock()
 	{
 		return gameClock;
 	}
 
-	void Loop::Run()
+	RENDERER& Engine::GetRenderer() const
 	{
-		StartUp();
-		while (isRunning) 
-		{
-			Update();
-		}
-		ShutDown();
+		return *renderer;
 	}
 
-	void Loop::Stop()
+	WorldSystem& Engine::GetWorldSys() const
 	{
-		isRunning = false;
+		return *worldSystem;
 	}
 
-	void Loop::StartUp()
+	void Engine::StartUp()
 	{
-		Config::Instance().LoadFrom("D:\\TEngine\\TEngine\\Engine.ini");
-		windowManager->StartUp();
-		inputSystem->StartUp(windowManager->GetWindow());
+		//Config::Instance().LoadFrom("D:\\TEngine\\TEngine\\Engine.ini");
+		//windowManager->StartUp();
+		//inputSystem->StartUp(windowManager->GetWindow());
 		worldSystem->StartUp();
-		renderSystem->StartUp(windowManager->GetWindow(), worldSystem);
+		//renderer->StartUp(windowManager->GetWindow(), worldSystem);
+		renderer->StartUp();
 #ifdef _DEBUG
-		debugSystem->StartUp(windowManager->GetWindow());
+		//debugSystem->StartUp(windowManager->GetWindow());
 #endif
 	}
 
-	void Loop::ShutDown()
+	void Engine::ShutDown()
 	{
 #ifdef _DEBUG
-		debugSystem->ShutDown();
+		//debugSystem->ShutDown();
 #endif
-		renderSystem->ShutDown();
+		renderer->ShutDown();
 		worldSystem->ShutDown();
-		inputSystem->ShutDown();
-		windowManager->ShutDown();
+		//inputSystem->ShutDown();
+		//windowManager->ShutDown();
 	}
 
 	/**
 	* Handles the calling of fixed and variable update
 	**/
-	void Loop::Update()
+	void Engine::Update()
 	{
 		gameClock.Update();
 
@@ -100,25 +94,30 @@ namespace TEngine
 	/**
 	* Updates at a fixed time step, defaulted to 50Hz
 	**/
-	void Loop::FixedUpdate(const float32 timeStep)
+	void Engine::FixedUpdate(const float32 timeStep)
 	{
 		worldSystem->FixedUpdate(timeStep);
 #ifdef _DEBUG
-		debugSystem->FixedUpdate(timeStep);
+		//debugSystem->FixedUpdate(timeStep);
 #endif
 	}
 
 	/**
 	* Updates as fast as possible, not fixed
 	**/
-	void Loop::VariableUpdate(const float32 deltaTime)
+	void Engine::VariableUpdate(const float32 deltaTime)
 	{
-		inputSystem->Update();
+		//inputSystem->Update();
 		worldSystem->Update(deltaTime);
-		renderSystem->Render(deltaTime);
+
+		renderer->ClearBuffer(0.f, 0.f, 0.f);
+		renderer->Render(deltaTime);
+		renderer->DrawTriangle();
+		renderer->Present();
+
 #ifdef _DEBUG
-		debugSystem->VariableUpdate(deltaTime);
+		//debugSystem->VariableUpdate(deltaTime);
 #endif
-		windowManager->Update(deltaTime);
+		//windowManager->Update(deltaTime);
 	}
 }

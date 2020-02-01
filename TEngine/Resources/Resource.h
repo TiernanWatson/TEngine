@@ -4,6 +4,9 @@
 
 namespace TEngine
 {
+	/*
+	* Base for loadable resources (e.g. Textures, Materials, Meshes)
+	*/
 	class Resource
 	{
 	public:

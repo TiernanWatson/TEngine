@@ -7,9 +7,6 @@ namespace TEngine
 
 	class WorldSystem
 	{
-	private:
-		World* currentWorld;
-
 	public:
 		void StartUp();
 		void Update(float32 deltaTime);
@@ -17,5 +14,8 @@ namespace TEngine
 		void ShutDown();
 
 		World* GetCurrentWorld() const;
+
+	private:
+		World* currentWorld;
 	};
 }

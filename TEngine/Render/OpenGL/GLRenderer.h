@@ -1,5 +1,6 @@
+#ifdef OPENGL
 #pragma once
-#include "../Core/PortableTypes.h"
+#include "../../Core/PortableTypes.h"
 #include "GLTextureInfo.h"
 #include "GLMeshInstance.h"
 #include <unordered_map>
@@ -30,7 +31,10 @@ namespace TEngine
 		WorldSystem* worlds;
 		World* world;
 
+		uint32 shader;
+
 		// Allows multiple components to share VAOs without slowing down performance
 		std::unordered_map<Mesh*, GLMeshInstance*> meshInstances;
 	};
 }
+#endif  // OPENGL

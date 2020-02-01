@@ -11,9 +11,6 @@
 #define _FORCE_INLINE_ inline
 #endif
 
-// Opens possibility for more rendering pipelines
-#define OPENGL 1
-
 namespace TEngine 
 {
 	typedef uint8_t uint8;
@@ -34,4 +31,6 @@ namespace TEngine
 	typedef uintptr_t uintptr;
 	typedef intptr_t intptr;
 	typedef ptrdiff_t ptrdiff;
+
+	typedef wchar_t wchar;
 }

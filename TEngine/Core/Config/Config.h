@@ -2,10 +2,11 @@
 #include "../PortableTypes.h"
 #include "ConfigVar.h"
 #include <unordered_map>
-/*
-#define CONFIG_INT32(section, name, fallback) TEngine::Config::Instance().GetVar(section, name, fallback).GetInt32()
-#define CONFIG_FLOAT32(section, name, fallback) TEngine::Config::Instance().GetVar(section, name, fallback).GetFloat32()
-#define CONFIG_BOOL(section, name, fallback) TEngine::Config::Instance().GetVar(section, name, fallback).GetBool()*/
+
+#define CONFIG_INT32(section, name, fallback) TEngine::Config::Instance().GetVar(section, name, fallback).GetInt()
+#define CONFIG_FLOAT32(section, name, fallback) TEngine::Config::Instance().GetVar(section, name, fallback).GetFloat()
+#define CONFIG_BOOL(section, name, fallback) TEngine::Config::Instance().GetVar(section, name, fallback).GetBool()
+#define CONFIG_STRING(section, name, fallback) TEngine::Config::Instance().GetVar(section, name, fallback).GetValue()
 #define CONFIG_VAL(section, name, fallback) TEngine::Config::Instance().GetVar(section, name, fallback)
 
 namespace TEngine

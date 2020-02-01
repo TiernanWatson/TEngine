@@ -1,5 +1,6 @@
+#ifdef OPENGL
 #pragma once
-#include "../Core/PortableTypes.h"
+#include "../../Core/PortableTypes.h"
 #include "GLTextureInfo.h"
 #include <glad/glad.h>
 #include <vector>
@@ -42,3 +43,4 @@ namespace TEngine
 		void SetupTexture(const Texture* tex);
 	};
 }
+#endif // OPENGL

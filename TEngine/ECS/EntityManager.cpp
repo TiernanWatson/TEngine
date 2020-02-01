@@ -128,7 +128,7 @@ namespace TEngine
 		maxint index = a->firstChunk->lastIndex;
 		uint8* start = a->firstChunk->data;
 
-		// Loop all types and instantiate them at correct place (non-interleaved)
+		// Engine all types and instantiate them at correct place (non-interleaved)
 		for (int i = 0; i < a->types.size(); i++)
 		{
 			uint8* comp = start + a->offsets[i] + a->types[i].size * index;

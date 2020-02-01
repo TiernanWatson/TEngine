@@ -1,9 +1,15 @@
 #pragma once
 #include "../../Core/PortableTypes.h"
+#ifdef DIRECTX
+#include <d3d11.h>
+#include <wrl.h>
+#endif
 #ifdef OPENGL
 #include <glad/glad.h>
-#include "../../Render/GLTextureInfo.h"
+#include "../../Render/OpenGL/GLTextureInfo.h"
 #endif
+
+namespace wrl = Microsoft::WRL;
 
 namespace TEngine
 {
@@ -12,8 +18,11 @@ namespace TEngine
 	struct MeshComponent
 	{
 		Mesh* mesh;
-		GLsizei indexCount;
+#ifdef DIRECTX
+		wrl::ComPtr<ID3D11Buffer> vertexBuffer;
+#endif
 #ifdef OPENGL
+		GLsizei indexCount;
 		GLTextureInfo* textures;
 		GLuint VAO;
 		GLuint texCount;

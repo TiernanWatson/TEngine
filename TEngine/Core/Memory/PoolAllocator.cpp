@@ -13,7 +13,7 @@ namespace TEngine
 
 		top = malloc(blockSize * maxElements);
 
-		// Initialize all the blocks
+		// Init all the blocks
 		freeBlock = new (top) Block(nullptr);
 		Block* currentBlock = freeBlock;
 		for (int i = 1; i < maxElements; i++) 

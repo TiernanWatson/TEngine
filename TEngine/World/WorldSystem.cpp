@@ -51,7 +51,7 @@ namespace TEngine
 
 		Transform& t2 = e.GetComponent<Transform>(currentWorld->mainCameraEntity);
 		t2.scale = Vector3::one;
-		t2.position = Vector3::back * 4.f;
+		t2.position = Vector3::forward * 10.f;
 		//t2.rotation = Vector3{ 0.3f, -0.3f, 0.f };
 
 		MoveCamera* moveCam = new MoveCamera();

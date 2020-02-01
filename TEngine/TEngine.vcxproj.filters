@@ -130,11 +130,41 @@
     <Filter Include="Source Files\Resources\Types">
       <UniqueIdentifier>{ab82d871-e781-4c7d-9cd4-a1b1d41a49b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Platform">
+      <UniqueIdentifier>{bef0d0e6-3210-4193-bacb-f4e8d47b07ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Platform\Windows">
+      <UniqueIdentifier>{6a223438-daff-4226-b810-2e59594a7f96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Platform">
+      <UniqueIdentifier>{c95f46d9-c8a1-4156-842f-b4551f0268b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Platform\Windows">
+      <UniqueIdentifier>{d467ca8f-092b-41cd-a7d2-83e68d8f302d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Render\D3D11">
+      <UniqueIdentifier>{d4bd1e92-039a-476f-9220-ae1c63922255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render\D3D11">
+      <UniqueIdentifier>{5b3cb10b-3d17-4a91-86d5-8f7094b1fdca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render\OpenGL">
+      <UniqueIdentifier>{a0ea54ad-4650-45ab-a660-b1288602a9cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Render\OpenGL">
+      <UniqueIdentifier>{cd3165e8-d6b0-429f-969b-c09cd8512aae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{8e677bf0-0fb7-4db7-88c3-88e554fcc604}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Render\D3D11\Bindables">
+      <UniqueIdentifier>{80484a00-b9a4-44dc-bd42-a76262e6ebde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render\D3D11\Bindables">
+      <UniqueIdentifier>{85e2539d-a3ff-4887-b8c4-280667d3e3eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Memory\StackAllocator.cpp">
       <Filter>Source Files\Core\Memory</Filter>
     </ClCompile>
@@ -167,9 +197,6 @@
     </ClCompile>
     <ClCompile Include="Core\Time\Clock.cpp">
       <Filter>Source Files\Core\Time</Filter>
-    </ClCompile>
-    <ClCompile Include="Loop.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Config\Config.cpp">
       <Filter>Source Files\Core\Config</Filter>
@@ -252,12 +279,6 @@
     <ClCompile Include="Resources\Types\Texture.cpp">
       <Filter>Source Files\Resources\Types</Filter>
     </ClCompile>
-    <ClCompile Include="Render\GLRenderer.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\GLTextureInfo.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
     <ClCompile Include="Resources\Types\Material.cpp">
       <Filter>Source Files\Resources\Types</Filter>
     </ClCompile>
@@ -270,8 +291,68 @@
     <ClCompile Include="Resources\ModelImporter.cpp">
       <Filter>Source Files\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="Render\GLMeshInstance.cpp">
-      <Filter>Source Files\Render</Filter>
+    <ClCompile Include="Render\D3D11\D3D11Renderer.cpp">
+      <Filter>Source Files\Render\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\OpenGL\GLMeshInstance.cpp">
+      <Filter>Source Files\Render\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\OpenGL\GLRenderer.cpp">
+      <Filter>Source Files\Render\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\OpenGL\GLTextureInfo.cpp">
+      <Filter>Source Files\Render\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform\Windows\WindowsOS.cpp">
+      <Filter>Source Files\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Exception.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform\Windows\Keyboard.cpp">
+      <Filter>Source Files\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform\Windows\Mouse.cpp">
+      <Filter>Source Files\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\D3D11\DXInfoManager.cpp">
+      <Filter>Source Files\Render\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform\Windows\WinExceptions.cpp">
+      <Filter>Source Files\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\D3D11\DXMeshInstance.cpp">
+      <Filter>Source Files\Render\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\D3D11\Bindables\Bindable.cpp">
+      <Filter>Source Files\Render\D3D11\Bindables</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\D3D11\Bindables\DXVertexBuffer.cpp">
+      <Filter>Source Files\Render\D3D11\Bindables</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\D3D11\Bindables\DXVertexShader.cpp">
+      <Filter>Source Files\Render\D3D11\Bindables</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\D3D11\Bindables\DXPixelShader.cpp">
+      <Filter>Source Files\Render\D3D11\Bindables</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\D3D11\Bindables\DXConstantBuffer.cpp">
+      <Filter>Source Files\Render\D3D11\Bindables</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\D3D11\Bindables\DXInputLayout.cpp">
+      <Filter>Source Files\Render\D3D11\Bindables</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\D3D11\Bindables\DXShader.cpp">
+      <Filter>Source Files\Render\D3D11\Bindables</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\D3D11\Bindables\DXIndexBuffer.cpp">
+      <Filter>Source Files\Render\D3D11\Bindables</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -310,9 +391,6 @@
     </ClInclude>
     <ClInclude Include="Core\Time\Clock.h">
       <Filter>Header Files\Core\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="Loop.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Config\Config.h">
       <Filter>Header Files\Core\Config</Filter>
@@ -410,12 +488,6 @@
     <ClInclude Include="Resources\Types\Texture.h">
       <Filter>Header Files\Resources\Types</Filter>
     </ClInclude>
-    <ClInclude Include="Render\GLRenderer.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\GLTextureInfo.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
     <ClInclude Include="Resources\Types\Mesh.h">
       <Filter>Header Files\Resources\Types</Filter>
     </ClInclude>
@@ -434,13 +506,84 @@
     <ClInclude Include="Resources\ModelImporter.h">
       <Filter>Header Files\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Render\GLMeshInstance.h">
-      <Filter>Header Files\Render</Filter>
+    <ClInclude Include="Render\D3D11\D3D11Renderer.h">
+      <Filter>Header Files\Render\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\OpenGL\GLMeshInstance.h">
+      <Filter>Header Files\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\OpenGL\GLRenderer.h">
+      <Filter>Header Files\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\OpenGL\GLTextureInfo.h">
+      <Filter>Header Files\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Windows\WindowsOS.h">
+      <Filter>Header Files\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Windows\WinHeader.h">
+      <Filter>Header Files\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Exception.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Windows\Keyboard.h">
+      <Filter>Header Files\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Windows\Mouse.h">
+      <Filter>Header Files\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\D3D11\DXInfoManager.h">
+      <Filter>Header Files\Render\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\D3D11\DXGraphicsExceptions.h">
+      <Filter>Header Files\Render\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Windows\WinExceptions.h">
+      <Filter>Header Files\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\D3D11\DXMeshInstance.h">
+      <Filter>Header Files\Render\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\D3D11\Bindables\Bindable.h">
+      <Filter>Header Files\Render\D3D11\Bindables</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\D3D11\Bindables\DXVertexBuffer.h">
+      <Filter>Header Files\Render\D3D11\Bindables</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\D3D11\Bindables\DXVertexShader.h">
+      <Filter>Header Files\Render\D3D11\Bindables</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\D3D11\Bindables\DXPixelShader.h">
+      <Filter>Header Files\Render\D3D11\Bindables</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\D3D11\Bindables\DXConstantBuffer.h">
+      <Filter>Header Files\Render\D3D11\Bindables</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\D3D11\Bindables\DXInputLayout.h">
+      <Filter>Header Files\Render\D3D11\Bindables</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\D3D11\Bindables\DXShader.h">
+      <Filter>Header Files\Render\D3D11\Bindables</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\D3D11\Bindables\DXIndexBuffer.h">
+      <Filter>Header Files\Render\D3D11\Bindables</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine.ini" />
     <None Include="cpp.hint" />
     <None Include="Resources\ExampleScene\example.world" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shaders\VertexShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

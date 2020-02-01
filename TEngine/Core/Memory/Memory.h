@@ -3,8 +3,6 @@
 
 namespace TEngine
 {
-	class StackAllocator;
-
 	namespace Memory
 	{
 		constexpr uint8 CACHE_LINE_SIZE = 64;

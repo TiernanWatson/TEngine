@@ -1,24 +1,26 @@
+#ifdef OPENGL
+
 #include "GLRenderer.h"
 #include <glad/glad.h>
 #include <glfw3.h>
-#include "../World/WorldSystem.h"
-#include "../World/World.h"
-#include "../Core/IO/FileSystem.h"
-#include "../Core/Math/Vector4.h"
-#include "../Core/Math/Matrix4.h"
-#include "../Core/Math/TMath.h"
-#include "../ECS/EntityManager.h"
-#include "../ECS/Components/Transform.h"
-#include "../ECS/Components/MeshComponent.h"
-#include "../ECS/Components/Camera.h"
-#include "../ECS/Components/PointLight.h"
-#include "../Resources/Types/Texture.h"
-#include "../Resources/Types/Material.h"
-#include "../Resources/Types/Mesh.h"
-#include "../Helpers/Debug.h"
-#include "UI/Font.h"
-#include "Material/Shaders.h"
-#include "Vertex.h"
+#include "../../World/WorldSystem.h"
+#include "../../World/World.h"
+#include "../../Core/IO/FileSystem.h"
+#include "../../Core/Math/Vector4.h"
+#include "../../Core/Math/Matrix4.h"
+#include "../../Core/Math/TMath.h"
+#include "../../ECS/EntityManager.h"
+#include "../../ECS/Components/Transform.h"
+#include "../../ECS/Components/MeshComponent.h"
+#include "../../ECS/Components/Camera.h"
+#include "../../ECS/Components/PointLight.h"
+#include "../../Resources/Types/Texture.h"
+#include "../../Resources/Types/Material.h"
+#include "../../Resources/Types/Mesh.h"
+#include "../../Helpers/Debug.h"
+#include "../UI/Font.h"
+#include "../Material/Shaders.h"
+#include "../Vertex.h"
 
 namespace TEngine
 {
@@ -66,6 +68,8 @@ namespace TEngine
 				}
 			}
 		);
+
+		shader = Shaders::GetDefault();
 	}
 
 	void GLRenderer::Render(float32 deltaTime)
@@ -80,22 +84,21 @@ namespace TEngine
 		Matrix4 view = Matrix4::ModelToWorld(camT.position, camT.scale, camT.rotation).Inverse();
 		Matrix4 projection = Matrix4::Projection(camC.FOV, camC.aspect, camC.farDist, camC.nearDist);
 
-		uint32 s = Shaders::GetDefault();
-		glUseProgram(s);
+		glUseProgram(shader);
 
 		// Send matrices to GPU
-		Shaders::SetMat4(s, "view", view.Transpose());
-		Shaders::SetMat4(s, "projection", projection.Transpose());
-		Shaders::SetVec3(s, "eyePos", camT.position);
+		Shaders::SetMat4(shader, "view", view.Transpose());
+		Shaders::SetMat4(shader, "projection", projection.Transpose());
+		Shaders::SetVec3(shader, "eyePos", camT.position);
 
 		// Now render each mesh
 		EntityManager& e = world->GetEntities();
 		e.ForEach<Transform, MeshComponent>(
-			[this, &s](Transform* t, MeshComponent* m)
+			[this](Transform* t, MeshComponent* m)
 			{
 				Matrix4 model = Matrix4::ModelToWorld(t->position, t->scale, t->rotation);
 
-				Shaders::SetMat4(s, "model", model.Transpose());
+				Shaders::SetMat4(shader, "model", model.Transpose());
 
 				// Texture handling
 				uint32 diffuseNum = 0;
@@ -126,7 +129,7 @@ namespace TEngine
 						throw std::exception("GLRenderer::Render: TexType invalid");
 					}
 
-					glUniform1i(glGetUniformLocation(s, uniformName.c_str()), i);
+					glUniform1i(glGetUniformLocation(shader, uniformName.c_str()), i);
 					glBindTexture(GL_TEXTURE_2D, m->GetTexInfo(i).id);
 				}
 
@@ -153,3 +156,5 @@ namespace TEngine
 		}
 	}
 }
+
+#endif

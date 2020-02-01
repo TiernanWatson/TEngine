@@ -95,11 +95,11 @@ namespace TEngine
 				Vector2 vec;
 				vec.x = mesh->mTextureCoords[0][i].x;
 				vec.y = mesh->mTextureCoords[0][i].y;
-				vertex.textCoord = vec;
+				vertex.texCoord = vec;
 			}
 			else
 			{
-				vertex.textCoord = Vector2(0.0f, 0.0f);
+				vertex.texCoord = Vector2(0.0f, 0.0f);
 			}
 
 			vertices.push_back(vertex);

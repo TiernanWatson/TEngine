@@ -3,17 +3,45 @@
 #include "Core/Time/Clock.h"
 #include "Window/WindowManager.h"
 #include "Input/InputSystem.h"
-#include "Render/GLRenderer.h"
 #include "World/WorldSystem.h"
 #include "Core/Memory/StackAllocator.h"
+
+// Removes the need for inheritance and thus vtable speed reduction
+#ifdef DIRECTX 
+#include "Render/D3D11/D3D11Renderer.h" 
+#define RENDERER D3D11Renderer
+#elif defined(OPENGL) 
+#include "Render/GL/GLRenderer.h"
+#define RENDERER GLRenderer
+#endif
 
 namespace TEngine
 {
 	class DebugSystem;
 
-	class Loop
+	class Engine
 	{
+	public:
+		void StartUp();
+		void Update();
+		void ShutDown();
+
+		Clock& GetClock();
+
+		RENDERER& GetRenderer() const;
+		WorldSystem& GetWorldSys() const;
+
+		static Engine& Get()
+		{
+			return *instance;
+		}
+
 	private:
+		Engine();
+		~Engine();
+
+		static Engine* instance;
+
 		bool isRunning = true;
 		uint8 maxFixedSteps = 8;		// Maximum number of fixed steps in one iteration
 		float32 fixedTimeStep = 0.02f;  // Period of time step
@@ -25,36 +53,15 @@ namespace TEngine
 
 		WindowManager* windowManager;
 		InputSystem* inputSystem;
-		GLRenderer* renderSystem;
+		RENDERER* renderer;
 		WorldSystem* worldSystem;
 #if _DEBUG
 		DebugSystem* debugSystem;
 #endif
 
-		Loop(); // singleton
-		~Loop();
-
-	public:
-		static Loop& Instance();
-
-		Clock& GetClock();
-
-		/**
-		* Starts the main game loop (usually called from Game::)
-		**/
-		void Run();
-
-		/**
-		* After the in-progress update finishes, the loop will stop and shut down
-		**/
-		void Stop();
-
-	private:
-		void StartUp();
-		void Update();
-		void ShutDown();
-
 		void FixedUpdate(const float32 timeStep);
 		void VariableUpdate(const float32 deltaTime);
+
+		friend class WindowsOS;
 	};
 }

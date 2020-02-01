@@ -1,5 +1,6 @@
 #pragma once
 #include "../Core/PortableTypes.h"
+#include <Windows.h>
 
 struct GLFWwindow;
 
