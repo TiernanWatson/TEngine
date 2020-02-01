@@ -24,9 +24,10 @@ namespace TEngine
 		void ShutDown();
 
 		void Render(float32 deltaTime);
-		void ClearBuffer(float red, float green, float blue);
+
+		void ClearBuffer(float r, float g, float b);
 		void DrawIndexed(int count);
-		void DrawTriangle();
+		void Draw(int count);
 		void Present();
 
 	private:

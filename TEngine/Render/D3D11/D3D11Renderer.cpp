@@ -96,8 +96,8 @@ namespace TEngine
 
 		wrl::ComPtr<ID3D11Texture2D> depthStencilTex;
 		D3D11_TEXTURE2D_DESC dTexDesc = {};
-		dTexDesc.Width = 800;
-		dTexDesc.Height = 600;
+		dTexDesc.Width = WindowsOS::GetInstance().GetWidth();
+		dTexDesc.Height = WindowsOS::GetInstance().GetHeight();
 		dTexDesc.MipLevels = 1;
 		dTexDesc.ArraySize = 1;
 		dTexDesc.Format = DXGI_FORMAT_D32_FLOAT;
@@ -114,47 +114,16 @@ namespace TEngine
 		THROW_IF_FAIL(device->CreateDepthStencilView(depthStencilTex.Get(), &dDSV, &depthStencilView));
 		
 		context->OMSetRenderTargets(1, renderTarget.GetAddressOf(), depthStencilView.Get());
-	}
 
-	void D3D11Renderer::Render(float32 deltaTime)
-	{
-	}
-
-	void D3D11Renderer::ClearBuffer(float red, float green, float blue)
-	{
-		const float color[] = { red, green, blue, 1.f };
-		context->ClearRenderTargetView(renderTarget.Get(), color);
-		context->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.f, 0);
-	}
-
-	void D3D11Renderer::DrawIndexed(int count)
-	{
-		context->DrawIndexed(count, 0, 0);
-	}
-
-	void D3D11Renderer::DrawTriangle()
-	{
-		HRESULT hr;
-		hr;
-
-		// Create Obj vertices
-
-		/*Vertex vertices[] = {
-			{ Vector3(1.f, -1.f, 0.f), Vector3(), Vector2() },
-			{ Vector3(-1.f, -1.f, 0.f), Vector3(), Vector2() },
-			{ Vector3(0.f, 1.f, 0.f), Vector3(), Vector2() }
-		};
-		DXVertexBuffer vb(*this, vertices, 3);
-		vb.Bind();*/
-
-		/*int indices[] = {
-			0, 1, 2
-		};*/
-
-		// Load in shaders
+		/*
+		*  Setup shaders, input layout and viewport
+		*/
 
 		DXVertexShader vertexShader(*this, L"VertexShader.cso");
 		vertexShader.Bind();
+
+		DXPixelShader pixelShader(*this, L"PixelShader.cso");
+		pixelShader.Bind();
 
 		// Create Input layout
 
@@ -168,11 +137,9 @@ namespace TEngine
 		DXInputLayout inputLayout(*this, ed, (UINT)3, vertexShader.GetBlob());
 		inputLayout.Bind();
 
-		context->OMSetRenderTargets(1, renderTarget.GetAddressOf(), nullptr);
-
 		D3D11_VIEWPORT vp;
-		vp.Width = 800;
-		vp.Height = 600;
+		vp.Width = (FLOAT)WindowsOS::GetInstance().GetWidth();
+		vp.Height = (FLOAT)WindowsOS::GetInstance().GetHeight();
 		vp.MaxDepth = 1;
 		vp.MinDepth = 0;
 		vp.TopLeftX = 0;
@@ -180,19 +147,15 @@ namespace TEngine
 		context->RSSetViewports(1, &vp);
 
 		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	}
 
-		DXPixelShader pixelShader(*this, L"PixelShader.cso");
-		pixelShader.Bind();
-
-		//Vector3 rotation = Vector3(0.f, (float32)Engine::Get().GetClock().GetElapsedTime(), 0.f);
-
+	void D3D11Renderer::Render(float32 deltaTime)
+	{
 		WorldSystem& worldSys = Engine::Get().GetWorldSys();
 		World* world = worldSys.GetCurrentWorld();
 
 		Camera& cam = world->GetEntities().GetComponent<Camera>(world->GetMainCameraEnt());
 		Transform& camTransform = world->GetEntities().GetComponent<Transform>(world->GetMainCameraEnt());
-
-		// Setup Const Buffer
 
 		struct CBuf
 		{
@@ -202,9 +165,6 @@ namespace TEngine
 		};
 
 		CBuf cb = {};
-		//cb.model = Matrix4::ModelToWorld(Vector3::back, Vector3::one, rotation).Transpose();
-		/*cb.view = Matrix4::ModelToWorld(Vector3::forward * 2.f, Vector3::one, Vector3::zero).Inverse().Transpose();
-		cb.proj = Matrix4::Projection(TMath::PI_4, 4.f / 3.f, 50.f, 0.1f).Transpose();*/
 		cb.view = Matrix4::ModelToWorld(camTransform.position, camTransform.scale, camTransform.rotation).Inverse().Transpose();
 		cb.proj = Matrix4::Projection(cam.FOV, cam.aspect, cam.farDist, cam.nearDist).Transpose();
 
@@ -222,20 +182,23 @@ namespace TEngine
 				i.Draw();
 			}
 		);
+	}
 
-		//Mesh m(std::vector<Vertex>(vertices, vertices + 3), std::vector<uint32>(indices, indices + 3), std::vector<Material*>(), 0, "");
+	void D3D11Renderer::ClearBuffer(float r, float g, float b)
+	{
+		const float color[] = { r, g, b, 1.f };
+		context->ClearRenderTargetView(renderTarget.Get(), color);
+		context->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.f, 0);
+	}
 
-		//DXMeshInstance meshInstance(*this, &m);
+	void D3D11Renderer::DrawIndexed(int count)
+	{
+		context->DrawIndexed(count, 0, 0);
+	}
 
-		
-
-		// Create transforms
-
-		
-
-		
-
-		//context->Draw(3, 0);
+	void D3D11Renderer::Draw(int count)
+	{
+		context->Draw(count, 0);
 	}
 
 	void D3D11Renderer::Present()

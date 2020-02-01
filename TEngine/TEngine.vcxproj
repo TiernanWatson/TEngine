@@ -208,7 +208,6 @@
     <ClCompile Include="ECS\Metatype.cpp" />
     <ClCompile Include="ECS\EntityManager.cpp" />
     <ClCompile Include="External\stb_image.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Helpers\Debug.cpp" />
     <ClCompile Include="Helpers\DebugSystem.cpp" />
     <ClCompile Include="Input\Input.cpp" />
@@ -278,7 +277,6 @@
     <ClInclude Include="ECS\Metatype.h" />
     <ClInclude Include="ECS\EntityManager.h" />
     <ClInclude Include="External\stb_image.h" />
-    <ClInclude Include="Game.h" />
     <ClInclude Include="Helpers\Debug.h" />
     <ClInclude Include="Helpers\DebugSystem.h" />
     <ClInclude Include="Input\Input.h" />

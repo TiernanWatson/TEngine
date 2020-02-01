@@ -1,5 +1,7 @@
 #include "WindowsOS.h"
 #include "WinExceptions.h"
+#include "../../Core/Config/Config.h"
+#include "../../Core/Config/ConfigVar.h"
 
 // Cannot cast member func to this func pointer type, so this is needed
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -12,6 +14,12 @@ namespace TEngine
 		: hInstance(hInstance), pCmdLine(pCmdLine), nCmdShow(nCmdShow)
 	{
 		instance = this;
+
+		Config::Instance().LoadFrom("D:\\TEngine\\TEngine\\Engine.ini");
+
+		width = CONFIG_INT32("Window", "width", ConfigVar("800"));
+		height = CONFIG_INT32("Window", "height", ConfigVar("600"));
+		fullscreen = CONFIG_BOOL("Window", "fullscreen", ConfigVar("false"));
 	}
 
 	void WindowsOS::Init()
@@ -97,6 +105,19 @@ namespace TEngine
 
 	void WindowsOS::InitWindow()
 	{
+		// Make sure client size is desired resolution
+		RECT wr;
+		wr.left = 100;
+		wr.right = width + wr.left;
+		wr.top = 100;
+		wr.bottom = height + wr.top;
+
+		if (!AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE))
+		{
+			throw EXCEPTION("Could not AdjustWindowRect in InitWindow!");
+		}
+
+		// Create the window
 		wc = { };
 		wc.style = CS_DBLCLKS;
 		wc.lpfnWndProc = ::WindowProc;
@@ -113,16 +134,14 @@ namespace TEngine
 		hWnd = CreateWindowEx(
 			0,
 			wndClsName,
-			"Odyssey WindowsOS Build",
-			WS_OVERLAPPEDWINDOW,
-
-			// Size and position
-			CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
-
-			NULL,       // Parent window    
-			NULL,       // Menu
-			hInstance,  // Instance handle
-			NULL        // Additional application data
+			CONFIG_STRING("Window", "title", ConfigVar("Odyssey Engine")).c_str(),
+			fullscreen ? WS_POPUP : WS_OVERLAPPEDWINDOW,
+			CW_USEDEFAULT, CW_USEDEFAULT,  // Position
+			wr.right - wr.left, wr.bottom - wr.top,  // Size
+			NULL,  // Parent window    
+			NULL,  // Menu
+			hInstance,  
+			NULL  // Additional application data
 		);
 
 		if (!hWnd)

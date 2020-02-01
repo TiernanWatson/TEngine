@@ -1,7 +1,6 @@
 #include "WindowManager.h"
 #include <glad/glad.h>
 #include <glfw3.h>
-#include "../Game.h"
 #include "../Core/IO/FileSystem.h"
 #include "../Core/Config/Config.h"
 #include "../Core/Config/ConfigVar.h"
@@ -55,7 +54,7 @@ namespace TEngine
 	{
 		if (glfwWindowShouldClose(window))
 		{
-			Game::Exit();
+			//Game::Exit();
 			return;
 		}
 

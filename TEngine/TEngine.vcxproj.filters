@@ -207,9 +207,6 @@
     <ClCompile Include="Core\Memory\Memory.cpp">
       <Filter>Source Files\Core\Memory</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="External\stb_image.cpp">
       <Filter>External</Filter>
     </ClCompile>
@@ -400,9 +397,6 @@
     </ClInclude>
     <ClInclude Include="Core\Memory\Memory.h">
       <Filter>Header Files\Core\Memory</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="External\stb_image.h">
       <Filter>External</Filter>

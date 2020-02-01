@@ -3,20 +3,21 @@
 #include "Render/D3D11/D3D11Renderer.h"
 #include "Helpers/DebugSystem.h"
 
-//#undef _DEBUG
-
 namespace TEngine
 {
 	Engine* Engine::instance = nullptr;
 
 	Engine::Engine() 
 		: systemsStack(sizeof(WindowManager) + sizeof(InputSystem)
-			+ sizeof(WorldSystem) + sizeof(D3D11Renderer))
+			+ sizeof(WorldSystem) + sizeof(RENDERER))
 	{
+		maxFixedSteps = CONFIG_INT32("Loop", "maxFixedSteps", ConfigVar("8"));
+		fixedTimeStep = CONFIG_FLOAT32("Loop", "fixedTimeStep", ConfigVar("0.02"));
+
 		windowManager = systemsStack.NewOnStack<WindowManager>();
 		inputSystem = systemsStack.NewOnStack<InputSystem>();
 		worldSystem = systemsStack.NewOnStack<WorldSystem>();
-		renderer = systemsStack.NewOnStack<D3D11Renderer>();
+		renderer = systemsStack.NewOnStack<RENDERER>();
 #ifdef _DEBUG
 		debugSystem = new DebugSystem();
 #endif
@@ -48,7 +49,6 @@ namespace TEngine
 
 	void Engine::StartUp()
 	{
-		//Config::Instance().LoadFrom("D:\\TEngine\\TEngine\\Engine.ini");
 		//windowManager->StartUp();
 		//inputSystem->StartUp(windowManager->GetWindow());
 		worldSystem->StartUp();
@@ -70,9 +70,6 @@ namespace TEngine
 		//windowManager->ShutDown();
 	}
 
-	/**
-	* Handles the calling of fixed and variable update
-	**/
 	void Engine::Update()
 	{
 		gameClock.Update();
@@ -91,9 +88,6 @@ namespace TEngine
 		VariableUpdate((float32)gameClock.GetDeltaTime());
 	}
 
-	/**
-	* Updates at a fixed time step, defaulted to 50Hz
-	**/
 	void Engine::FixedUpdate(const float32 timeStep)
 	{
 		worldSystem->FixedUpdate(timeStep);
@@ -102,9 +96,6 @@ namespace TEngine
 #endif
 	}
 
-	/**
-	* Updates as fast as possible, not fixed
-	**/
 	void Engine::VariableUpdate(const float32 deltaTime)
 	{
 		//inputSystem->Update();
@@ -112,7 +103,6 @@ namespace TEngine
 
 		renderer->ClearBuffer(0.f, 0.f, 0.f);
 		renderer->Render(deltaTime);
-		renderer->DrawTriangle();
 		renderer->Present();
 
 #ifdef _DEBUG
