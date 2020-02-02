@@ -37,7 +37,8 @@ namespace TEngine
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTarget;
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> depthStencilView;
+		Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizer;
 
-		friend class Bindable;
+		friend class Bindable;  // For access to context and device
 	};
 }

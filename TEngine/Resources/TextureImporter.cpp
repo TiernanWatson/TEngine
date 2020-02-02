@@ -1,5 +1,6 @@
 #include "TextureImporter.h"
 #include "../External/stb_image.h"
+#include "../Platform/Windows/WinExceptions.h"
 
 namespace TEngine
 {
@@ -11,11 +12,9 @@ namespace TEngine
 	Texture& TextureImporter::Load(const std::string& path, bool useCache)
 	{
 		int width, height, nrComponents;
-		unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrComponents, 0);
+		unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrComponents, 4);
 		if (data)
 		{
-			CONSOLE_PRINT("STB Loaded image: " + path);
-
 			TexFormat format;
 			if (nrComponents == 1)
 				format = TexFormat::R;
@@ -32,11 +31,8 @@ namespace TEngine
 		}
 		else
 		{
-			CONSOLE_PRINT("STB FAILED to load image: " + path);
-
-			throw std::exception("TextureImporter::Load: Could not load texture");
-
 			stbi_image_free(data);
+			throw EXCEPTION("TextureImporter::Load: Could not load texture");
 		}
 	}
 }

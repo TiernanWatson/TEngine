@@ -1,4 +1,7 @@
-float4 main(float3 col : COLOR) : SV_TARGET
+Texture2D texDiffuse;
+SamplerState sampleType;
+
+float4 main(float3 col : COLOR, float2 texCoord : TEXCOORD) : SV_TARGET
 {
-	return float4(col, 1.f);
+	return texDiffuse.Sample(sampleType, texCoord);
 }

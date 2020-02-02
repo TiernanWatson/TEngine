@@ -222,7 +222,9 @@
     <ClCompile Include="Render\D3D11\Bindables\DXIndexBuffer.cpp" />
     <ClCompile Include="Render\D3D11\Bindables\DXInputLayout.cpp" />
     <ClCompile Include="Render\D3D11\Bindables\DXPixelShader.cpp" />
+    <ClCompile Include="Render\D3D11\Bindables\DXSampler.cpp" />
     <ClCompile Include="Render\D3D11\Bindables\DXShader.cpp" />
+    <ClCompile Include="Render\D3D11\Bindables\DXTexture.cpp" />
     <ClCompile Include="Render\D3D11\Bindables\DXVertexBuffer.cpp" />
     <ClCompile Include="Render\D3D11\Bindables\DXVertexShader.cpp" />
     <ClCompile Include="Render\D3D11\D3D11Renderer.cpp" />
@@ -294,7 +296,9 @@
     <ClInclude Include="Render\D3D11\Bindables\DXIndexBuffer.h" />
     <ClInclude Include="Render\D3D11\Bindables\DXInputLayout.h" />
     <ClInclude Include="Render\D3D11\Bindables\DXPixelShader.h" />
+    <ClInclude Include="Render\D3D11\Bindables\DXSampler.h" />
     <ClInclude Include="Render\D3D11\Bindables\DXShader.h" />
+    <ClInclude Include="Render\D3D11\Bindables\DXTexture.h" />
     <ClInclude Include="Render\D3D11\Bindables\DXVertexBuffer.h" />
     <ClInclude Include="Render\D3D11\Bindables\DXVertexShader.h" />
     <ClInclude Include="Render\D3D11\D3D11Renderer.h" />

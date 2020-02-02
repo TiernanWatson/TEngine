@@ -351,6 +351,12 @@
     <ClCompile Include="Render\D3D11\Bindables\DXIndexBuffer.cpp">
       <Filter>Source Files\Render\D3D11\Bindables</Filter>
     </ClCompile>
+    <ClCompile Include="Render\D3D11\Bindables\DXTexture.cpp">
+      <Filter>Source Files\Render\D3D11\Bindables</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\D3D11\Bindables\DXSampler.cpp">
+      <Filter>Source Files\Render\D3D11\Bindables</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\PortableTypes.h">
@@ -564,6 +570,12 @@
       <Filter>Header Files\Render\D3D11\Bindables</Filter>
     </ClInclude>
     <ClInclude Include="Render\D3D11\Bindables\DXIndexBuffer.h">
+      <Filter>Header Files\Render\D3D11\Bindables</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\D3D11\Bindables\DXTexture.h">
+      <Filter>Header Files\Render\D3D11\Bindables</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\D3D11\Bindables\DXSampler.h">
       <Filter>Header Files\Render\D3D11\Bindables</Filter>
     </ClInclude>
   </ItemGroup>

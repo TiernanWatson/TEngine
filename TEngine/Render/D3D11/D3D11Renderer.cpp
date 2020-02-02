@@ -13,6 +13,7 @@
 #include "Bindables/DXPixelShader.h"
 #include "Bindables/DXVertexBuffer.h"
 #include "Bindables/DXVertexShader.h"
+#include "Bindables/DXSampler.h"
 #include "DXMeshInstance.h"
 #include <d3dcompiler.h>
 
@@ -39,7 +40,7 @@ namespace TEngine
 		DXGI_SWAP_CHAIN_DESC sd = {};
 		sd.BufferDesc.Width = WindowsOS::GetInstance().GetWidth();
 		sd.BufferDesc.Height = WindowsOS::GetInstance().GetHeight();
-		sd.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+		sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		sd.BufferDesc.RefreshRate.Numerator = 0;
 		sd.BufferDesc.RefreshRate.Denominator = 0;
 		sd.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
@@ -147,6 +148,26 @@ namespace TEngine
 		context->RSSetViewports(1, &vp);
 
 		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+		// Set up rasterizer state
+		D3D11_RASTERIZER_DESC rd = {};
+		rd.FillMode = D3D11_FILL_SOLID;
+		rd.CullMode = D3D11_CULL_BACK;
+		rd.FrontCounterClockwise = TRUE;
+		rd.DepthBias = 0;
+		rd.DepthBiasClamp = 0;
+		rd.SlopeScaledDepthBias = 0;
+		rd.DepthClipEnable = TRUE;
+		rd.ScissorEnable = FALSE;
+		rd.MultisampleEnable = FALSE;
+		rd.AntialiasedLineEnable = FALSE;
+
+		THROW_IF_FAIL(device->CreateRasterizerState(&rd, &rasterizer));
+
+		context->RSSetState(rasterizer.Get());
+
+		DXSampler sampler(*this);
+		sampler.Bind();
 	}
 
 	void D3D11Renderer::Render(float32 deltaTime)

@@ -2,6 +2,7 @@
 #include <d3d11.h>
 #include "Bindables/DXVertexBuffer.h"
 #include "Bindables/DXIndexBuffer.h"
+#include "Bindables/DXTexture.h"
 
 namespace TEngine
 {
@@ -18,6 +19,8 @@ namespace TEngine
 	private:
 		DXVertexBuffer vertexBuffer;
 		DXIndexBuffer indexBuffer;
+		DXTexture texture;
+
 		int indexCount;
 		
 		D3D11Renderer& renderer;
