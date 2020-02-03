@@ -108,5 +108,6 @@ namespace TEngine
 		RIGHT_SHIFT,
 		RIGHT_CONTROL,
 		RIGHT_ALT,
+		Count
 	};
 }

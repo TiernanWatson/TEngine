@@ -61,11 +61,12 @@ namespace TEngine
 			PostQuitMessage(0);
 			break;
 		case WM_KILLFOCUS:
-			keyboard.Clear();
+			//keyboard.Clear();
 			break;
 		// Input Management
 		case WM_KEYDOWN:
 		case WM_SYSKEYDOWN:
+			// 0x4.... specifies that key was pressed last frame
 			if (!(lParam & 0x40000000) || keyboard.AutorepeatOn())
 				keyboard.OnKeyPress(static_cast<unsigned char>(wParam));
 			break;
@@ -98,7 +99,7 @@ namespace TEngine
 		return DefWindowProc(hwnd, uMsg, wParam, lParam);
 	}
 
-	WindowsOS& WindowsOS::GetInstance()
+	WindowsOS& WindowsOS::Get()
 	{
 		return *instance;
 	}
@@ -167,5 +168,5 @@ using namespace TEngine;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	return WindowsOS::GetInstance().WindowProc(hwnd, uMsg, wParam, lParam);
+	return WindowsOS::Get().WindowProc(hwnd, uMsg, wParam, lParam);
 }

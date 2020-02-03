@@ -30,6 +30,7 @@ namespace TEngine
 
 		RENDERER& GetRenderer() const;
 		WorldSystem& GetWorldSys() const;
+		InputSystem& GetInputSys() const;
 
 		static Engine& Get()
 		{
@@ -51,7 +52,6 @@ namespace TEngine
 
 		StackAllocator systemsStack;	// Manages memory for all subsystems
 
-		WindowManager* windowManager;
 		InputSystem* inputSystem;
 		RENDERER* renderer;
 		WorldSystem* worldSystem;

@@ -211,6 +211,7 @@
     <ClCompile Include="Helpers\Debug.cpp" />
     <ClCompile Include="Helpers\DebugSystem.cpp" />
     <ClCompile Include="Input\Input.cpp" />
+    <ClCompile Include="Input\InputEvent.cpp" />
     <ClCompile Include="Input\InputSystem.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Platform\Windows\Keyboard.cpp" />
@@ -282,6 +283,7 @@
     <ClInclude Include="Helpers\Debug.h" />
     <ClInclude Include="Helpers\DebugSystem.h" />
     <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Input\InputEvent.h" />
     <ClInclude Include="Input\InputSystem.h" />
     <ClInclude Include="Input\KeyCode.h" />
     <ClInclude Include="Engine.h" />

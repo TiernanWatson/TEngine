@@ -357,6 +357,9 @@
     <ClCompile Include="Render\D3D11\Bindables\DXSampler.cpp">
       <Filter>Source Files\Render\D3D11\Bindables</Filter>
     </ClCompile>
+    <ClCompile Include="Input\InputEvent.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\PortableTypes.h">
@@ -577,6 +580,9 @@
     </ClInclude>
     <ClInclude Include="Render\D3D11\Bindables\DXSampler.h">
       <Filter>Header Files\Render\D3D11\Bindables</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\InputEvent.h">
+      <Filter>Header Files\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

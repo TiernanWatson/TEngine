@@ -41,7 +41,7 @@ namespace TEngine
 			return height;
 		}
 
-		static WindowsOS& GetInstance();
+		static WindowsOS& Get();
 
 	private:
 		void InitWindow();

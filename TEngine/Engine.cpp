@@ -3,18 +3,18 @@
 #include "Render/D3D11/D3D11Renderer.h"
 #include "Helpers/DebugSystem.h"
 
+#define SYS_STACK_SIZE sizeof(InputSystem) + sizeof(WorldSystem) + sizeof(RENDERER)
+
 namespace TEngine
 {
 	Engine* Engine::instance = nullptr;
 
 	Engine::Engine() 
-		: systemsStack(sizeof(WindowManager) + sizeof(InputSystem)
-			+ sizeof(WorldSystem) + sizeof(RENDERER))
+		: systemsStack(SYS_STACK_SIZE)
 	{
 		maxFixedSteps = CONFIG_INT32("Loop", "maxFixedSteps", ConfigVar("8"));
 		fixedTimeStep = CONFIG_FLOAT32("Loop", "fixedTimeStep", ConfigVar("0.02"));
 
-		windowManager = systemsStack.NewOnStack<WindowManager>();
 		inputSystem = systemsStack.NewOnStack<InputSystem>();
 		worldSystem = systemsStack.NewOnStack<WorldSystem>();
 		renderer = systemsStack.NewOnStack<RENDERER>();
@@ -47,12 +47,15 @@ namespace TEngine
 		return *worldSystem;
 	}
 
+	InputSystem& Engine::GetInputSys() const
+	{
+		return *inputSystem;
+	}
+
 	void Engine::StartUp()
 	{
-		//windowManager->StartUp();
-		//inputSystem->StartUp(windowManager->GetWindow());
+		inputSystem->StartUp();
 		worldSystem->StartUp();
-		//renderer->StartUp(windowManager->GetWindow(), worldSystem);
 		renderer->StartUp();
 #ifdef _DEBUG
 		//debugSystem->StartUp(windowManager->GetWindow());
@@ -66,8 +69,7 @@ namespace TEngine
 #endif
 		renderer->ShutDown();
 		worldSystem->ShutDown();
-		//inputSystem->ShutDown();
-		//windowManager->ShutDown();
+		inputSystem->ShutDown();
 	}
 
 	void Engine::Update()
@@ -98,7 +100,7 @@ namespace TEngine
 
 	void Engine::VariableUpdate(const float32 deltaTime)
 	{
-		//inputSystem->Update();
+		inputSystem->Update();
 		worldSystem->Update(deltaTime);
 
 		renderer->ClearBuffer(0.f, 0.f, 0.f);
@@ -108,6 +110,5 @@ namespace TEngine
 #ifdef _DEBUG
 		//debugSystem->VariableUpdate(deltaTime);
 #endif
-		//windowManager->Update(deltaTime);
 	}
 }

@@ -23,6 +23,8 @@
 #include "../../ECS/Components/Transform.h"
 #include "../../ECS/Components/Camera.h"
 
+#include <sstream>
+
 namespace wrl = Microsoft::WRL;
 
 namespace TEngine
@@ -38,8 +40,8 @@ namespace TEngine
 		*/
 
 		DXGI_SWAP_CHAIN_DESC sd = {};
-		sd.BufferDesc.Width = WindowsOS::GetInstance().GetWidth();
-		sd.BufferDesc.Height = WindowsOS::GetInstance().GetHeight();
+		sd.BufferDesc.Width = WindowsOS::Get().GetWidth();
+		sd.BufferDesc.Height = WindowsOS::Get().GetHeight();
 		sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		sd.BufferDesc.RefreshRate.Numerator = 0;
 		sd.BufferDesc.RefreshRate.Denominator = 0;
@@ -49,14 +51,14 @@ namespace TEngine
 		sd.SampleDesc.Quality = 0;
 		sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 		sd.BufferCount = 1;
-		sd.OutputWindow = WindowsOS::GetInstance().GetHWND();
+		sd.OutputWindow = WindowsOS::Get().GetHWND();
 		sd.Windowed = TRUE;
 		sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 		sd.Flags = 0;
 
 		UINT flags = 0;
 #if _DEBUG
-		flags = D3D11_CREATE_DEVICE_DEBUG;
+		flags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 		HRESULT hr;
 		THROW_IF_FAIL(D3D11CreateDeviceAndSwapChain(
@@ -97,8 +99,8 @@ namespace TEngine
 
 		wrl::ComPtr<ID3D11Texture2D> depthStencilTex;
 		D3D11_TEXTURE2D_DESC dTexDesc = {};
-		dTexDesc.Width = WindowsOS::GetInstance().GetWidth();
-		dTexDesc.Height = WindowsOS::GetInstance().GetHeight();
+		dTexDesc.Width = WindowsOS::Get().GetWidth();
+		dTexDesc.Height = WindowsOS::Get().GetHeight();
 		dTexDesc.MipLevels = 1;
 		dTexDesc.ArraySize = 1;
 		dTexDesc.Format = DXGI_FORMAT_D32_FLOAT;
@@ -139,8 +141,8 @@ namespace TEngine
 		inputLayout.Bind();
 
 		D3D11_VIEWPORT vp;
-		vp.Width = (FLOAT)WindowsOS::GetInstance().GetWidth();
-		vp.Height = (FLOAT)WindowsOS::GetInstance().GetHeight();
+		vp.Width = (FLOAT)WindowsOS::Get().GetWidth();
+		vp.Height = (FLOAT)WindowsOS::Get().GetHeight();
 		vp.MaxDepth = 1;
 		vp.MinDepth = 0;
 		vp.TopLeftX = 0;
@@ -153,7 +155,7 @@ namespace TEngine
 		D3D11_RASTERIZER_DESC rd = {};
 		rd.FillMode = D3D11_FILL_SOLID;
 		rd.CullMode = D3D11_CULL_BACK;
-		rd.FrontCounterClockwise = TRUE;
+		rd.FrontCounterClockwise = FALSE;
 		rd.DepthBias = 0;
 		rd.DepthBiasClamp = 0;
 		rd.SlopeScaledDepthBias = 0;
@@ -168,6 +170,17 @@ namespace TEngine
 
 		DXSampler sampler(*this);
 		sampler.Bind();
+
+		//--------------
+		WorldSystem& worldSys = Engine::Get().GetWorldSys();
+		World* world = worldSys.GetCurrentWorld();
+
+		world->GetEntities().ForEach<Transform, MeshComponent>(
+			[this](Transform* t, MeshComponent* m)
+			{
+				m->meshInstance = new DXMeshInstance(*this, m->mesh);
+			}
+		);
 	}
 
 	void D3D11Renderer::Render(float32 deltaTime)
@@ -189,6 +202,10 @@ namespace TEngine
 		cb.view = Matrix4::ModelToWorld(camTransform.position, camTransform.scale, camTransform.rotation).Inverse().Transpose();
 		cb.proj = Matrix4::Projection(cam.FOV, cam.aspect, cam.farDist, cam.nearDist).Transpose();
 
+		std::stringstream ss;
+		ss << "Cam Position: " << camTransform.position.ToString() << "\n";
+		OutputDebugString(ss.str().c_str());
+
 		DXVSConstantBuffer<CBuf> constBuffer(*this, cb);
 		constBuffer.Bind();
 
@@ -196,11 +213,9 @@ namespace TEngine
 			[this, &constBuffer, &cb](Transform* t, MeshComponent* m)
 			{
 				cb.model = Matrix4::ModelToWorld(t->position, t->scale, t->rotation).Transpose();
-
 				constBuffer.Update(cb);
 
-				DXMeshInstance i(*this, m->mesh);
-				i.Draw();
+				m->meshInstance->Draw();
 			}
 		);
 	}
@@ -225,7 +240,7 @@ namespace TEngine
 	void D3D11Renderer::Present()
 	{
 		HRESULT hr;
-		if (FAILED(hr = swapChain->Present(1u, 0u)))
+		if (FAILED(hr = swapChain->Present(0, 0)))
 		{
 			if (hr == DXGI_ERROR_DEVICE_REMOVED)
 			{

@@ -1,6 +1,7 @@
 #pragma once
 #include "KeyCode.h"
-#include <unordered_set>
+#include "InputEvent.h"
+#include <bitset>
 
 struct GLFWwindow;
 
@@ -14,15 +15,15 @@ namespace TEngine
 	public:
 		InputSystem() = default;
 
-		void StartUp(GLFWwindow* window);
+		void StartUp();
 		void Update();
 		void ShutDown();
 
 		bool GetKey(KeyCode key);
 
-	private:
-		GLFWwindow* window;
+		void ReceiveEvent(InputEvent e);
 
-		int GetGlfwKey(KeyCode key) const;
+	private:
+		std::bitset<(size_t)KeyCode::Count> keyStates;
 	};
 }

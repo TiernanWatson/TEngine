@@ -1,25 +1,22 @@
 #pragma once
 #include "../../Core/PortableTypes.h"
-#ifdef DIRECTX
-#include <d3d11.h>
-#include <wrl.h>
-#endif
 #ifdef OPENGL
 #include <glad/glad.h>
 #include "../../Render/OpenGL/GLTextureInfo.h"
 #endif
 
-namespace wrl = Microsoft::WRL;
-
 namespace TEngine
 {
 	class Mesh;
+#ifdef DIRECTX
+	class DXMeshInstance;
+#endif
 
 	struct MeshComponent
 	{
 		Mesh* mesh;
 #ifdef DIRECTX
-		wrl::ComPtr<ID3D11Buffer> vertexBuffer;
+		DXMeshInstance* meshInstance;
 #endif
 #ifdef OPENGL
 		GLsizei indexCount;

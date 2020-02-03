@@ -1,37 +1,41 @@
 #include "InputSystem.h"
 #include <glfw3.h>
 #include "Input.h"
-#include <iostream>
+#include "../Platform/Windows/WinHeader.h"
 
 namespace TEngine
 {
-	void InputSystem::StartUp(GLFWwindow* window)
+	void InputSystem::StartUp()
 	{
-		this->window = window;
-
 		Input::input = this;
 	}
 
 	void InputSystem::Update()
 	{
-		glfwPollEvents();
+		//glfwPollEvents();
 	}
 
 	void InputSystem::ShutDown()
 	{
-		window = nullptr;
-
 		Input::input = nullptr;
 	}
 
 	bool InputSystem::GetKey(KeyCode key)
 	{
-		return glfwGetKey(window, GetGlfwKey(key)) == GLFW_PRESS;
+		return keyStates[(size_t)key];
+	}
+
+	void InputSystem::ReceiveEvent(InputEvent e)
+	{
+		if (e.GetType() == KeyEventType::Down)
+			keyStates[(size_t)e.GetKey()] = 1;
+		else
+			keyStates[(size_t)e.GetKey()] = 0;
 	}
 
 	// Helper functions
 
-	int InputSystem::GetGlfwKey(KeyCode key) const
+	/*int InputSystem::GetGlfwKey(KeyCode key) const
 	{
 		switch (key)
 		{
@@ -153,5 +157,5 @@ namespace TEngine
 		default:
 			return GLFW_KEY_UNKNOWN;
 		}
-	}
+	}*/
 }
