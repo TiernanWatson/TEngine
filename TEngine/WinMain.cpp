@@ -11,8 +11,11 @@ int WINAPI wWinMain(
 	_In_ PWSTR pCmdLine, 
 	_In_ int nCmdShow)
 {
+	// Want to see exceptions in VS debugger in development
+#ifndef _DEBUG
 	try
 	{
+#endif
 		TEngine::WindowsOS game(
 			hInstance,
 			pCmdLine,
@@ -23,6 +26,7 @@ int WINAPI wWinMain(
 		game.Run();
 
 		return 0;
+#ifndef _DEBUG
 	}
 	catch (TEngine::Exception const& e)
 	{
@@ -53,5 +57,6 @@ int WINAPI wWinMain(
 	}
 
 	return -1;
+#endif
 }
 #endif  // PLATFORM_WINDOWS

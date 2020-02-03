@@ -89,7 +89,7 @@ namespace TEngine
 			vector.z = mesh->mBitangents[i].z;
 			vertex.bitangent = vector;*/
 
-			// Process the texture co-ordinates
+			// Process the dxTexture co-ordinates
 			if (mesh->mTextureCoords[0])
 			{
 				Vector2 vec;

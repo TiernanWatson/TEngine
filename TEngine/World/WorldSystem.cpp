@@ -20,7 +20,6 @@ namespace TEngine
 		//
 		// Temporarily sets up a test world until serialization etc is done!
 		//
-
 		currentWorld = new World();
 		EntityManager& e = currentWorld->GetEntities();
 

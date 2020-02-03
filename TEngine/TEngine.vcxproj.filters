@@ -249,9 +249,6 @@
     <ClCompile Include="Core\Math\Vector2Int.cpp">
       <Filter>Source Files\Core\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Helpers\DebugSystem.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
     <ClCompile Include="Helpers\Debug.cpp">
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
@@ -360,6 +357,9 @@
     <ClCompile Include="Input\InputEvent.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Helpers\DebugUIRenderer.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\PortableTypes.h">
@@ -457,9 +457,6 @@
     </ClInclude>
     <ClInclude Include="Core\Math\Vector2Int.h">
       <Filter>Header Files\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Helpers\DebugSystem.h">
-      <Filter>Header Files\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Helpers\Debug.h">
       <Filter>Header Files\Helpers</Filter>
@@ -584,6 +581,9 @@
     <ClInclude Include="Input\InputEvent.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Helpers\DebugUIRenderer.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine.ini" />
@@ -595,6 +595,12 @@
       <Filter>Shaders</Filter>
     </FxCompile>
     <FxCompile Include="PixelShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\TextVertexShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\TextPixelShader.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
   </ItemGroup>

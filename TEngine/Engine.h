@@ -17,7 +17,7 @@
 
 namespace TEngine
 {
-	class DebugSystem;
+	class DebugUIRenderer;
 
 	class Engine
 	{
@@ -31,6 +31,9 @@ namespace TEngine
 		RENDERER& GetRenderer() const;
 		WorldSystem& GetWorldSys() const;
 		InputSystem& GetInputSys() const;
+#ifdef _DEBUG
+		DebugUIRenderer& GetDebugRenderer() const;
+#endif
 
 		static Engine& Get()
 		{
@@ -56,7 +59,7 @@ namespace TEngine
 		RENDERER* renderer;
 		WorldSystem* worldSystem;
 #if _DEBUG
-		DebugSystem* debugSystem;
+		DebugUIRenderer* debugRenderer;
 #endif
 
 		// For updating the engine at fixed time step

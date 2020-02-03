@@ -1,8 +1,8 @@
 #include "Font.h"
-#include <glad/glad.h>
-#include <glfw3.h>
+#include "../../Engine.h"
 #include <ft2build.h>
 #include FT_FREETYPE_H
+#include <sstream>
 
 namespace TEngine
 {
@@ -28,8 +28,6 @@ namespace TEngine
 
 		FT_Set_Pixel_Sizes(face, 0, 12);
 
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // Textures stored just as one byte
-
 		// Load in the ASCII set
 		for (uint8 c = 0; c < 128; c++)
 		{
@@ -39,28 +37,32 @@ namespace TEngine
 				continue;
 			}
 
-			uint32 texture;
-			glGenTextures(1, &texture);
-			glBindTexture(GL_TEXTURE_2D, texture);
-			glTexImage2D(
-				GL_TEXTURE_2D,
-				0,
-				GL_RED,
+			std::stringstream ss;
+			ss << "Creating Font Tex for: " << (char)c << "("<<(int)c<<")" << " with width: " << face->glyph->bitmap.width << "\n";
+			OutputDebugString(ss.str().c_str());
+
+			Texture* tex = new Texture(
 				face->glyph->bitmap.width,
 				face->glyph->bitmap.rows,
+				TexFormat::R,
+				TexType::diffuse,
+				face->glyph->bitmap.buffer,
 				0,
-				GL_RED,
-				GL_UNSIGNED_BYTE,
-				face->glyph->bitmap.buffer
+				""
 			);
-			
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+			/*Texture tex(
+				face->glyph->bitmap.width,
+				face->glyph->bitmap.rows,
+				TexFormat::R,
+				TexType::diffuse,
+				face->glyph->bitmap.buffer,
+				0,
+				""
+			);*/
 			
 			Character character = {
-				texture,
+				new DXTexture(Engine::Get().GetRenderer(), tex),
 				face->glyph->advance.x,
 				Vector2Int(face->glyph->bitmap_left, face->glyph->bitmap_top),
 				Vector2Int(face->glyph->bitmap.width, face->glyph->bitmap.rows)
@@ -68,8 +70,6 @@ namespace TEngine
 
 			characterMap[c] = character;
 		}
-
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 4); // Reset
 
 		FT_Done_Face(face);
 		FT_Done_FreeType(ft);

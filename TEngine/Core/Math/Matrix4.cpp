@@ -279,17 +279,17 @@ namespace TEngine
 		return result;
 	}
 
-	Matrix4 Matrix4::Orthographic(float32 near, float32 far, float32 left, float32 right, float32 bottom, float32 top)
+	Matrix4 Matrix4::Orthographic(float32 nearDist, float32 farDist, float32 left, float32 right, float32 bottom, float32 top)
 	{
 		Matrix4 result;
 
 		result.m[0][0] = 2.f / (right - left);
 		result.m[1][1] = 2.f / (top - bottom);
-		result.m[2][2] = -2.f / (far - near);
+		result.m[2][2] = -2.f / (farDist - nearDist);
 
 		result.m[0][3] = -(right + left) / (right - left);
 		result.m[1][3] = -(top + bottom) / (top - bottom);
-		result.m[2][3] = -(far + near) / (far - near);
+		result.m[2][3] = -(farDist + nearDist) / (farDist - nearDist);
 		result.m[3][3] = 1.f;
 
 		return result;

@@ -1,7 +1,7 @@
 #ifdef _DEBUG
 #include "Debug.h"
+#include "../Platform/Windows/WinHeader.h"
 #include "../Core/Math/Vector3.h"
-#include <iostream>
 
 namespace TEngine
 {
@@ -14,7 +14,7 @@ namespace TEngine
 
 	void Debug::LogDebugText(std::string message)
 	{
-		std::cout << message << "\n";
+		OutputDebugString((message + "\n").c_str());
 	}
 
 	std::string Debug::Vec3ToStr(Vector3& v)

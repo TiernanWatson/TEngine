@@ -1,9 +1,15 @@
 #include "Engine.h"
 #include "Core/Config/Config.h"
 #include "Render/D3D11/D3D11Renderer.h"
-#include "Helpers/DebugSystem.h"
+#ifdef _DEBUG
+#include "Helpers/DebugUIRenderer.h"
+#endif
 
+#ifdef _DEBUG
+#define SYS_STACK_SIZE sizeof(InputSystem) + sizeof(WorldSystem) + sizeof(RENDERER) + sizeof(DebugUIRenderer)
+#else
 #define SYS_STACK_SIZE sizeof(InputSystem) + sizeof(WorldSystem) + sizeof(RENDERER)
+#endif
 
 namespace TEngine
 {
@@ -19,7 +25,7 @@ namespace TEngine
 		worldSystem = systemsStack.NewOnStack<WorldSystem>();
 		renderer = systemsStack.NewOnStack<RENDERER>();
 #ifdef _DEBUG
-		debugSystem = new DebugSystem();
+		debugRenderer = systemsStack.NewOnStack<DebugUIRenderer>();
 #endif
 		instance = this;
 	}
@@ -27,9 +33,6 @@ namespace TEngine
 	Engine::~Engine()
 	{
 		// Subsystems will be freed as stack is deconstructed
-#ifdef _DEBUG
-		delete debugSystem;
-#endif
 	}
 
 	Clock& Engine::GetClock()
@@ -52,20 +55,25 @@ namespace TEngine
 		return *inputSystem;
 	}
 
+	DebugUIRenderer& Engine::GetDebugRenderer() const
+	{
+		return *debugRenderer;
+	}
+
 	void Engine::StartUp()
 	{
 		inputSystem->StartUp();
 		worldSystem->StartUp();
 		renderer->StartUp();
 #ifdef _DEBUG
-		//debugSystem->StartUp(windowManager->GetWindow());
+		debugRenderer->StartUp();
 #endif
 	}
 
 	void Engine::ShutDown()
 	{
 #ifdef _DEBUG
-		//debugSystem->ShutDown();
+		debugRenderer->ShutDown();
 #endif
 		renderer->ShutDown();
 		worldSystem->ShutDown();
@@ -93,9 +101,6 @@ namespace TEngine
 	void Engine::FixedUpdate(const float32 timeStep)
 	{
 		worldSystem->FixedUpdate(timeStep);
-#ifdef _DEBUG
-		//debugSystem->FixedUpdate(timeStep);
-#endif
 	}
 
 	void Engine::VariableUpdate(const float32 deltaTime)
@@ -105,10 +110,9 @@ namespace TEngine
 
 		renderer->ClearBuffer(0.f, 0.f, 0.f);
 		renderer->Render(deltaTime);
-		renderer->Present();
-
 #ifdef _DEBUG
-		//debugSystem->VariableUpdate(deltaTime);
+		debugRenderer->VariableUpdate(deltaTime);
 #endif
+		renderer->Present();
 	}
 }

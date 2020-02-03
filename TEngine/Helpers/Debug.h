@@ -19,7 +19,7 @@ namespace TEngine
 	/**
 	* Class with only static members for debugging purposes
 	* Not a namespace so message list is hidden and only accessed
-	* by DebugSystem friend class
+	* by DebugUIRenderer friend class
 	**/
 	class Debug
 	{
@@ -42,7 +42,9 @@ namespace TEngine
 	private:
 		static std::vector<std::string> screenMessages;
 
-		friend class DebugSystem;
+		static const int MAX_SCREEN_MSGS = 10;
+
+		friend class DebugUIRenderer;
 	};
 }
 #endif

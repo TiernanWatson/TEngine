@@ -14,9 +14,11 @@ namespace TEngine
 
 		void Bind() override;
 
-	private:
-		wrl::ComPtr<ID3D11ShaderResourceView> texView;
+		static DXTexture* GetBlank(D3D11Renderer& renderer);
 
-		Texture* texture;
+	private:
+		DXTexture(D3D11Renderer& renderer);
+
+		wrl::ComPtr<ID3D11ShaderResourceView> texView;
 	};
 }

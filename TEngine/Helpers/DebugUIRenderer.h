@@ -1,34 +1,32 @@
 #pragma once
 #include "../Core/PortableTypes.h"
-#include "../Core/Math/Vector3.h"
 #include "../Core/Math/Vector2.h"
+#include "../Core/Math/Vector3.h"
+#include "../Engine.h"
+#include "../Render/D3D11/Bindables/DXPixelShader.h"
+#include "../Render/D3D11/Bindables/DXVertexShader.h"
 #include <string>
-
-struct GLFWwindow;
 
 namespace TEngine
 {
-	class Shader;
-	class Vector3;
-	class Vector2;
 	class Font;
 
-	class DebugSystem
+	class DebugUIRenderer
 	{
 	public:
-		DebugSystem();
+		DebugUIRenderer();
 
-		void StartUp(GLFWwindow* window);
+		void StartUp();
 		void VariableUpdate(float32 deltaTime);
 		void FixedUpdate(float32 timeStep);
 		void ShutDown();
 
 	private:
-		GLFWwindow* window;
 		Font* font;
-		uint32 shader;
+		RENDERER* renderer;
 
-		uint32 VAO, VBO;
+		DXVertexShader* vertexShader;
+		DXPixelShader* pixelShader;
 
 		void RenderText(std::string text,
 						const Vector2& pos,

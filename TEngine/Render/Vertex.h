@@ -13,4 +13,10 @@ namespace TEngine
 		Vector3 bitangent;*/
 		Vector2 texCoord;
 	};
+
+	struct Vertex2D
+	{
+		Vector2 position;
+		Vector2 texCoord;
+	};
 }

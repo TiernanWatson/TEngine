@@ -25,6 +25,9 @@
 
 #include <sstream>
 
+#include "../UI/Font.h"
+#include "../UI/Character.h"
+
 namespace wrl = Microsoft::WRL;
 
 namespace TEngine
@@ -84,6 +87,10 @@ namespace TEngine
 		THROW_IF_FAIL(swapChain->GetBuffer(0, __uuidof(ID3D11Resource), &backBuffer));
 		THROW_IF_FAIL(device->CreateRenderTargetView(backBuffer.Get(), nullptr, &renderTarget));
 
+		/*
+		* Setup Z-Buffering
+		*/
+
 		D3D11_DEPTH_STENCIL_DESC dDesc = {};
 		dDesc.DepthEnable = TRUE;
 		dDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
@@ -92,11 +99,7 @@ namespace TEngine
 		wrl::ComPtr<ID3D11DepthStencilState> dsState;
 		THROW_IF_FAIL(device->CreateDepthStencilState(&dDesc, &dsState));
 		context->OMSetDepthStencilState(dsState.Get(), 1);
-
-		/*
-		* Setup Z-Buffering
-		*/
-
+		
 		wrl::ComPtr<ID3D11Texture2D> depthStencilTex;
 		D3D11_TEXTURE2D_DESC dTexDesc = {};
 		dTexDesc.Width = WindowsOS::Get().GetWidth();
@@ -117,28 +120,7 @@ namespace TEngine
 		THROW_IF_FAIL(device->CreateDepthStencilView(depthStencilTex.Get(), &dDSV, &depthStencilView));
 		
 		context->OMSetRenderTargets(1, renderTarget.GetAddressOf(), depthStencilView.Get());
-
-		/*
-		*  Setup shaders, input layout and viewport
-		*/
-
-		DXVertexShader vertexShader(*this, L"VertexShader.cso");
-		vertexShader.Bind();
-
-		DXPixelShader pixelShader(*this, L"PixelShader.cso");
-		pixelShader.Bind();
-
-		// Create Input layout
-
-		const D3D11_INPUT_ELEMENT_DESC ed[] =
-		{
-			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-			{ "TANGENT", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12u, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24u, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-		};
-
-		DXInputLayout inputLayout(*this, ed, (UINT)3, vertexShader.GetBlob());
-		inputLayout.Bind();
+		//context->OMSetRenderTargets(1, renderTarget.GetAddressOf(), nullptr);
 
 		D3D11_VIEWPORT vp;
 		vp.Width = (FLOAT)WindowsOS::Get().GetWidth();
@@ -171,6 +153,21 @@ namespace TEngine
 		DXSampler sampler(*this);
 		sampler.Bind();
 
+		ID3D11BlendState* blendState = NULL;
+
+		D3D11_BLEND_DESC blendDesc = { };
+		blendDesc.RenderTarget[0].BlendEnable = TRUE;
+		blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+		blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+		blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+		blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+		blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].RenderTargetWriteMask = 0x0f;
+		device->CreateBlendState(&blendDesc, &blendState);
+
+		context->OMSetBlendState(blendState, NULL, 0xFFFFFFFF);
+
 		//--------------
 		WorldSystem& worldSys = Engine::Get().GetWorldSys();
 		World* world = worldSys.GetCurrentWorld();
@@ -190,6 +187,28 @@ namespace TEngine
 
 		Camera& cam = world->GetEntities().GetComponent<Camera>(world->GetMainCameraEnt());
 		Transform& camTransform = world->GetEntities().GetComponent<Transform>(world->GetMainCameraEnt());
+
+		/*
+		*  Setup shaders, input layout and viewport
+		*/
+
+		DXVertexShader vertexShader(*this, L"VertexShader.cso");
+		vertexShader.Bind();
+
+		DXPixelShader pixelShader(*this, L"PixelShader.cso");
+		pixelShader.Bind();
+
+		// Create Input layout
+
+		const D3D11_INPUT_ELEMENT_DESC ed[] =
+		{
+			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "TANGENT", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12u, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24u, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+		};
+
+		DXInputLayout inputLayout(*this, ed, (UINT)3, vertexShader.GetBlob());
+		inputLayout.Bind();
 
 		struct CBuf
 		{

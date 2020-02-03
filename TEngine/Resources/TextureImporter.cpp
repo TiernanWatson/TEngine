@@ -15,15 +15,7 @@ namespace TEngine
 		unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrComponents, 4);
 		if (data)
 		{
-			TexFormat format;
-			if (nrComponents == 1)
-				format = TexFormat::R;
-			else if (nrComponents == 3)
-				format = TexFormat::RGB;
-			else if (nrComponents == 4)
-				format = TexFormat::RGBA;
-
-			loadedResources[path] = Texture(width, height, format, TexType::diffuse, data, 0, path);
+			loadedResources[path] = Texture(width, height, TexFormat::RGBA, TexType::diffuse, data, 0, path);
 
 			return loadedResources[path];
 
@@ -32,7 +24,7 @@ namespace TEngine
 		else
 		{
 			stbi_image_free(data);
-			throw EXCEPTION("TextureImporter::Load: Could not load texture");
+			throw EXCEPTION("TextureImporter::Load: Could not load dxTexture");
 		}
 	}
 }

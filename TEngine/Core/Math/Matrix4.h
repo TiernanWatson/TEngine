@@ -55,7 +55,7 @@ namespace TEngine
 		/**
 		* Computes an orthographic projection matrix
 		**/
-		static Matrix4 Orthographic(float32 near, float32 far, float32 left, float32 right, float32 bottom, float32 top);
+		static Matrix4 Orthographic(float32 nearDist, float32 farDist, float32 left, float32 right, float32 bottom, float32 top);
 
 		/**
 		* Used to return the Model-to-World space matrix for rendering
