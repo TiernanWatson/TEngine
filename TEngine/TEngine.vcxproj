@@ -199,6 +199,7 @@
     <ClCompile Include="Core\Math\Vector2Int.cpp" />
     <ClCompile Include="Core\Math\Vector3.cpp" />
     <ClCompile Include="Core\Math\Vector4.cpp" />
+    <ClCompile Include="Core\Memory\HeapAllocator.cpp" />
     <ClCompile Include="Core\Memory\Memory.cpp" />
     <ClCompile Include="Core\Memory\PoolAllocator.cpp" />
     <ClCompile Include="Core\Memory\StackAllocator.cpp" />
@@ -266,6 +267,7 @@
     <ClInclude Include="Core\Math\Vector2Int.h" />
     <ClInclude Include="Core\Math\Vector3.h" />
     <ClInclude Include="Core\Math\Vector4.h" />
+    <ClInclude Include="Core\Memory\HeapAllocator.h" />
     <ClInclude Include="Core\Memory\Memory.h" />
     <ClInclude Include="Core\Memory\PoolAllocator.h" />
     <ClInclude Include="Core\Memory\StackAllocator.h" />

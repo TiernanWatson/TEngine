@@ -360,6 +360,9 @@
     <ClCompile Include="Helpers\DebugUIRenderer.cpp">
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Memory\HeapAllocator.cpp">
+      <Filter>Source Files\Core\Memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\PortableTypes.h">
@@ -583,6 +586,9 @@
     </ClInclude>
     <ClInclude Include="Helpers\DebugUIRenderer.h">
       <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Memory\HeapAllocator.h">
+      <Filter>Header Files\Core\Memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

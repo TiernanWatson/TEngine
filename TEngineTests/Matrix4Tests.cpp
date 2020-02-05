@@ -2,6 +2,8 @@
 #include "CppUnitTest.h"
 #include "../TEngine/Core/Math/Matrix4.h"
 #include "../TEngine/Core/Math/Matrix4.cpp"
+#include "../TEngine/Core/Exception.h"
+#include "../TEngine/Core/Exception.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace TEngine;
