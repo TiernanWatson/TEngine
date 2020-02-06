@@ -7,14 +7,14 @@ namespace TEngine
 	{
 	}
 
-	Model::Model(std::vector<Mesh*> meshes, uint32 rId, std::string path)
+	Model::Model(std::vector<Mesh*> meshes, U32 rId, std::string path)
 		: Resource(rId, path)
 	{
-		this->meshes = meshes;
+		this->meshes_ = meshes;
 	}
 
 	const std::vector<Mesh*>& Model::GetMeshes() const
 	{
-		return meshes;
+		return meshes_;
 	}
 }

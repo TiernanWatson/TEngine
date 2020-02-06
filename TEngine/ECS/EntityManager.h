@@ -11,7 +11,7 @@
 namespace TEngine
 {
 	/**
-	* Manages entities in the world - use to add/edit/remove comps/ents
+	* Manages entities_ in the world_ - use to add/edit/remove comps/ents
 	**/
 	class EntityManager
 	{
@@ -22,128 +22,128 @@ namespace TEngine
 		/**
 		* Creates a new entity with no components
 		**/
-		uint32 NewEntity();
+		U32 NewEntity();
 
 		/**
 		* Creates an entity with the specified components
 		**/
 		template<typename ...Comps>
-		uint32 NewEntityWith();
+		U32 NewEntityWith();
 
 		/**
 		* Creates an entity with the specified components and instances
 		**/
 		template<typename ...Comps>
-		uint32 NewEntityWith(Comps* ...args);
+		U32 NewEntityWith(Comps* ...args);
 
 		/**
 		* Removes an entity and its associated components
 		**/
-		void DeleteEntity(uint32 id);
+		void DeleteEntity(U32 id);
 
 		/**
 		* Adds a new component to an entity (warning: will change its archetype)
 		**/
 		template<typename Comp>
-		void AddToEntity(uint32 id);
+		void AddToEntity(U32 id);
 
 		/**
-		* Applies the supplied function to the archetypes containing the specified types
+		* Applies the supplied function to the archetypes_ containing the specified types
 		**/
 		template<typename ...Comps>
 		void ForEach(std::function<void(Comps*...)> func);
 
 		/**
-		* Gets a reference the component of type T for entity index
+		* Gets a reference the component of type_ T for entity index
 		**/
 		template<typename T>
-		T& GetComponent(uint32 id) const;
+		T& GetComponent(U32 id) const;
 
 	private:
 		/**
-		* Instantiates an instance of an archetype in the next available slot
+		* Instantiates an instance_ of an archetype in the next available slot
 		**/
-		void NewArchetypeInstance(Archetype* a, maxint& outChunk, maxint& outIndex);
+		void NewArchetypeInstance(Archetype* a, USIZE& out_chunk, USIZE& out_index);
 
 		/**
-		* Gets a component of type T from chunk at index index
+		* Gets a component of type_ T from chunk at index index
 		**/
 		template<typename T>
-		T* GetComponentChunkId(DataChunk* chunk, maxint index);
+		T* GetComponentChunkId(DataChunk* chunk, USIZE index);
 
 		/**
 		* Returns the archetype that exactly matches the list of metatypes, nullptr if none found
 		**/
-		Archetype* FindArchetype(Metatype* types, maxint count) const;
+		Archetype* FindArchetype(Metatype* types, USIZE count) const;
 
 		/**
-		* Returns all the archetypes that contain the specified metatypes
+		* Returns all the archetypes_ that contain the specified metatypes
 		**/
-		std::vector<Archetype*> MatchingArchetypes(Metatype* inc, maxint count) const;
+		std::vector<Archetype*> MatchingArchetypes(Metatype* inc, USIZE count) const;
 
 		/**
 		* Adds a new archetype describing the metatypes and returns a pointer to it
 		**/
-		Archetype* AddArchetype(Metatype* types, maxint count);
+		Archetype* AddArchetype(Metatype* types, USIZE count);
 
 		struct EntityDetails 
 		{
 			Archetype* archetype;
-			maxint chunk;
-			maxint index;
+			USIZE chunk;
+			USIZE index;
 		};
 
-		std::vector<Archetype*> archetypes;
+		std::vector<Archetype*> archetypes_;
 
-		std::unordered_map<uint32, EntityDetails> entityStorageMap;
+		std::unordered_map<U32, EntityDetails> entity_storage_map_;
 
-		std::queue<uint32> unusedID;
+		std::queue<U32> unused_id_;
 
-		uint32 entityCount = 0;
+		U32 entity_count_ = 0;
 	};
 
 	template<typename ...Comps>
-	inline uint32 EntityManager::NewEntityWith()
+	inline U32 EntityManager::NewEntityWith()
 	{
-		uint32 id = NewEntity();
+		U32 id = NewEntity();
 
-		maxint count = sizeof...(Comps);
+		USIZE count = sizeof...(Comps);
 		Metatype types[] = { Metatype::Create<Comps>()... };
 
 		Archetype* a = FindArchetype(types, count);
 
 		if (a == nullptr) a = AddArchetype(types, count);
 		
-		maxint chunk, index;
+		USIZE chunk, index;
 		NewArchetypeInstance(a, chunk, index);
 
-		entityStorageMap[id] = EntityDetails{ a, chunk, index };
+		entity_storage_map_[id] = EntityDetails{ a, chunk, index };
 
 		return id;
 	}
 
 	template<typename ...Comps>
-	inline uint32 EntityManager::NewEntityWith(Comps* ...args)
+	inline U32 EntityManager::NewEntityWith(Comps* ...args)
 	{
-		uint32 id = NewEntity();
+		U32 id = NewEntity();
 
-		maxint count = sizeof...(Comps);
+		USIZE count = sizeof...(Comps);
 		Metatype types[] = { Metatype::Create<Comps>()... };
 
 		Archetype* a = FindArchetype(types, count);
 
 		if (a == nullptr) a = AddArchetype(types, count);
 
-		maxint chunk, index;
+		USIZE chunk, index;
 		NewArchetypeInstance(a, chunk, index);
 
-		entityStorageMap[id] = EntityDetails{ a, chunk, index };
+		entity_storage_map_[id] = EntityDetails{ a, chunk, index };
 
 		return id;
 	}
 
 	template<typename Comp>
-	inline void EntityManager::AddToEntity(uint32 id)
+	inline void EntityManager::AddToEntity(U32 id)
 	{
 		
 	}
@@ -151,17 +151,17 @@ namespace TEngine
 	template<typename ...Comps>
 	inline void EntityManager::ForEach(std::function<void(Comps*...)> func)
 	{
-		maxint count = sizeof...(Comps);
+		USIZE count = sizeof...(Comps);
 		Metatype types[] = { Metatype::Create<Comps>()... };
 
 		std::vector<Archetype*> results = MatchingArchetypes(types, count);
 		
 		for (Archetype* a : results)
 		{
-			DataChunk* d = a->firstChunk;
+			DataChunk* d = a->first_chunk;
 			while (d != nullptr)
 			{
-				for (maxint i = 0; i < d->lastIndex; i++)
+				for (USIZE i = 0; i < d->last_index; i++)
 				{
 					func(GetComponentChunkId<Comps>(d, i)...);
 				}
@@ -171,16 +171,16 @@ namespace TEngine
 	}
 
 	template<typename T>
-	inline T& EntityManager::GetComponent(uint32 id) const
+	inline T& EntityManager::GetComponent(U32 id) const
 	{
-		const EntityDetails& detail = entityStorageMap.at(id);
+		const EntityDetails& detail = entity_storage_map_.at(id);
 		std::vector<Metatype>& types = detail.archetype->types;
-		DataChunk* chunk = detail.archetype->firstChunk;
+		DataChunk* chunk = detail.archetype->first_chunk;
 
-		maxint hash = typeid(T).hash_code();
+		USIZE hash = typeid(T).hash_code();
 
-		maxint index = 0;
-		for (maxint i = 0; i < types.size(); i++)
+		USIZE index = 0;
+		for (USIZE i = 0; i < types.size(); i++)
 		{
 			if (hash == types[i].hash)
 			{
@@ -189,7 +189,7 @@ namespace TEngine
 			}
 		}
 
-		uint8* p = (uint8*)chunk->data			// data start
+		U8* p = (U8*)chunk->data			// data_ start
 			+ detail.archetype->offsets[index]  // subarray for T
 			+ detail.index * sizeof(T);			// entity position
 
@@ -197,17 +197,17 @@ namespace TEngine
 	}
 
 	template<typename T>
-	inline T* EntityManager::GetComponentChunkId(DataChunk* chunk, maxint index)
+	inline T* EntityManager::GetComponentChunkId(DataChunk* chunk, USIZE index)
 	{
 		Archetype* a = chunk->archetype;
 
-		maxint hash = typeid(T).hash_code();
+		USIZE hash = typeid(T).hash_code();
 
-		for (maxint i = 0; i < a->types.size(); i++)
+		for (USIZE i = 0; i < a->types.size(); i++)
 		{
 			if (hash == a->types[i].hash)
 			{
-				uint8* p = chunk->data		// data start
+				U8* p = chunk->data		// data_ start
 					+ a->offsets[i]			// subarray for T
 					+ sizeof(T) * index;	// entity position
 

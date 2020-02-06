@@ -5,17 +5,17 @@
 namespace TEngine
 {
 	/**
-	* Represents a quaternion, 16-size
+	* Represents a quaternion, 16-size_
 	**/
 	class Quat
 	{
 	public:
-		float32 x, y, z, w;
+		F32 x, y, z, w;
 
 	public:
 		Quat();
-		explicit Quat(float32 x, float32 y, float32 z, float32 w);
-		explicit Quat(const Vector3& axis, float32 angleRad);
+		explicit Quat(F32 x, F32 y, F32 z, F32 w);
+		explicit Quat(const Vector3& axis, F32 angleRad);
 
 		Quat operator+(const Quat& rhs) const;
 		Quat operator-(const Quat& rhs) const;

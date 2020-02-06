@@ -13,24 +13,24 @@
 
 namespace TEngine 
 {
-	typedef uint8_t uint8;
-	typedef uint16_t uint16;
-	typedef uint32_t uint32;
-	typedef uint64_t uint64;
+	typedef uint8_t U8;
+	typedef uint16_t U16;
+	typedef uint32_t U32;
+	typedef uint64_t U64;
 
-	typedef int8_t int8;
-	typedef int16_t int16;
-	typedef int32_t int32;
-	typedef int64_t int64;
+	typedef int8_t I8;
+	typedef int16_t I16;
+	typedef int32_t I32;
+	typedef int64_t I64;
 
-	typedef size_t maxint;
+	typedef size_t USIZE;
 
-	typedef float float32;
-	typedef double float64;
+	typedef float F32;
+	typedef double F64;
 
-	typedef uintptr_t uintptr;
-	typedef intptr_t intptr;
-	typedef ptrdiff_t ptrdiff;
+	typedef uintptr_t UPTR;
+	typedef intptr_t IPTR;
+	typedef ptrdiff_t PTRDIFF;
 
 	typedef wchar_t wchar;
 }

@@ -10,11 +10,11 @@ namespace TEngine
 	{
 	public:
 		Model();
-		Model(std::vector<Mesh*> meshes, uint32 rId, std::string path);
+		Model(std::vector<Mesh*> meshes, U32 r_id, std::string path);
 
 		const std::vector<Mesh*>& GetMeshes() const;
 
 	protected:
-		std::vector<Mesh*> meshes;
+		std::vector<Mesh*> meshes_;
 	};
 }

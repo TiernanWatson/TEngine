@@ -18,15 +18,15 @@ namespace TEngine
 	class ResourceLoader
 	{
 	public:
-		Texture& GetTexture(const std::string& name, bool useCache = true);
-		Model& GetModel(const std::string& path, bool useCache = true);
+		Texture& GetTexture(const std::string& name, bool use_cache = true);
+		Model& GetModel(const std::string& path, bool use_cache = true);
 
 		static ResourceLoader& Instance();
 
 	private:
 		ResourceLoader();
 
-		TextureImporter texImporter;
-		ModelImporter modelImporter;
+		TextureImporter tex_importer_;
+		ModelImporter model_importer_;
 	};
 }

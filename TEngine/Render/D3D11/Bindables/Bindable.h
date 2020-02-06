@@ -14,6 +14,6 @@ namespace TEngine
 		ID3D11DeviceContext* GetContext() const;
 
 	private:
-		D3D11Renderer& renderer;
+		D3D11Renderer& renderer_;
 	};
 }

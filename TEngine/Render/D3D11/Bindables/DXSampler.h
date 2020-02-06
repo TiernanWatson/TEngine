@@ -14,6 +14,6 @@ namespace TEngine
 		void Bind() override;
 
 	private:
-		wrl::ComPtr<ID3D11SamplerState> sampler;
+		wrl::ComPtr<ID3D11SamplerState> sampler_;
 	};
 }

@@ -21,17 +21,17 @@ namespace TEngine
 			break;
 		case ERROR_ALREADY_EXISTS:  // not necessarily an error
 		   throw std::exception(
-		      "FileSystem::ThrowFileError: ERROR_ALREADY_EXISTS file already "
+		      "FileSystem::ThrowFileError: ERROR_ALREADY_EXISTS file_ already "
 		      "exists, cannot be created");
 			break;
 		case ERROR_FILE_EXISTS:
 			throw std::exception(
-				"FileSystem::ThrowFileError: ERROR_FILE_EXISTS file cannot be "
-				"created, file exists");
+				"FileSystem::ThrowFileError: ERROR_FILE_EXISTS file_ cannot be "
+				"created, file_ exists");
 			break;
 		case ERROR_FILE_NOT_FOUND:
 			throw std::exception(
-				"FileSystem::ThrowFileError: ERROR_FILE_NOT_FOUND file cannot be "
+				"FileSystem::ThrowFileError: ERROR_FILE_NOT_FOUND file_ cannot be "
 				"opened, not found");
 			break;
 		default:
@@ -44,53 +44,53 @@ namespace TEngine
 	{
 	}
 
-	bool FileSystem::FileExists(const char* filePath) const
+	bool FileSystem::FileExists(const char* file_path) const
 	{
-		assert(filePath != nullptr);
+		assert(file_path != nullptr);
 
 		WIN32_FIND_DATA findFileData;
-		HANDLE hFind = FindFirstFile(filePath, &findFileData);
+		HANDLE file_handle = FindFirstFile(file_path, &findFileData);
 
-		bool exists = hFind != INVALID_HANDLE_VALUE;
+		bool exists = file_handle != INVALID_HANDLE_VALUE;
 		if (exists) 
 		{
-			FindClose(hFind);
+			FindClose(file_handle);
 		}
 
 		return exists;
 	}
 
-	char* FileSystem::Read(const char* filePath, uint32* outSize) const
+	char* FileSystem::Read(const char* file_path, U32* out_size) const
 	{
-		assert(filePath != nullptr);
+		assert(file_path != nullptr);
 
-		HANDLE hFile = CreateFile(filePath, GENERIC_READ,
+		HANDLE file_handle = CreateFile(file_path, GENERIC_READ,
 			NULL, NULL, OPEN_EXISTING,
 			FILE_ATTRIBUTE_NORMAL,
 			NULL);
 
-		if (hFile == INVALID_HANDLE_VALUE)
+		if (file_handle == INVALID_HANDLE_VALUE)
 			ThrowFileError();
 
-		DWORD fileSize = GetFileSize(hFile, NULL);
-		DWORD bytesRead = 0;
+		DWORD file_size = GetFileSize(file_handle, NULL);
+		DWORD bytes_read = 0;
 
-		char* buffer = new char[fileSize + 1];
+		char* buffer = new char[file_size + 1];
 
-		if (!ReadFile(hFile, buffer, fileSize, &bytesRead, NULL)) 
+		if (!ReadFile(file_handle, buffer, file_size, &bytes_read, NULL)) 
 			ThrowReadError();
 
-		if (outSize != nullptr)
-			*outSize = fileSize;
+		if (out_size != nullptr)
+			*out_size = file_size;
 		
 		return buffer;
 	}
 
-	char* FileSystem::ReadString(const char* filePath) const
+	char* FileSystem::ReadString(const char* file_path) const
 	{
-		uint32 fileSize;
-		char* buffer = Read(filePath, &fileSize);
-		buffer[fileSize] = '\0';
+		U32 file_size;
+		char* buffer = Read(file_path, &file_size);
+		buffer[file_size] = '\0';
 
 		return buffer;
 	}

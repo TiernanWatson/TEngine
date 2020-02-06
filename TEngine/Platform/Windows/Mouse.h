@@ -16,7 +16,7 @@ namespace TEngine
 	private:
 		int x, y;
 
-		bool isLeftPressed = false;
-		bool isRightPressed = false;
+		bool is_left_pressed_ = false;
+		bool is_right_pressed_ = false;
 	};
 }

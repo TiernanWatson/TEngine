@@ -4,13 +4,13 @@
 namespace TEngine 
 {
 	/**
-	* Stack of fixed size allocating blocks of varying size memory
+	* Stack of fixed size_ allocating blocks of varying size_ memory
 	**/
 	class StackAllocator
 	{
 	public:
 		StackAllocator() = delete;
-		explicit StackAllocator(maxint size, void* (*alloc)(maxint) = malloc);
+		explicit StackAllocator(USIZE size, void* (*alloc)(USIZE) = malloc);
 		StackAllocator(const StackAllocator&) = delete;
 		StackAllocator& operator=(const StackAllocator&) = delete;
 		~StackAllocator();
@@ -19,21 +19,21 @@ namespace TEngine
 		inline T* NewOnStack(Args... args);
 
 		/*
-		* Allocates 'size' bytes with specified alignment at top of stack
+		* Allocates 'size_' bytes with specified alignment at top_ of stack
 		*/
-		void* Alloc(maxint size, uint8 alignment);
+		void* Alloc(USIZE size, U8 alignment);
 
 		/*
-		* Frees down to (and including) ptr from the stack
+		* Frees kDown to (and including) ptr from the stack
 		*/
 		void Free(void* ptr);
 
 		void Clear();
 
 	private:
-		maxint stackSize;
-		void* basePtr;
-		void* stackPointer;
+		USIZE stack_size_;
+		void* base_ptr_;
+		void* stack_pointer_;
 	};
 
 	template<typename T, typename ...Args>

@@ -16,7 +16,7 @@ namespace TEngine
 		void Update(T& data);
 
 	protected:
-		wrl::ComPtr<ID3D11Buffer> constBuffer;
+		wrl::ComPtr<ID3D11Buffer> const_buffer_;
 	};
 
 	template<typename T>
@@ -36,7 +36,7 @@ namespace TEngine
 		D3D11_SUBRESOURCE_DATA csr = {};
 		csr.pSysMem = &data;
 
-		THROW_IF_FAIL(GetDevice()->CreateBuffer(&cbd, &csr, &constBuffer));
+		THROW_IF_FAIL(GetDevice()->CreateBuffer(&cbd, &csr, &const_buffer_));
 	}
 
 	template<typename T>
@@ -46,7 +46,7 @@ namespace TEngine
 
 		D3D11_MAPPED_SUBRESOURCE mapped;
 		THROW_IF_FAIL(GetContext()->Map(
-			constBuffer.Get(),
+			const_buffer_.Get(),
 			0,
 			D3D11_MAP_WRITE_DISCARD,
 			0,
@@ -54,7 +54,7 @@ namespace TEngine
 		));
 
 		memcpy(mapped.pData, &data, sizeof(T));
-		GetContext()->Unmap(constBuffer.Get(), 0);
+		GetContext()->Unmap(const_buffer_.Get(), 0);
 	}
 
 	/*
@@ -71,7 +71,7 @@ namespace TEngine
 		void Bind() override
 		{
 			Bindable::GetContext()->VSSetConstantBuffers(0, 1, 
-				DXConstantBuffer<T>::constBuffer.GetAddressOf());
+				DXConstantBuffer<T>::const_buffer_.GetAddressOf());
 		}
 	};
 
@@ -93,6 +93,6 @@ namespace TEngine
 	void DXPSConstantBuffer<T>::Bind()
 	{
 		Bindable::GetContext()->PSSetConstantBuffers(0, 1, 
-			DXConstantBuffer<T>::constBuffer.GetAddressOf());
+			DXConstantBuffer<T>::const_buffer_.GetAddressOf());
 	}
 }

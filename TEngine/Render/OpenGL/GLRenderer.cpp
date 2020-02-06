@@ -55,7 +55,7 @@ namespace TEngine
 					m->textures = (GLTextureInfo*)instance->GetTextures();
 					m->texCount = instance->GetTextureCount();
 				}
-				else  // generate mesh instance if none exists
+				else  // generate mesh instance_ if none exists
 				{
 					GLMeshInstance* newInstance = new GLMeshInstance(m->mesh);
 					newInstance->Load();
@@ -77,7 +77,7 @@ namespace TEngine
 		glClearColor(0.1f, 0.1f, 0.1f, 1.f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Get camera details and set up the constant matrices
+		// Get camera details and set kUp the constant matrices
 		Transform& camT = world->GetEntities().GetComponent<Transform>(world->GetMainCameraEnt());
 		Camera& camC = world->GetEntities().GetComponent<Camera>(world->GetMainCameraEnt());
 
@@ -133,7 +133,7 @@ namespace TEngine
 					glBindTexture(GL_TEXTURE_2D, m->GetTexInfo(i).id);
 				}
 
-				// Draw the mesh using indices
+				// Draw the mesh using indices_
 				glBindVertexArray(m->VAO);
 				glDrawElements(GL_TRIANGLES, m->indexCount, GL_UNSIGNED_INT, 0);
 				glBindVertexArray(0);

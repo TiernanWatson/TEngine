@@ -7,15 +7,15 @@
 
 namespace TEngine
 {
-	// Must declare this here because of type error if under TEngine::
+	// Must declare this here because of type_ error if under TEngine::
 	void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 
 	void WindowManager::StartUp()
 	{
 		ConfigVar titleVar = CONFIG_VAL("Window", "title", ConfigVar("Odyssey"));
-		ConfigVar widthVar = CONFIG_VAL("Window", "width", ConfigVar("800"));
-		ConfigVar heightVar = CONFIG_VAL("Window", "height", ConfigVar("600"));
-		ConfigVar fullscreenVar = CONFIG_VAL("Window", "fullscreen", ConfigVar("false"));
+		ConfigVar widthVar = CONFIG_VAL("Window", "width_", ConfigVar("800"));
+		ConfigVar heightVar = CONFIG_VAL("Window", "height_", ConfigVar("600"));
+		ConfigVar fullscreenVar = CONFIG_VAL("Window", "is_fullscreen_", ConfigVar("false"));
 
 		width = widthVar.GetInt();
 		height = heightVar.GetInt();
@@ -50,7 +50,7 @@ namespace TEngine
 		glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 	}
 
-	void WindowManager::Update(float32 deltaTime)
+	void WindowManager::Update(F32 deltaTime)
 	{
 		if (glfwWindowShouldClose(window))
 		{

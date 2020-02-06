@@ -12,11 +12,11 @@ namespace TEngine
 		desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 
 		HRESULT hr;
-		THROW_IF_FAIL(GetDevice()->CreateSamplerState(&desc, &sampler));
+		THROW_IF_FAIL(GetDevice()->CreateSamplerState(&desc, &sampler_));
 	}
 
 	void DXSampler::Bind()
 	{
-		GetContext()->PSSetSamplers(0, 1, sampler.GetAddressOf());
+		GetContext()->PSSetSamplers(0, 1, sampler_.GetAddressOf());
 	}
 }

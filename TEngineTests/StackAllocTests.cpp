@@ -22,7 +22,7 @@ namespace TEngineTests
 		{
 			StackAllocator stack(100);
 			void* ptr = stack.Alloc(16, 16);
-			int misalign = (uintptr)ptr & 15;
+			int misalign = (UPTR)ptr & 15;
 			Assert::AreEqual(misalign, 0);
 		}
 
@@ -31,7 +31,7 @@ namespace TEngineTests
 			StackAllocator stack(100);
 			void* ptr1 = stack.Alloc(8, 8);
 			void* ptr2 = stack.Alloc(8, 8);
-			int diff = (uintptr)ptr2 - (uintptr)ptr1;
+			int diff = (UPTR)ptr2 - (UPTR)ptr1;
 			Assert::AreEqual(diff, 8);
 		}
 	};

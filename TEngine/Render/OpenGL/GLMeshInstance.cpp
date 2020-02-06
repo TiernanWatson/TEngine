@@ -125,7 +125,7 @@ namespace TEngine
 			format = GL_RGBA;
 			break;
 		default:
-			throw std::exception("Unrecognised dxTexture format!");
+			throw std::exception("Unrecognised dx_texture_ format_!");
 		}
 
 		texInfo.type = tex->GetType();

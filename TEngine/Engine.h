@@ -37,35 +37,35 @@ namespace TEngine
 
 		static Engine& Get()
 		{
-			return *instance;
+			return *instance_;
 		}
 
 	private:
 		Engine();
 		~Engine();
 
-		static Engine* instance;
+		static Engine* instance_;
 
-		bool isRunning = true;
-		uint8 maxFixedSteps;			// Maximum number of fixed steps in one iteration
-		float32 fixedTimeStep;			// Period of time step
-		float64 accumulatedTime = 0.f;  // Time accumulated since last update
+		bool is_running_ = true;
+		U8 max_fixed_steps_;			// Maximum number of fixed steps in kOne iteration
+		F32 fixed_time_step_;			// Period of time step
+		F64 accumulated_time_ = 0.f;  // Time accumulated since last update
 
-		Clock gameClock;
+		Clock game_clock_;
 
-		StackAllocator systemsStack;	// Manages memory for all subsystems
+		StackAllocator systems_stack_;	// Manages memory for all subsystems
 
-		InputSystem* inputSystem;
-		RENDERER* renderer;
-		WorldSystem* worldSystem;
+		InputSystem* input_system_;
+		RENDERER* renderer_;
+		WorldSystem* world_system_;
 #if _DEBUG
-		DebugUIRenderer* debugRenderer;
+		DebugUIRenderer* debug_renderer_;
 #endif
 
 		// For updating the engine at fixed time step
-		void FixedUpdate(const float32 timeStep);
+		void FixedUpdate(const F32 time_step);
 		// For updating the engine as fast as possible
-		void VariableUpdate(const float32 deltaTime);
+		void VariableUpdate(const F32 delta_time);
 
 		friend class WindowsOS;
 	};

@@ -5,19 +5,19 @@
 namespace TEngine
 {
 	DXMeshInstance::DXMeshInstance(D3D11Renderer& renderer, const Mesh* mesh) :
-		vertexBuffer(renderer, mesh->GetVertices().data(), (maxint)mesh->GetVertices().size()),
-		indexBuffer(renderer, (int*)mesh->GetIndices().data(), (int)mesh->GetIndices().size()),
-		texture(renderer, mesh->GetMaterials()[0]->GetDiffuse()),
-		renderer(renderer), indexCount((int)mesh->GetIndices().size())
+		vertex_buffer_(renderer, mesh->GetVertices().data(), (USIZE)mesh->GetVertices().size()),
+		index_buffer_(renderer, (int*)mesh->GetIndices().data(), (int)mesh->GetIndices().size()),
+		texture_(renderer, mesh->GetMaterials()[0]->GetDiffuse()),
+		renderer_(renderer), index_count_((int)mesh->GetIndices().size())
 	{
 	}
 
 	void DXMeshInstance::Draw()
 	{
-		vertexBuffer.Bind();
-		indexBuffer.Bind();
-		texture.Bind();
+		vertex_buffer_.Bind();
+		index_buffer_.Bind();
+		texture_.Bind();
 
-		renderer.DrawIndexed(indexCount);
+		renderer_.DrawIndexed(index_count_);
 	}
 }

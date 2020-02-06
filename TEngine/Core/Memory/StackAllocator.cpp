@@ -6,47 +6,47 @@
 
 namespace TEngine
 {
-	StackAllocator::StackAllocator(maxint size, void* (*alloc)(maxint))
-		: stackSize(size), basePtr(alloc(size)), stackPointer(basePtr)
+	StackAllocator::StackAllocator(USIZE size, void* (*alloc)(USIZE))
+		: stack_size_(size), base_ptr_(alloc(size)), stack_pointer_(base_ptr_)
 	{
 	}
 
 	StackAllocator::~StackAllocator()
 	{
-		free(basePtr);
+		free(base_ptr_);
 	}
 
-	void* StackAllocator::Alloc(maxint size, uint8 alignment)
+	void* StackAllocator::Alloc(USIZE size, U8 alignment)
 	{
 		assert((alignment & (alignment - 1)) == 0); // Should be power of 2
 
-		uintptr testAddress = (uintptr)stackPointer;
-		uintptr misalign = testAddress & (alignment - 1);
-		ptrdiff correction = alignment - misalign;
+		UPTR testAddress = (UPTR)stack_pointer_;
+		UPTR misalign = testAddress & (alignment - 1);
+		PTRDIFF correction = alignment - misalign;
 
 		correction = correction & (alignment - 1); // Stops skipping block if misalign = 0
 
-		uintptr payload = testAddress + correction;
+		UPTR payload = testAddress + correction;
 
-		uintptr newMarker = payload + size;
+		UPTR newMarker = payload + size;
 
-		if (newMarker > (uintptr)basePtr + stackSize)
+		if (newMarker > (UPTR)base_ptr_ + stack_size_)
 			throw std::overflow_error("StackAllocator::Alloc not enough memory to allocate");
 
-		stackPointer = (void*)newMarker;
+		stack_pointer_ = (void*)newMarker;
 		
 		return (void*)payload;
 	}
 
 	void StackAllocator::Free(void* ptr)
 	{
-		assert(ptr > basePtr && ptr < stackPointer);
+		assert(ptr > base_ptr_ && ptr < stack_pointer_);
 
-		stackPointer = ptr;
+		stack_pointer_ = ptr;
 	}
 
 	void StackAllocator::Clear()
 	{
-		stackPointer = nullptr;
+		stack_pointer_ = nullptr;
 	}
 }

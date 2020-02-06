@@ -11,6 +11,6 @@ namespace TEngine
 		void Bind() override;
 
 	private:
-		wrl::ComPtr<ID3D11VertexShader> vertexShader;
+		wrl::ComPtr<ID3D11VertexShader> vertex_shader_;
 	};
 }

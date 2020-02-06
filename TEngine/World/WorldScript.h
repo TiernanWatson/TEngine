@@ -8,12 +8,12 @@ namespace TEngine
 	public:
 		virtual void Awake() { };
 		virtual void Start() { };
-		virtual void Update(float32 deltaTime) { };
-		virtual void FixedUpdate(float32 timeStep) { };
+		virtual void Update(F32 delta_time) { };
+		virtual void FixedUpdate(F32 time_step) { };
 		virtual void Stop() { };
 
 	protected:
-		class World* world;
+		class World* world_;
 
 		friend class WorldSystem;
 	};

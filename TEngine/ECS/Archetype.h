@@ -13,10 +13,10 @@ namespace TEngine
 	**/
 	struct Archetype
 	{
-		std::set<maxint> hashes;
+		std::set<USIZE> hashes;
 		std::vector<Metatype> types;
-		std::vector<maxint> offsets;
-		DataChunk* firstChunk;
-		uint16 totalSize;
+		std::vector<USIZE> offsets;
+		DataChunk* first_chunk;
+		U16 total_size;
 	};
 }

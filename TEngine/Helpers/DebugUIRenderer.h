@@ -17,20 +17,20 @@ namespace TEngine
 		DebugUIRenderer();
 
 		void StartUp();
-		void VariableUpdate(float32 deltaTime);
-		void FixedUpdate(float32 timeStep);
+		void VariableUpdate(F32 delta_time);
+		void FixedUpdate(F32 time_step);
 		void ShutDown();
 
 	private:
-		Font* font;
-		RENDERER* renderer;
+		Font* font_;
+		RENDERER* renderer_;
 
-		DXVertexShader* vertexShader;
-		DXPixelShader* pixelShader;
+		DXVertexShader* vertex_shader_;
+		DXPixelShader* pixel_shader_;
 
 		void RenderText(std::string text,
 						const Vector2& pos,
-						float32 scale,
+						F32 scale,
 						const Vector3& color);
 	};
 }

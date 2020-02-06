@@ -11,6 +11,6 @@ namespace TEngine
 		void Bind() override;
 
 	private:
-		wrl::ComPtr<ID3D11PixelShader> pixelShader;
+		wrl::ComPtr<ID3D11PixelShader> pixel_shader_;
 	};
 }

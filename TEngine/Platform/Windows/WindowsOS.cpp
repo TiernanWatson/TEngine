@@ -3,7 +3,7 @@
 #include "../../Core/Config/Config.h"
 #include "../../Core/Config/ConfigVar.h"
 
-// Cannot cast member func to this func pointer type, so this is needed
+// Cannot cast member func to this func pointer type_, so this is needed
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 namespace TEngine
@@ -11,15 +11,15 @@ namespace TEngine
 	WindowsOS* WindowsOS::instance = nullptr;
 
 	WindowsOS::WindowsOS(HINSTANCE hInstance, PWSTR pCmdLine, int nCmdShow)
-		: hInstance(hInstance), pCmdLine(pCmdLine), nCmdShow(nCmdShow)
+		: hInstance_(hInstance), pCmdLine_(pCmdLine), nCmdShow_(nCmdShow)
 	{
 		instance = this;
 
 		Config::Instance().LoadFrom("D:\\TEngine\\TEngine\\Engine.ini");
 
-		width = CONFIG_INT32("Window", "width", ConfigVar("800"));
-		height = CONFIG_INT32("Window", "height", ConfigVar("600"));
-		fullscreen = CONFIG_BOOL("Window", "fullscreen", ConfigVar("false"));
+		width_ = CONFIG_INT32("Window", "width_", ConfigVar("800"));
+		height_ = CONFIG_INT32("Window", "height_", ConfigVar("600"));
+		is_fullscreen_ = CONFIG_BOOL("Window", "is_fullscreen_", ConfigVar("false"));
 	}
 
 	void WindowsOS::Init()
@@ -29,24 +29,24 @@ namespace TEngine
 
 	void WindowsOS::Run()
 	{
-		isRunning = true;
-		mainLoop.StartUp();
+		is_running_ = true;
+		main_loop_.StartUp();
 
-		while (isRunning)
+		while (is_running_)
 		{
 			HandleMessages();
-			mainLoop.Update();
+			main_loop_.Update();
 		}
 
-		mainLoop.ShutDown();
+		main_loop_.ShutDown();
 
-		DestroyWindow(hWnd);
-		UnregisterClass(wndClsName, hInstance);
+		DestroyWindow(hWnd_);
+		UnregisterClass(wnd_cls_name_, hInstance_);
 	}
 
 	void WindowsOS::Stop()
 	{
-		isRunning = false;
+		is_running_ = false;
 	}
 
 	LRESULT WindowsOS::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -61,38 +61,38 @@ namespace TEngine
 			PostQuitMessage(0);
 			break;
 		case WM_KILLFOCUS:
-			//keyboard.Clear();
+			//keyboard_.Clear();
 			break;
 		// Input Management
 		case WM_KEYDOWN:
 		case WM_SYSKEYDOWN:
 			// 0x4.... specifies that key was pressed last frame
-			if (!(lParam & 0x40000000) || keyboard.AutorepeatOn())
-				keyboard.OnKeyPress(static_cast<unsigned char>(wParam));
+			if (!(lParam & 0x40000000) || keyboard_.AutorepeatOn())
+				keyboard_.OnKeyPress(static_cast<unsigned char>(wParam));
 			break;
 		case WM_KEYUP:
 		case WM_SYSKEYUP:
-			keyboard.OnKeyRelease(static_cast<unsigned char>(wParam));
+			keyboard_.OnKeyRelease(static_cast<unsigned char>(wParam));
 			break;
 		case WM_MOUSEMOVE:
 			const POINTS pt = MAKEPOINTS(lParam);
-			mouse.OnMouseMove(pt.x, pt.y);
+			mouse_.OnMouseMove(pt.x, pt.y);
 			break;
 		case WM_LBUTTONDOWN:
 			const POINTS pt2 = MAKEPOINTS(lParam);
-			mouse.OnLeftDown(pt2.x, pt2.y);
+			mouse_.OnLeftDown(pt2.x, pt2.y);
 			break;
 		case WM_RBUTTONDOWN:
 			const POINTS pt3 = MAKEPOINTS(lParam);
-			mouse.OnRightDown(pt3.x, pt3.y);
+			mouse_.OnRightDown(pt3.x, pt3.y);
 			break;
 		case WM_LBUTTONUP:
 			const POINTS pt4 = MAKEPOINTS(lParam);
-			mouse.OnLeftUp(pt4.x, pt4.y);
+			mouse_.OnLeftUp(pt4.x, pt4.y);
 			break;
 		case WM_RBUTTONUP:
 			const POINTS pt5 = MAKEPOINTS(lParam);
-			mouse.OnRightUp(pt5.x, pt5.y);
+			mouse_.OnRightUp(pt5.x, pt5.y);
 			break;
 		}
 
@@ -106,12 +106,12 @@ namespace TEngine
 
 	void WindowsOS::InitWindow()
 	{
-		// Make sure client size is desired resolution
+		// Make sure client size_ is desired resolution
 		RECT wr;
 		wr.left = 100;
-		wr.right = width + wr.left;
+		wr.right = width_ + wr.left;
 		wr.top = 100;
-		wr.bottom = height + wr.top;
+		wr.bottom = height_ + wr.top;
 
 		if (!AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE))
 		{
@@ -119,44 +119,44 @@ namespace TEngine
 		}
 
 		// Create the window
-		wc = { };
-		wc.style = CS_DBLCLKS;
-		wc.lpfnWndProc = ::WindowProc;
-		wc.hInstance = hInstance;
-		wc.lpszClassName = wndClsName;
-		wc.lpszMenuName = NULL;
-		wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
-		wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-		wc.cbClsExtra = 0;
-		wc.cbWndExtra = 0;
+		wc_ = { };
+		wc_.style = CS_DBLCLKS;
+		wc_.lpfnWndProc = ::WindowProc;
+		wc_.hInstance = hInstance_;
+		wc_.lpszClassName = wnd_cls_name_;
+		wc_.lpszMenuName = NULL;
+		wc_.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
+		wc_.hCursor = LoadCursor(NULL, IDC_ARROW);
+		wc_.cbClsExtra = 0;
+		wc_.cbWndExtra = 0;
 
-		RegisterClass(&wc);
+		RegisterClass(&wc_);
 
-		hWnd = CreateWindowEx(
+		hWnd_ = CreateWindowEx(
 			0,
-			wndClsName,
+			wnd_cls_name_,
 			CONFIG_STRING("Window", "title", ConfigVar("Odyssey Engine")).c_str(),
-			fullscreen ? WS_POPUP : WS_OVERLAPPEDWINDOW,
+			is_fullscreen_ ? WS_POPUP : WS_OVERLAPPEDWINDOW,
 			CW_USEDEFAULT, CW_USEDEFAULT,  // Position
 			wr.right - wr.left, wr.bottom - wr.top,  // Size
 			NULL,  // Parent window    
 			NULL,  // Menu
-			hInstance,  
-			NULL  // Additional application data
+			hInstance_,  
+			NULL  // Additional application data_
 		);
 
-		if (!hWnd)
+		if (!hWnd_)
 		{
 			throw EXCEPTION("Failed to initialize window!");
 		}
 
-		ShowWindow(hWnd, nCmdShow);
+		ShowWindow(hWnd_, nCmdShow_);
 	}
 
 	void WindowsOS::HandleMessages()
 	{
 		MSG msg = { };
-		while (PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE))
+		while (PeekMessage(&msg, hWnd_, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);

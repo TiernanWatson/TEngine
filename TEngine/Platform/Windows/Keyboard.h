@@ -12,12 +12,12 @@ namespace TEngine
 
 	private:
 		// Used by WindowsOS to set key states
-		void OnKeyPress(unsigned char keyCode);
-		void OnKeyRelease(unsigned char keyCode);
+		void OnKeyPress(unsigned char key_code);
+		void OnKeyRelease(unsigned char key_code);
 
-		KeyCode WinKeyToCode(unsigned char keyCode);
+		KeyCode WinKeyToCode(unsigned char key_code);
 
-		bool allowAutorepeat = false;
+		bool allow_autorepeat_ = false;
 		
 		friend class WindowsOS;
 	};

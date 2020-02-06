@@ -1,4 +1,4 @@
-// TEngine.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// TEngine.cpp : This file_ contains the 'main' function. Program execution begins and ends there.
 //
 
 #ifdef PLATFORM_WINDOWS

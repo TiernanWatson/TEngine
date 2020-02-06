@@ -19,16 +19,16 @@ namespace TEngine
 		std::string GetName() const;
 
 		/**
-		* Returns the default engine font (does NOT need to be deleted after)
+		* Returns the default engine font_ (does NOT need to be deleted after)
 		**/
 		static Font* GetDefaultFont();
 
 	private:
-		std::map<char, Character> characterMap;
+		std::map<char, Character> character_map_;
 
-		const std::string file;
-		const std::string name;
+		const std::string file_;
+		const std::string name_;
 
-		bool isLoaded = false;
+		bool is_loaded_ = false;
 	};
 }

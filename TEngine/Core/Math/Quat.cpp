@@ -5,15 +5,15 @@ namespace TEngine
 {
 	Quat::Quat() : x(0), y(0), z(0), w(0) { }
 
-	Quat::Quat(float32 x, float32 y, float32 z, float32 w)
+	Quat::Quat(F32 x, F32 y, F32 z, F32 w)
 		: x(x), y(y), z(z), w(w)
 	{
 	}
 
-	Quat::Quat(const Vector3& axis, float32 angleRad)
+	Quat::Quat(const Vector3& axis, F32 angleRad)
 	{
-		float32 sin = TMath::Sin(angleRad / 2.f);
-		float32 cos = TMath::Cos(angleRad / 2.f);
+		F32 sin = TMath::Sin(angleRad / 2.f);
+		F32 cos = TMath::Cos(angleRad / 2.f);
 
 		x = axis.x * sin;
 		y = axis.y * sin;

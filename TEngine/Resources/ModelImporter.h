@@ -16,9 +16,9 @@ namespace TEngine
 	class ModelImporter : public ResourceImporter<Model>
 	{
 	public:
-		ModelImporter(uint32 maxInCache);
+		ModelImporter(U32 maxInCache);
 
-		Model& Load(const std::string& path, bool useCache = true);
+		Model& Load(const std::string& path, bool use_cache = true);
 
 	protected:
 		void ProcessNode(aiNode* node, const aiScene* scene, std::string& directory, std::vector<Mesh*>& meshes);
@@ -27,6 +27,6 @@ namespace TEngine
 
 		void LoadMaterialTextures(aiMaterial* mat, aiTextureType type, TexType typeName, std::string& directory, std::vector<Texture*>& result);
 
-		std::vector<Mesh> loadedMeshes;
+		std::vector<Mesh> loaded_meshes_;
 	};
 }

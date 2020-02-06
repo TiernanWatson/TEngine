@@ -14,6 +14,6 @@ namespace TEngine
 		void Bind() override;
 
 	private:
-		wrl::ComPtr<ID3D11Buffer> indexBuffer;
+		wrl::ComPtr<ID3D11Buffer> index_buffer_;
 	};
 }

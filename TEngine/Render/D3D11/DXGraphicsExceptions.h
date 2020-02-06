@@ -7,7 +7,7 @@
 #define HR_D3D11_EXCEPT(hr) TEngine::HrD3D11Exception(hr, __FILE__, __LINE__)
 #define D3D11_EXCEPT(msg) TEngine::D3D11Exception(msg, __FILE__, __LINE__)
 
-// HRESULT hr; must be declared before - otherwise hrcall would be called twice
+// HRESULT hr_; must be declared before - otherwise hrcall would be called twice
 #define THROW_IF_FAIL(hrcall) if (FAILED(hr = hrcall)) throw HR_D3D11_EXCEPT(hr)
 
 namespace TEngine
@@ -35,11 +35,11 @@ namespace TEngine
 
 		inline HRESULT GetHResult() const noexcept
 		{
-			return hr;
+			return hr_;
 		}
 
 	private:
-		HRESULT hr;
+		HRESULT hr_;
 	};
 
 	class DeviceRemovedException : public HrD3D11Exception
@@ -54,10 +54,10 @@ namespace TEngine
 
 		inline HRESULT GetReason()
 		{
-			return reason;
+			return reason_;
 		}
 
 	private:
-		HRESULT reason;
+		HRESULT reason_;
 	};
 }

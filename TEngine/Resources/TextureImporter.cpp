@@ -4,7 +4,7 @@
 
 namespace TEngine
 {
-	TextureImporter::TextureImporter(uint32 maxInCache)
+	TextureImporter::TextureImporter(U32 maxInCache)
 		: ResourceImporter(maxInCache)
 	{
 	}
@@ -15,16 +15,16 @@ namespace TEngine
 		unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrComponents, 4);
 		if (data)
 		{
-			loadedResources[path] = Texture(width, height, TexFormat::RGBA, TexType::diffuse, data, 0, path);
+			loaded_resources_[path] = Texture(width, height, TexFormat::RGBA, TexType::diffuse, data, 0, path);
 
-			return loadedResources[path];
+			return loaded_resources_[path];
 
-			//stbi_image_free(data);
+			//stbi_image_free(data_);
 		}
 		else
 		{
 			stbi_image_free(data);
-			throw EXCEPTION("TextureImporter::Load: Could not load dxTexture");
+			throw EXCEPTION("TextureImporter::Load: Could not load dx_texture_");
 		}
 	}
 }

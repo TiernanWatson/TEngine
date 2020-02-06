@@ -7,7 +7,7 @@ namespace TEngine
 {
 	void InputSystem::StartUp()
 	{
-		Input::input = this;
+		Input::input_ = this;
 	}
 
 	void InputSystem::Update()
@@ -17,20 +17,20 @@ namespace TEngine
 
 	void InputSystem::ShutDown()
 	{
-		Input::input = nullptr;
+		Input::input_ = nullptr;
 	}
 
 	bool InputSystem::GetKey(KeyCode key)
 	{
-		return keyStates[(size_t)key];
+		return key_states_[(size_t)key];
 	}
 
 	void InputSystem::ReceiveEvent(InputEvent e)
 	{
 		if (e.GetType() == KeyEventType::Down)
-			keyStates[(size_t)e.GetKey()] = 1;
+			key_states_[(size_t)e.GetKey()] = 1;
 		else
-			keyStates[(size_t)e.GetKey()] = 0;
+			key_states_[(size_t)e.GetKey()] = 0;
 	}
 
 	// Helper functions

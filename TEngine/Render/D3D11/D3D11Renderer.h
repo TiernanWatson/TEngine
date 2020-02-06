@@ -23,7 +23,7 @@ namespace TEngine
 		void StartUp();
 		void ShutDown();
 
-		void Render(float32 deltaTime);
+		void Render(F32 delta_time);
 
 		void ClearBuffer(float r, float g, float b);
 		void DrawIndexed(int count);
@@ -31,14 +31,14 @@ namespace TEngine
 		void Present();
 
 	private:
-		// DirectX 11 device info and swap chain
-		Microsoft::WRL::ComPtr<ID3D11Device> device;
-		Microsoft::WRL::ComPtr<IDXGISwapChain> swapChain;
-		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
-		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTarget;
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> depthStencilView;
-		Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizer;
+		// DirectX 11 device_ info and swap chain
+		Microsoft::WRL::ComPtr<ID3D11Device> device_;
+		Microsoft::WRL::ComPtr<IDXGISwapChain> swap_chain_;
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context_;
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> render_target_;
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> depth_stencil_view_;
+		Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizer_;
 
-		friend class Bindable;  // For access to context and device
+		friend class Bindable;  // For access to context_ and device_
 	};
 }

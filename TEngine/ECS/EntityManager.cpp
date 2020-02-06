@@ -11,70 +11,70 @@ namespace TEngine
 
 	EntityManager::~EntityManager()
 	{
-		for (Archetype* a : archetypes) 
+		for (Archetype* a : archetypes_) 
 			delete a;
 	}
 
-	uint32 EntityManager::NewEntity()
+	U32 EntityManager::NewEntity()
 	{
-		uint32 id;
-		if (unusedID.size() != 0)
+		U32 id;
+		if (unused_id_.size() != 0)
 		{
-			id = unusedID.front();
-			unusedID.pop();
+			id = unused_id_.front();
+			unused_id_.pop();
 		}
 		else 
 		{
-			id = entityCount;
+			id = entity_count_;
 		}
 
-		entityCount++;
+		entity_count_++;
 		return id;
 	}
 
-	void EntityManager::DeleteEntity(uint32 id)
+	void EntityManager::DeleteEntity(U32 id)
 	{
-		EntityDetails details = entityStorageMap[id];
+		EntityDetails details = entity_storage_map_[id];
 
 		// TODO: Remove from datachunk
 
-		unusedID.push(id);
-		entityCount--;
+		unused_id_.push(id);
+		entity_count_--;
 	}
 
-	Archetype* EntityManager::FindArchetype(Metatype* types, maxint count) const
+	Archetype* EntityManager::FindArchetype(Metatype* types, USIZE count) const
 	{
-		for (int i = 0; i < archetypes.size(); i++)
+		for (int i = 0; i < archetypes_.size(); i++)
 		{
-			if (archetypes[i]->types.size() != count)
+			if (archetypes_[i]->types.size() != count)
 				continue;
 
 			bool matches = true;
-			for (int j = 0; j < archetypes[i]->types.size(); j++)
+			for (int j = 0; j < archetypes_[i]->types.size(); j++)
 			{
-				if (types[j].hash != archetypes[i]->types[j].hash)
+				if (types[j].hash != archetypes_[i]->types[j].hash)
 				{
 					matches = false;
 					break;
 				}
 			}
 
-			if (matches) return archetypes[i];
+			if (matches) return archetypes_[i];
 		}
 
 		return nullptr;
 	}
 
-	std::vector<Archetype*> EntityManager::MatchingArchetypes(Metatype* inc, maxint count) const
+	std::vector<Archetype*> EntityManager::MatchingArchetypes(Metatype* inc, USIZE count) const
 	{
 		std::vector<Archetype*> result;
-		for (maxint i = 0; i < archetypes.size(); i++)
+		for (USIZE i = 0; i < archetypes_.size(); i++)
 		{
 			bool matches = true;
-			for (maxint j = 0; j < count; j++)
+			for (USIZE j = 0; j < count; j++)
 			{
-				if (archetypes[i]->hashes.find(inc[j].hash) ==
-					archetypes[i]->hashes.end())
+				if (archetypes_[i]->hashes.find(inc[j].hash) ==
+					archetypes_[i]->hashes.end())
 				{
 					matches = false;
 					break;
@@ -82,13 +82,13 @@ namespace TEngine
 			}
 
 			if (matches)
-				result.push_back(archetypes[i]);
+				result.push_back(archetypes_[i]);
 		}
 
 		return result;
 	}
 
-	Archetype* EntityManager::AddArchetype(Metatype* types, maxint count)
+	Archetype* EntityManager::AddArchetype(Metatype* types, USIZE count)
 	{
 		assert(count != 0);
 
@@ -98,46 +98,46 @@ namespace TEngine
 		a->offsets.push_back(0);
 		a->types.push_back(types[0]);
 		a->hashes.insert(types[0].hash);
-		maxint totalSize = types[0].size;
+		USIZE totalSize = types[0].size;
 
-		for (maxint i = 1; i < count; i++)
+		for (USIZE i = 1; i < count; i++)
 		{
 			a->types.push_back(types[i]);
 			a->hashes.insert(types[i].hash);
 			totalSize += types[i].size;
 
-			// Offset for i is determined by how much mem previous takes up
-			// Amount of memory is proportional to the type size
-			maxint offset = (maxint)(((float64)types[i - 1].size / totalSize) * MEM_16K_BYTES);
-			uint8 misalign = offset & (Memory::CACHE_LINE_SIZE - 1);
+			// Offset for i is determined by how much mem previous takes kUp
+			// Amount of memory is proportional to the type_ size_
+			USIZE offset = (USIZE)(((F64)types[i - 1].size / totalSize) * kMem16kBytes);
+			U8 misalign = offset & (Memory::kCacheLineSize - 1);
 			a->offsets.push_back(offset - misalign);
 		}
 
-		void* alignedPointer = Memory::AlignedMalloc(sizeof(DataChunk), Memory::CACHE_LINE_SIZE);
-		a->firstChunk = new (alignedPointer) DataChunk();
-		a->firstChunk->archetype = a;
-		a->firstChunk->next = nullptr;
+		void* alignedPointer = Memory::Malloc(sizeof(DataChunk), Memory::kCacheLineSize);
+		a->first_chunk = new (alignedPointer) DataChunk();
+		a->first_chunk->archetype = a;
+		a->first_chunk->next = nullptr;
 
-		archetypes.push_back(a);
+		archetypes_.push_back(a);
 
 		return a;
 	}
 
-	void EntityManager::NewArchetypeInstance(Archetype* a, maxint& outChunk, maxint& outIndex)
+	void EntityManager::NewArchetypeInstance(Archetype* a, USIZE& out_chunk, USIZE& out_index)
 	{
-		maxint index = a->firstChunk->lastIndex;
-		uint8* start = a->firstChunk->data;
+		USIZE index = a->first_chunk->last_index;
+		U8* start = a->first_chunk->data;
 
 		// Engine all types and instantiate them at correct place (non-interleaved)
 		for (int i = 0; i < a->types.size(); i++)
 		{
-			uint8* comp = start + a->offsets[i] + a->types[i].size * index;
+			U8* comp = start + a->offsets[i] + a->types[i].size * index;
 			a->types[i].construct((void*)comp);
 		}
 
-		outChunk = 0;
-		outIndex = index;
+		out_chunk = 0;
+		out_index = index;
 
-		a->firstChunk->lastIndex++;
+		a->first_chunk->last_index++;
 	}
 }

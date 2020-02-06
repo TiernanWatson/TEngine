@@ -3,7 +3,7 @@
 
 namespace TEngine
 {
-	DXVertexBuffer::DXVertexBuffer(D3D11Renderer& renderer, const Vertex* vertices, maxint size)
+	DXVertexBuffer::DXVertexBuffer(D3D11Renderer& renderer, const Vertex* vertices, USIZE size)
 		: Bindable(renderer)
 	{
 		D3D11_BUFFER_DESC desc = {};
@@ -18,13 +18,13 @@ namespace TEngine
 		sr.pSysMem = vertices;
 
 		HRESULT hr;
-		THROW_IF_FAIL(GetDevice()->CreateBuffer(&desc, &sr, &vertexBuffer));
+		THROW_IF_FAIL(GetDevice()->CreateBuffer(&desc, &sr, &vertex_buffer_));
 	}
 
 	void DXVertexBuffer::Bind()
 	{
 		const UINT stride = sizeof(Vertex);
 		const UINT offset = 0;
-		GetContext()->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), &stride, &offset);
+		GetContext()->IASetVertexBuffers(0, 1, vertex_buffer_.GetAddressOf(), &stride, &offset);
 	}
 }

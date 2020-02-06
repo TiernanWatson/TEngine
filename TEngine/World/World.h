@@ -9,24 +9,24 @@ namespace TEngine
 	struct Camera;
 
 	/**
-	* Describes a world in the game (i.e. all its entities, etc..)
+	* Describes a world_ in the game (i.e. all its entities_, etc..)
 	**/
 	class World
 	{
 	public:
 		void Awake();
 		void Start();
-		void Update(float32 deltaTime);
-		void FixedUpdate(float32 timeStep);
+		void Update(F32 deltaTime);
+		void FixedUpdate(F32 timeStep);
 		void Stop();
 
 		EntityManager& GetEntities();
-		uint32 GetMainCameraEnt() const;
+		U32 GetMainCameraEnt() const;
 
 	private:
-		EntityManager entities;
-		std::vector<WorldScript*> scripts;
-		uint32 mainCameraEntity;
+		EntityManager entities_;
+		std::vector<WorldScript*> scripts_;
+		U32 main_cam_ent_;
 
 		friend class WorldSystem;
 	};

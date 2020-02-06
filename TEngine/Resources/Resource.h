@@ -11,13 +11,13 @@ namespace TEngine
 	{
 	public:
 		Resource();
-		Resource(uint32 rId, std::string path);
+		Resource(U32 r_id, std::string path);
 
-		uint32 GetId() const;
+		U32 GetId() const;
 		std::string GetPath() const;
 
 	protected:
-		uint32 rId;
-		std::string path;
+		U32 r_id_;
+		std::string path_;
 	};
 }

@@ -17,7 +17,7 @@ namespace TEngine
 	{
 		try 
 		{
-			return valueMap.at(section).at(name);
+			return value_map_.at(section).at(name);
 		}
 		catch (std::out_of_range ex) 
 		{
@@ -25,32 +25,32 @@ namespace TEngine
 		}
 	}
 
-	void Config::LoadFrom(const char* filePath)
+	void Config::LoadFrom(const char* file_path)
 	{
-		char* iniString = FileSystem::Instance().ReadString(filePath);
-		ProcessString(iniString);
-		delete iniString;
+		char* ini_string = FileSystem::Instance().ReadString(file_path);
+		ProcessString(ini_string);
+		delete ini_string;
 	}
 
-	void Config::ProcessString(char* iniString)
+	void Config::ProcessString(char* ini_string)
 	{
-		std::string currentSection;
+		std::string current_section;
 
 		char* context;
-		char* line = strtok_s(iniString, "\n\r", &context);
+		char* line = strtok_s(ini_string, "\n\r", &context);
 
 		while (line != NULL)
 		{
-			if (!CheckForSection(line, currentSection)) // change section name if needed
+			if (!CheckForSection(line, current_section)) // change section name_ if needed
 			{
 				std::string key, value;
 				if (ProcessLine(line, key, value))
 				{
-					valueMap[currentSection][key] = ConfigVar(value);
+					value_map_[current_section][key] = ConfigVar(value);
 				}
 			}
 
-			line = strtok_s(NULL, "\n\r", &context); // move to next line
+			line = strtok_s(NULL, "\n\r", &context); // move to next line_
 		}
 	}
 
@@ -71,7 +71,7 @@ namespace TEngine
 		return false;
 	}
 
-	bool Config::CheckForSection(char* line, std::string& outName) const
+	bool Config::CheckForSection(char* line, std::string& out_name) const
 	{
 		if (line[0] == '[')
 		{
@@ -80,7 +80,7 @@ namespace TEngine
 				if (line[i] == ']') 
 				{
 					line[i] = '\0';
-					outName = std::string(&line[1]);
+					out_name = std::string(&line[1]);
 					return true;
 				}
 			}

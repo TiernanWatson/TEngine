@@ -18,23 +18,23 @@ namespace TEngine
 	public:
 		Shaders() = delete;
 
-		static uint32 CreateShader(
+		static U32 CreateShader(
 			const std::string& name, 
 			const char* vertSource, 
 			const char* fragSource
 		);
 
-		static uint32 GetShader(const std::string& name);
+		static U32 GetShader(const std::string& name);
 
-		static uint32 GetDefault();
+		static U32 GetDefault();
 
-		static void SetMat4(uint32 id, const std::string& name, const Matrix4& mat);
-		static void SetVec4(uint32 id, const std::string& name, const Vector4& vec);
-		static void SetVec3(uint32 id, const std::string& name, const Vector3& vec);
-		static void SetVec2(uint32 id, const std::string& name, const Vector2& vec);
-		static void SetFloat32(uint32 id, const std::string& name, const float32& val);
+		static void SetMat4(U32 id, const std::string& name, const Matrix4& mat);
+		static void SetVec4(U32 id, const std::string& name, const Vector4& vec);
+		static void SetVec3(U32 id, const std::string& name, const Vector3& vec);
+		static void SetVec2(U32 id, const std::string& name, const Vector2& vec);
+		static void SetFloat32(U32 id, const std::string& name, const F32& val);
 
 	private:
-		static std::unordered_map<std::string, uint32> nameToShader;
+		static std::unordered_map<std::string, U32> nameToShader;
 	};
 }

@@ -17,11 +17,11 @@ namespace TEngine
 		sr.pSysMem = indices;
 
 		HRESULT hr;
-		THROW_IF_FAIL(GetDevice()->CreateBuffer(&bd, &sr, &indexBuffer));
+		THROW_IF_FAIL(GetDevice()->CreateBuffer(&bd, &sr, &index_buffer_));
 	}
 
 	void DXIndexBuffer::Bind()
 	{
-		GetContext()->IASetIndexBuffer(indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+		GetContext()->IASetIndexBuffer(index_buffer_.Get(), DXGI_FORMAT_R32_UINT, 0);
 	}
 }

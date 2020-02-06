@@ -4,7 +4,7 @@
 namespace TEngine
 {
 	Exception::Exception(const char* msg, const char* file, int line) noexcept
-		: file(file), line(line), std::exception(msg)
+		: file_(file), line_(line), std::exception(msg)
 	{
 	}
 
@@ -12,12 +12,12 @@ namespace TEngine
 	{
 		std::stringstream result;
 		result << GetType() << std::endl
-			<< "File: " << file << std::endl
-			<< "Line: " << line << std::endl
+			<< "File: " << file_ << std::endl
+			<< "Line: " << line_ << std::endl
 			<< what();
-		displayString = result.str();
+		display_string_ = result.str();
 
-		return displayString.c_str();
+		return display_string_.c_str();
 	}
 
 	const char* Exception::GetType() const noexcept

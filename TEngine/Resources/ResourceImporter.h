@@ -17,22 +17,22 @@ namespace TEngine
 	class ResourceImporter
 	{
 	public:
-		ResourceImporter(uint32 maxInCache);
+		ResourceImporter(U32 max_in_cache);
 
-		virtual T& Load(const std::string& path, bool useCache = true) = 0;
+		virtual T& Load(const std::string& path, bool use_cache = true) = 0;
 
 		bool CanImport(const std::string& file);
 
 	protected:
-		std::vector<std::string> acceptedExtensions;
+		std::vector<std::string> accepted_extensions_;
 
-		PoolAllocator resourcePool;
-		std::unordered_map<std::string, T> loadedResources;
+		PoolAllocator resource_pool_;
+		std::unordered_map<std::string, T> loaded_resources_;
 	};
 
 	template<typename T>
-	inline ResourceImporter<T>::ResourceImporter(uint32 maxInCache)
-		: resourcePool(sizeof(T), maxInCache)
+	inline ResourceImporter<T>::ResourceImporter(U32 max_in_cache)
+		: resource_pool_(sizeof(T), max_in_cache)
 	{
 	}
 
@@ -41,7 +41,7 @@ namespace TEngine
 	{
 		std::string ext = file.substr(file.find_last_of('.'), file.npos);
 
-		for (std::string& s : acceptedExtensions)
+		for (std::string& s : accepted_extensions_)
 		{
 			if (s == ext) return true;
 		}

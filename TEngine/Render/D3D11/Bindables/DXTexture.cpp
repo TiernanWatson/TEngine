@@ -70,14 +70,14 @@ namespace TEngine
 			THROW_IF_FAIL(GetDevice()->CreateTexture2D(&texDesc, NULL, &texture2D));
 		}
 
-		// Create the resource view on the dxTexture
+		// Create the resource view on the dx_texture_
 		D3D11_SHADER_RESOURCE_VIEW_DESC viewDesc = {};
 		viewDesc.Format = texDesc.Format;
 		viewDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 		viewDesc.Texture2D.MostDetailedMip = 0;
 		viewDesc.Texture2D.MipLevels = 1;
 		THROW_IF_FAIL(GetDevice()->CreateShaderResourceView(
-			texture2D.Get(), &viewDesc, &texView
+			texture2D.Get(), &viewDesc, &tex_view_
 		));
 	}
 
@@ -102,20 +102,20 @@ namespace TEngine
 		wrl::ComPtr<ID3D11Texture2D> texture2D;
 		THROW_IF_FAIL(GetDevice()->CreateTexture2D(&texDesc, NULL, &texture2D));
 
-		// Create the resource view on the dxTexture
+		// Create the resource view on the dx_texture_
 		D3D11_SHADER_RESOURCE_VIEW_DESC viewDesc = {};
 		viewDesc.Format = texDesc.Format;
 		viewDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 		viewDesc.Texture2D.MostDetailedMip = 0;
 		viewDesc.Texture2D.MipLevels = 1;
 		THROW_IF_FAIL(GetDevice()->CreateShaderResourceView(
-			texture2D.Get(), &viewDesc, &texView
+			texture2D.Get(), &viewDesc, &tex_view_
 		));
 	}
 
 	void DXTexture::Bind()
 	{
-		GetContext()->PSSetShaderResources(0, 1u, texView.GetAddressOf());
+		GetContext()->PSSetShaderResources(0, 1u, tex_view_.GetAddressOf());
 	}
 
 	DXTexture* DXTexture::GetBlank(D3D11Renderer& renderer)

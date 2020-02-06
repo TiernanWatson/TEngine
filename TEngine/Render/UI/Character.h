@@ -10,13 +10,13 @@ namespace TEngine
 	struct Character
 	{
 #ifdef DIRECTX
-		DXTexture* dxTexture;
+		DXTexture* dx_texture_;
 #elif defined(OPENGL)
 		uint32 textureID;
 #endif
-		//Texture* texture;
-		uint32 advance;
-		Vector2Int bearing;
-		Vector2Int size;
+		//Texture* texture_;
+		U32 advance_;
+		Vector2Int bearing_;
+		Vector2Int size_;
 	};
 }

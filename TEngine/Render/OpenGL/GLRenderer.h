@@ -33,7 +33,7 @@ namespace TEngine
 
 		uint32 shader;
 
-		// Allows multiple components to share VAOs without slowing down performance
+		// Allows multiple components to share VAOs without slowing kDown performance
 		std::unordered_map<Mesh*, GLMeshInstance*> meshInstances;
 	};
 }

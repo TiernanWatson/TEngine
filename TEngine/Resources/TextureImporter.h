@@ -8,8 +8,8 @@ namespace TEngine
 	class TextureImporter : public ResourceImporter<Texture>
 	{
 	public:
-		TextureImporter(uint32 maxInCache);
+		TextureImporter(U32 max_in_cache);
 
-		Texture& Load(const std::string& path, bool useCache = true);
+		Texture& Load(const std::string& path, bool use_cache = true);
 	};
 }

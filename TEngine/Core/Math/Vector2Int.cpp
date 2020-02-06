@@ -3,22 +3,22 @@
 
 namespace TEngine
 {
-	float32 Vector2Int::Magnitude() const
+	F32 Vector2Int::Magnitude() const
 	{
 		return sqrtf(SqrMagnitude());
 	}
 
-	float32 Vector2Int::SqrMagnitude() const
+	F32 Vector2Int::SqrMagnitude() const
 	{
-		return (float32)x * x + (float32)y * y;
+		return (F32)x * x + (F32)y * y;
 	}
 
-	Vector2Int Vector2Int::operator*(const uint32& rhs) const
+	Vector2Int Vector2Int::operator*(const U32& rhs) const
 	{
 		return Vector2Int(rhs * x, rhs * y);
 	}
 
-	Vector2Int& Vector2Int::operator*=(const uint32& rhs)
+	Vector2Int& Vector2Int::operator*=(const U32& rhs)
 	{
 		x *= rhs;
 		y *= rhs;

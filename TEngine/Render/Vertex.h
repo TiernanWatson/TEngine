@@ -9,14 +9,12 @@ namespace TEngine
 	{
 		Vector3 position;
 		Vector3 normal;
-		/*Vector3 tangent;
-		Vector3 bitangent;*/
-		Vector2 texCoord;
+		Vector2 tex_coord;
 	};
 
 	struct Vertex2D
 	{
 		Vector2 position;
-		Vector2 texCoord;
+		Vector2 tex_coord;
 	};
 }

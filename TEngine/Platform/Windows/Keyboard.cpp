@@ -6,12 +6,12 @@ namespace TEngine
 {
 	bool Keyboard::AutorepeatOn() const noexcept
 	{
-		return allowAutorepeat;
+		return allow_autorepeat_;
 	}
 
 	void Keyboard::SetAutorepeat(bool allow) noexcept
 	{
-		allowAutorepeat = allow;
+		allow_autorepeat_ = allow;
 	}
 
 	void Keyboard::OnKeyPress(unsigned char keyCode)

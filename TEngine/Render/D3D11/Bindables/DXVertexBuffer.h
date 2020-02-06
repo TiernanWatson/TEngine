@@ -12,11 +12,11 @@ namespace TEngine
 	{
 	public:
 		DXVertexBuffer() = delete;
-		DXVertexBuffer(D3D11Renderer& renderer, const Vertex* vertices, maxint size);
+		DXVertexBuffer(D3D11Renderer& renderer, const Vertex* vertices, USIZE size);
 
 		void Bind() override;
 
 	private:
-		wrl::ComPtr<ID3D11Buffer> vertexBuffer;
+		wrl::ComPtr<ID3D11Buffer> vertex_buffer_;
 	};
 }

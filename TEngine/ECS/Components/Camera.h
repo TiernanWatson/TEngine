@@ -6,9 +6,9 @@ namespace TEngine
 {
 	struct Camera
 	{
-		float32 FOV = TMath::PI_4;
-		float32 aspect = 16.f / 9.f;
-		float32 farDist = 100.f;
-		float32 nearDist = 0.1f;
+		F32 fov = TMath::kPi_4;
+		F32 aspect = 16.f / 9.f;
+		F32 far_dist = 100.f;
+		F32 near_dist = 0.1f;
 	};
 }

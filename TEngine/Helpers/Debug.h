@@ -40,9 +40,9 @@ namespace TEngine
 		static std::string PtrToStr(void* p);
 
 	private:
-		static std::vector<std::string> screenMessages;
+		static std::vector<std::string> screen_messages_;
 
-		static const int MAX_SCREEN_MSGS = 10;
+		static const int kMaxScreenMsgs = 10;
 
 		friend class DebugUIRenderer;
 	};

@@ -11,11 +11,11 @@ namespace TEngine
 		HRESULT hr;
 		THROW_IF_FAIL(GetDevice()->CreateInputLayout(desc, numElements, 
 			shaderBlob->GetBufferPointer(), shaderBlob->GetBufferSize(), 
-			&inputLayout));
+			&input_layout_));
 	}
 
 	void DXInputLayout::Bind()
 	{
-		GetContext()->IASetInputLayout(inputLayout.Get());
+		GetContext()->IASetInputLayout(input_layout_.Get());
 	}
 }

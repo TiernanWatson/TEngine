@@ -6,7 +6,7 @@
 namespace TEngine
 {
 	/**
-	* Static class used to make input handling easy
+	* Static class used to make input_ handling easy
 	**/
 	class Input
 	{
@@ -15,11 +15,11 @@ namespace TEngine
 
 		static _FORCE_INLINE_ bool GetKey(KeyCode key) 
 		{
-			return input->GetKey(key);
+			return input_->GetKey(key);
 		};
 
 	private:
-		static class InputSystem* input;
+		static class InputSystem* input_;
 		friend class InputSystem;
 	};
 }

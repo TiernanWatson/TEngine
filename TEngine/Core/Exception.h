@@ -13,10 +13,10 @@ namespace TEngine
 		virtual const char* GetType() const noexcept;
 
 	protected:
-		const char* file;
-		int line;
+		const char* file_;
+		int line_;
 
-		mutable std::string displayString;  // Used so buffer isn't destroyed on GetWhat()
+		mutable std::string display_string_;  // Used so buffer isn't destroyed on GetWhat()
 	};
 }
 

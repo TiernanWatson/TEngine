@@ -14,7 +14,7 @@ namespace TEngine
 			Texture* specular, 
 			Texture* normal, 
 			Texture* height,
-			uint32 rId,
+			U32 r_id,
 			std::string path
 		);
 
@@ -24,9 +24,9 @@ namespace TEngine
 		Texture* GetHeight() const;
 
 	protected:
-		Texture* diffuse;
-		Texture* specular;
-		Texture* normal;
-		Texture* height;
+		Texture* diffuse_;
+		Texture* specular_;
+		Texture* normal_;
+		Texture* height_;
 	};
 }

@@ -3,35 +3,42 @@
 
 namespace TEngine
 {
+	struct AllocHeader
+	{
+		// Lowest bit 1 if allocated
+		USIZE size;
+	};
+
 	/*
-	* Allocates a fixed-size of memory on the heap.
-	* Returns arbitrarily-sized memory without context-switching
+	* Allocates a fixed-size_ of memory on the heap.
+	* Returns arbitrarily-sized memory without context_-switching
 	*/
 	class HeapAllocator
 	{
 	public:
-		HeapAllocator(maxint size);
+		HeapAllocator() = delete;
+		HeapAllocator(USIZE size);
 		HeapAllocator(const HeapAllocator&) = delete;
 		HeapAllocator& operator=(const HeapAllocator&) = delete;
 		~HeapAllocator();
 
-		void* Alloc(maxint size);
+		void* Alloc(USIZE size);
 		void Free(void* pointer);
 
 #ifdef _DEBUG
-		maxint GetActiveCnt() const 
+		USIZE GetActiveCnt() const 
 		{
-			return active;
+			return active_;
 		}
 
-		maxint GetFreeCnt() const
+		USIZE GetFreeCnt() const
 		{
-			return freed;
+			return freed_;
 		}
 
-		maxint GetActiveSize() const
+		USIZE GetActiveSize() const
 		{
-			return activeSize;
+			return active_size_;
 		}
 #endif
 
@@ -40,20 +47,21 @@ namespace TEngine
 		{
 			HeapHeader* prev;
 			HeapHeader* next;
-			maxint size;  // Size of block excluding header
-			bool isFree;
+			USIZE size;  // Size of block excluding header
+			bool is_free;
 		};
 
-		void* data;
-		HeapHeader* firstBlock;
-		maxint totalSize;
+		void* data_;
+		HeapHeader* first_block_;
+		USIZE total_size_;
+		U32 expand_size_;  // TODO: EXPANSION
 
 #ifdef _DEBUG
-		maxint active = 0;
-		maxint freed = 0;
-		maxint activeSize = 0;
+		USIZE active_ = 0;
+		USIZE freed_ = 0;
+		USIZE active_size_ = 0;
 #endif
 
-		static constexpr int32 HEADER_SIZE = sizeof(HeapHeader);
+		static constexpr I32 kHeaderSize = sizeof(HeapHeader);
 	};
 }

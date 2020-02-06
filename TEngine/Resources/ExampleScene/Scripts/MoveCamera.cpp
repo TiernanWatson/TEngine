@@ -7,16 +7,16 @@
 
 #include "../../../Platform/Windows/WinHeader.h"
 
-void MoveCamera::Update(float32 deltaTime)
+void MoveCamera::Update(F32 deltaTime)
 {
-	uint32 camId = world->GetMainCameraEnt();
-	Transform& t = world->GetEntities().GetComponent<Transform>(camId);
+	U32 camId = world_->GetMainCameraEnt();
+	Transform& t = world_->GetEntities().GetComponent<Transform>(camId);
 
-	float32 forward = Input::GetKey(KeyCode::W) ? -1.f : 0.f;
+	F32 forward = Input::GetKey(KeyCode::W) ? -1.f : 0.f;
 	forward = Input::GetKey(KeyCode::S) ? 1.f : forward;
-	float32 right = Input::GetKey(KeyCode::D) ? 1.f : 0.f;
+	F32 right = Input::GetKey(KeyCode::D) ? 1.f : 0.f;
 	right = Input::GetKey(KeyCode::A) ? -1.f : right;
 
-	Vector3 move = Vector3::forward * forward + Vector3::right * right;
+	Vector3 move = Vector3::kForward * forward + Vector3::kRight * right;
 	t.position += move * deltaTime;
 }

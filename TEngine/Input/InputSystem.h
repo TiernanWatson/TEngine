@@ -8,7 +8,7 @@ struct GLFWwindow;
 namespace TEngine
 {
 	/**
-	* Main input manager responsible for events
+	* Main input_ manager responsible for events
 	**/
 	class InputSystem
 	{
@@ -24,6 +24,6 @@ namespace TEngine
 		void ReceiveEvent(InputEvent e);
 
 	private:
-		std::bitset<(size_t)KeyCode::Count> keyStates;
+		std::bitset<(size_t)KeyCode::Count> key_states_;
 	};
 }

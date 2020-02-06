@@ -7,7 +7,7 @@ namespace TEngine
 	struct PointLight
 	{
 		Vector3 color;
-		float32 intensity;
-		float32 range;
+		F32 intensity;
+		F32 range;
 	};
 }

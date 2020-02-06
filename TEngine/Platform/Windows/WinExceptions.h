@@ -4,7 +4,7 @@
 
 #define HR_EXCEPT(hr) TEngine::HrException(hr, __FILE__, __LINE__)
 
-// HRESULT hr; must be declared before - otherwise hrcall would be called twice
+// HRESULT hr_; must be declared before - otherwise hrcall would be called twice
 #define THROW_IF_FAIL(hrcall) if (FAILED(hr = hrcall)) throw HR_EXCEPT(hr)
 
 namespace TEngine

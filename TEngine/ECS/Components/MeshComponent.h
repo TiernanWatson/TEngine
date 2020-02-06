@@ -16,7 +16,7 @@ namespace TEngine
 	{
 		Mesh* mesh;
 #ifdef DIRECTX
-		DXMeshInstance* meshInstance;
+		DXMeshInstance* mesh_instance;
 #endif
 #ifdef OPENGL
 		GLsizei indexCount;

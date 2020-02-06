@@ -11,12 +11,12 @@ namespace TEngine
 	public:
 		DXInputLayout(D3D11Renderer& renderer,
 			const D3D11_INPUT_ELEMENT_DESC* desc,
-			UINT numElements,
-			ID3DBlob* shaderBlob);
+			UINT num_elements,
+			ID3DBlob* shader_blob);
 
 		void Bind() override;
 
 	private:
-		wrl::ComPtr<ID3D11InputLayout> inputLayout;
+		wrl::ComPtr<ID3D11InputLayout> input_layout_;
 	};
 }

@@ -4,5 +4,5 @@
 
 namespace TEngine
 {
-	InputSystem* Input::input = nullptr;
+	InputSystem* Input::input_ = nullptr;
 }

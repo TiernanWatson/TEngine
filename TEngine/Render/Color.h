@@ -5,6 +5,6 @@ namespace TEngine
 {
 	struct Color
 	{
-		float32 r, g, b, a;
+		F32 r, g, b, a;
 	};
 }

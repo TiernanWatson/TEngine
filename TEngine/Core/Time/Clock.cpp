@@ -2,45 +2,45 @@
 
 namespace TEngine
 {
-	Clock::Clock() : isPaused(false),
-		startTime(HighResClock::now()),
-		currentTime(HighResClock::now()),
-		elapsedTime(0.f),
-		deltaTime(0.f)
+	Clock::Clock() : is_paused_(false),
+		start_time_(HighResClock::now()),
+		current_time_(HighResClock::now()),
+		elapsed_time_(0.f),
+		delta_time_(0.f)
 	{
 	}
 
 	void Clock::SetPause(bool value)
 	{
-		isPaused = value;
+		is_paused_ = value;
 	}
 
 	bool Clock::IsPaused()
 	{
-		return isPaused;
+		return is_paused_;
 	}
 
 	void Clock::Update()
 	{
-		if (isPaused) return;
+		if (is_paused_) return;
 
 		TimePoint now = HighResClock::now();
 
-		Nanoseconds delta = now - currentTime;
-		Nanoseconds elapsed = now - startTime;
+		Nanoseconds delta = now - current_time_;
+		Nanoseconds elapsed = now - start_time_;
 
-		currentTime = now;
-		deltaTime = delta.count() * 1e-9;
-		elapsedTime = elapsed.count() * 1e-9;
+		current_time_ = now;
+		delta_time_ = delta.count() * 1e-9;
+		elapsed_time_ = elapsed.count() * 1e-9;
 	}
 
-	float64 Clock::GetDeltaTime()
+	F64 Clock::GetDeltaTime()
 	{
-		return deltaTime;
+		return delta_time_;
 	}
 
-	float64 Clock::GetElapsedTime()
+	F64 Clock::GetElapsedTime()
 	{
-		return elapsedTime;
+		return elapsed_time_;
 	}
 }

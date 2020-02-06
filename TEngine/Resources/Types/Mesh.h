@@ -13,19 +13,19 @@ namespace TEngine
 		Mesh();
 		Mesh(
 			std::vector<Vertex> vertices,
-			std::vector<uint32> indices,
+			std::vector<U32> indices,
 			std::vector<Material*> materials,
-			uint32 rId,
+			U32 r_id,
 			std::string path
 		);
 
 		const std::vector<Vertex>& GetVertices() const;
-		const std::vector<uint32>& GetIndices() const;
+		const std::vector<U32>& GetIndices() const;
 		const std::vector<Material*>& GetMaterials() const;
 
 	protected:
-		std::vector<Vertex> vertices;
-		std::vector<uint32> indices;
-		std::vector<Material*> materials;
+		std::vector<Vertex> vertices_;
+		std::vector<U32> indices_;
+		std::vector<Material*> materials_;
 	};
 }

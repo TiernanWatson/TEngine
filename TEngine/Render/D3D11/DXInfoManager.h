@@ -19,7 +19,7 @@ namespace TEngine
 		std::vector<std::string> GetMessage();
 
 	private:
-		unsigned long long mark = 0;
-		Microsoft::WRL::ComPtr<IDXGIInfoQueue> infoQueue;
+		unsigned long long mark_ = 0;
+		Microsoft::WRL::ComPtr<IDXGIInfoQueue> info_queue_;
 	};
 }

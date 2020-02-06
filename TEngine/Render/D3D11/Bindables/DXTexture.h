@@ -19,6 +19,6 @@ namespace TEngine
 	private:
 		DXTexture(D3D11Renderer& renderer);
 
-		wrl::ComPtr<ID3D11ShaderResourceView> texView;
+		wrl::ComPtr<ID3D11ShaderResourceView> tex_view_;
 	};
 }

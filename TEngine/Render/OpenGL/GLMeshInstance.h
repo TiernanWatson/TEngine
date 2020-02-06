@@ -11,8 +11,8 @@ namespace TEngine
 	class Texture;
 
 	/**
-	* Represents an instance of a mesh on the GPU
-	* Useful for saving memory (only one copy needed)
+	* Represents an instance_ of a mesh on the GPU
+	* Useful for saving memory (only kOne copy needed)
 	**/
 	class GLMeshInstance
 	{

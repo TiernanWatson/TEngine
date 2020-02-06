@@ -5,11 +5,11 @@
 
 namespace TEngine
 {
-	std::vector<std::string> Debug::screenMessages;
+	std::vector<std::string> Debug::screen_messages_;
 
 	void Debug::ScreenDebugText(std::string message)
 	{
-		screenMessages.push_back(message);
+		screen_messages_.push_back(message);
 	}
 
 	void Debug::LogDebugText(std::string message)
@@ -26,7 +26,7 @@ namespace TEngine
 
 	std::string Debug::PtrToStr(void* p)
 	{
-		return std::to_string(reinterpret_cast<uintptr>(p));
+		return std::to_string(reinterpret_cast<UPTR>(p));
 	}
 }
 #endif

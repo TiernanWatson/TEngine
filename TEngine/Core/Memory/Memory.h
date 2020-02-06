@@ -1,20 +1,19 @@
 #pragma once
 #include "../PortableTypes.h"
+#include "HeapAllocator.h"
 
 namespace TEngine
 {
-	namespace Memory
+	class Memory
 	{
-		constexpr uint8 CACHE_LINE_SIZE = 64;
+	public:
+		Memory() = delete;
 
-		/**
-		* Allocates size at a certain alignment using standard malloc
-		**/
-		void* AlignedMalloc(maxint bytes, uint8 alignment);
+		static void* Malloc(USIZE size, U8 alignment);
 
-		/**
-		* Deallocates memory that was allocated using AlignedMalloc
-		**/
-		void AlignedFree(void* address);
-	}
+		static constexpr U8 kCacheLineSize = 64;
+
+	private:
+		static HeapAllocator heap_allocator_;
+	};
 }

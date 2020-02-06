@@ -5,41 +5,41 @@ namespace TEngine
 {
 	void World::Awake()
 	{
-		for (WorldScript* s : scripts)
+		for (WorldScript* s : scripts_)
 			s->Awake();
 	}
 
 	void World::Start()
 	{
-		for (WorldScript* s : scripts)
+		for (WorldScript* s : scripts_)
 			s->Start();
 	}
 
-	void World::Update(float32 deltaTime)
+	void World::Update(F32 delta_time)
 	{
-		for (WorldScript* s : scripts)
-			s->Update(deltaTime);
+		for (WorldScript* s : scripts_)
+			s->Update(delta_time);
 	}
 
-	void World::FixedUpdate(float32 timeStep)
+	void World::FixedUpdate(F32 time_step)
 	{
-		for (WorldScript* s : scripts)
-			s->FixedUpdate(timeStep);
+		for (WorldScript* s : scripts_)
+			s->FixedUpdate(time_step);
 	}
 
 	void World::Stop()
 	{
-		for (WorldScript* s : scripts)
+		for (WorldScript* s : scripts_)
 			s->Stop();
 	}
 
-	uint32 World::GetMainCameraEnt() const
+	U32 World::GetMainCameraEnt() const
 	{
-		return mainCameraEntity;
+		return main_cam_ent_;
 	}
 
 	EntityManager& World::GetEntities() 
 	{
-		return entities;
+		return entities_;
 	}
 }

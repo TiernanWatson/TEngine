@@ -6,14 +6,14 @@
 namespace TEngine
 {
 	/**
-	* Represents a component type for use in an archetype
+	* Represents a component type_ for use in an archetype
 	* Data chunk knows how much to allocate, etc...
 	**/
 	struct Metatype
 	{
-		maxint hash;
-		maxint size;
-		uint8 align;
+		USIZE hash;
+		USIZE size;
+		U8 align;
 
 #if _DEBUG
 		std::string name;

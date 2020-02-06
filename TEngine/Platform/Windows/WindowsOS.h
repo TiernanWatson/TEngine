@@ -7,8 +7,8 @@
 namespace TEngine
 {
 	/**
-	* Represents an instance of this program on WindowsOS,
-	* there should only ever be one instance WindowsOS::Get
+	* Represents an instance_ of this program on WindowsOS,
+	* there should only ever be kOne instance_ WindowsOS::Get
 	**/
 	class WindowsOS
 	{
@@ -23,22 +23,22 @@ namespace TEngine
 
 		inline HINSTANCE GetHINSTANCE() const
 		{
-			return hInstance;
+			return hInstance_;
 		}
 
 		inline HWND GetHWND() const
 		{
-			return hWnd;
+			return hWnd_;
 		}
 
 		inline int GetWidth() const
 		{
-			return width;
+			return width_;
 		}
 
 		inline int GetHeight() const
 		{
-			return height;
+			return height_;
 		}
 
 		static WindowsOS& Get();
@@ -48,25 +48,24 @@ namespace TEngine
 		void HandleMessages();
 
 		// Windows API Stuff
-		HINSTANCE hInstance;
-		PWSTR pCmdLine;
-		int nCmdShow;
+		HINSTANCE hInstance_;
+		PWSTR pCmdLine_;
+		int nCmdShow_;
 
-		WNDCLASS wc;
-		HWND hWnd;
+		WNDCLASS wc_;
+		HWND hWnd_;
 
-		const char* wndClsName = "OddWinCls";
+		const char* wnd_cls_name_ = "OddWinCls";
 
-		int width = 800;
-		int height = 600;
-		bool fullscreen = false;
+		int width_ = 800;
+		int height_ = 600;
+		bool is_fullscreen_ = false;
 
-		// Game Engine Stuff
-		bool isRunning = false;
+		bool is_running_ = false;
 
-		Engine mainLoop;
-		Keyboard keyboard;
-		Mouse mouse;
+		Engine main_loop_;
+		Keyboard keyboard_;
+		Mouse mouse_;
 
 		static WindowsOS* instance;
 	};

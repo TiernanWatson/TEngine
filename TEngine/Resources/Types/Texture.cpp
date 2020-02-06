@@ -3,42 +3,42 @@
 namespace TEngine
 {
 	Texture::Texture()
-		: width(0), height(0), format(TexFormat::RGBA), type(TexType::diffuse), data(nullptr), Resource(0, "")
+		: width_(0), height_(0), format_(TexFormat::RGBA), type_(TexType::diffuse), data_(nullptr), Resource(0, "")
 	{
 	}
 
-	Texture::Texture(uint32 width, uint32 height, TexFormat format, TexType type, unsigned char* data, uint32 rId, std::string path)
-		: width(width), height(height), format(format), type(type), data(data), Resource(rId, path)
+	Texture::Texture(U32 width, U32 height, TexFormat format, TexType type, unsigned char* data, U32 rId, std::string path)
+		: width_(width), height_(height), format_(format), type_(type), data_(data), Resource(rId, path)
 	{
 	}
 
 	TexType Texture::GetType() const
 	{
-		return type;
+		return type_;
 	}
 
 	TexFormat Texture::GetFormat() const
 	{
-		return format;
+		return format_;
 	}
 
-	uint32 Texture::GetWidth() const
+	U32 Texture::GetWidth() const
 	{
-		return width;
+		return width_;
 	}
 
-	uint32 Texture::GetHeight() const
+	U32 Texture::GetHeight() const
 	{
-		return height;
+		return height_;
 	}
 
 	unsigned char* Texture::GetDataPtr() const
 	{
-		return data;
+		return data_;
 	}
 
 	void Texture::SetType(TexType type)
 	{
-		this->type = type;
+		this->type_ = type;
 	}
 }

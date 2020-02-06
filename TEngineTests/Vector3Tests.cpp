@@ -53,14 +53,14 @@ namespace TEngineTests
 		TEST_METHOD(MagnitudeOk)
 		{
 			Vector3 test = Vector3(10.f, 0.f, 0.f);
-			float32 result = test.Magnitude();
+			F32 result = test.Magnitude();
 			Assert::AreEqual(result, 10.f);
 		}
 
 		TEST_METHOD(SqrMagnitudeOk)
 		{
 			Vector3 test = Vector3(10.f, 0.f, 0.f);
-			float32 result = test.SqrMagnitude();
+			F32 result = test.SqrMagnitude();
 			Assert::AreEqual(result, 100.f);
 		}
 	};

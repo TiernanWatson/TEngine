@@ -7,11 +7,11 @@ namespace TEngine
 		: Bindable(renderer)
 	{
 		HRESULT hr;
-		THROW_IF_FAIL(D3DReadFileToBlob(file, &blob));
+		THROW_IF_FAIL(D3DReadFileToBlob(file, &blob_));
 	}
 
 	ID3DBlob* DXShader::GetBlob() const
 	{
-		return blob.Get();
+		return blob_.Get();
 	}
 }

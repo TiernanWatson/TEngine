@@ -38,15 +38,15 @@ namespace TEngineTests
 		{
 			EntityManager e;
 
-			uint32 id = e.NewEntityWith<Transform>();
-			uint32 id2 = e.NewEntityWith<Transform, MeshComponent>();
+			U32 id = e.NewEntityWith<Transform>();
+			U32 id2 = e.NewEntityWith<Transform, MeshComponent>();
 
 			e.ForEach<Transform>(
 				[](Transform* t)
 				{
-					t->position = Vector3::one;
-					t->rotation = Vector3::one;
-					t->scale = Vector3::one;
+					t->position = Vector3::kOne;
+					t->rotation = Vector3::kOne;
+					t->scale = Vector3::kOne;
 				}
 			);
 

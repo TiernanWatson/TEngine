@@ -13,106 +13,106 @@
 
 namespace TEngine
 {
-	Engine* Engine::instance = nullptr;
+	Engine* Engine::instance_ = nullptr;
 
 	Engine::Engine() 
-		: systemsStack(SYS_STACK_SIZE)
+		: systems_stack_(SYS_STACK_SIZE)
 	{
-		maxFixedSteps = CONFIG_INT32("Loop", "maxFixedSteps", ConfigVar("8"));
-		fixedTimeStep = CONFIG_FLOAT32("Loop", "fixedTimeStep", ConfigVar("0.02"));
+		max_fixed_steps_ = CONFIG_INT32("Loop", "max_fixed_steps", ConfigVar("8"));
+		fixed_time_step_ = CONFIG_FLOAT32("Loop", "fixed_time_step", ConfigVar("0.02"));
 
-		inputSystem = systemsStack.NewOnStack<InputSystem>();
-		worldSystem = systemsStack.NewOnStack<WorldSystem>();
-		renderer = systemsStack.NewOnStack<RENDERER>();
+		input_system_ = systems_stack_.NewOnStack<InputSystem>();
+		world_system_ = systems_stack_.NewOnStack<WorldSystem>();
+		renderer_ = systems_stack_.NewOnStack<RENDERER>();
 #ifdef _DEBUG
-		debugRenderer = systemsStack.NewOnStack<DebugUIRenderer>();
+		debug_renderer_ = systems_stack_.NewOnStack<DebugUIRenderer>();
 #endif
-		instance = this;
+		instance_ = this;
 	}
 
 	Engine::~Engine()
 	{
-		// Subsystems will be freed as stack is deconstructed
+		// Subsystems will be freed_ as stack is deconstructed
 	}
 
 	Clock& Engine::GetClock()
 	{
-		return gameClock;
+		return game_clock_;
 	}
 
 	RENDERER& Engine::GetRenderer() const
 	{
-		return *renderer;
+		return *renderer_;
 	}
 
 	WorldSystem& Engine::GetWorldSys() const
 	{
-		return *worldSystem;
+		return *world_system_;
 	}
 
 	InputSystem& Engine::GetInputSys() const
 	{
-		return *inputSystem;
+		return *input_system_;
 	}
 
 	DebugUIRenderer& Engine::GetDebugRenderer() const
 	{
-		return *debugRenderer;
+		return *debug_renderer_;
 	}
 
 	void Engine::StartUp()
 	{
-		inputSystem->StartUp();
-		worldSystem->StartUp();
-		renderer->StartUp();
+		input_system_->StartUp();
+		world_system_->StartUp();
+		renderer_->StartUp();
 #ifdef _DEBUG
-		debugRenderer->StartUp();
+		debug_renderer_->StartUp();
 #endif
 	}
 
 	void Engine::ShutDown()
 	{
 #ifdef _DEBUG
-		debugRenderer->ShutDown();
+		debug_renderer_->ShutDown();
 #endif
-		renderer->ShutDown();
-		worldSystem->ShutDown();
-		inputSystem->ShutDown();
+		renderer_->ShutDown();
+		world_system_->ShutDown();
+		input_system_->ShutDown();
 	}
 
 	void Engine::Update()
 	{
-		gameClock.Update();
+		game_clock_.Update();
 
-		accumulatedTime += gameClock.GetDeltaTime();
+		accumulated_time_ += game_clock_.GetDeltaTime();
 
-		// If game lags, make sure fixed update catches up
-		uint8 stepCount = 0;
-		while (accumulatedTime >= fixedTimeStep && stepCount <= maxFixedSteps) 
+		// If game lags, make sure fixed update catches kUp
+		U8 stepCount = 0;
+		while (accumulated_time_ >= fixed_time_step_ && stepCount <= max_fixed_steps_) 
 		{
-			accumulatedTime -= fixedTimeStep;
-			FixedUpdate(fixedTimeStep);
+			accumulated_time_ -= fixed_time_step_;
+			FixedUpdate(fixed_time_step_);
 			stepCount++;
 		}
 
-		VariableUpdate((float32)gameClock.GetDeltaTime());
+		VariableUpdate((F32)game_clock_.GetDeltaTime());
 	}
 
-	void Engine::FixedUpdate(const float32 timeStep)
+	void Engine::FixedUpdate(const F32 timeStep)
 	{
-		worldSystem->FixedUpdate(timeStep);
+		world_system_->FixedUpdate(timeStep);
 	}
 
-	void Engine::VariableUpdate(const float32 deltaTime)
+	void Engine::VariableUpdate(const F32 deltaTime)
 	{
-		inputSystem->Update();
-		worldSystem->Update(deltaTime);
+		input_system_->Update();
+		world_system_->Update(deltaTime);
 
-		renderer->ClearBuffer(0.f, 0.f, 0.f);
-		renderer->Render(deltaTime);
+		renderer_->ClearBuffer(0.f, 0.f, 0.f);
+		renderer_->Render(deltaTime);
 #ifdef _DEBUG
-		debugRenderer->VariableUpdate(deltaTime);
+		debug_renderer_->VariableUpdate(deltaTime);
 #endif
-		renderer->Present();
+		renderer_->Present();
 	}
 }

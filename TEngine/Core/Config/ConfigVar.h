@@ -24,14 +24,14 @@ namespace TEngine
 			return str == "true" ? true : false;
 		}
 
-		inline uint32 GetInt() const
+		inline U32 GetInt() const
 		{
 			return std::atoi(str.c_str());
 		}
 
-		inline float32 GetFloat() const
+		inline F32 GetFloat() const
 		{
-			return (float32)std::atof(str.c_str());
+			return (F32)std::atof(str.c_str());
 		}
 
 	private:

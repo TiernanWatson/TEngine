@@ -20,7 +20,7 @@ namespace TEngineTests
 
 			Matrix4 m3 = m1 + m2;
 
-			for (float32 f : m3.flat)
+			for (F32 f : m3.flat)
 				Assert::AreEqual(f, 3.f);
 		}
 
@@ -31,7 +31,7 @@ namespace TEngineTests
 
 			Matrix4 m3 = m2 - m1;
 
-			for (float32 f : m3.flat)
+			for (F32 f : m3.flat)
 				Assert::AreEqual(f, 1.f);
 		}
 
@@ -61,7 +61,7 @@ namespace TEngineTests
 
 			m1 += m2;
 
-			for (float32 f : m1.flat)
+			for (F32 f : m1.flat)
 				Assert::AreEqual(f, 3.f);
 		}
 
@@ -72,7 +72,7 @@ namespace TEngineTests
 
 			m1 -= m2;
 
-			for (float32 f : m1.flat)
+			for (F32 f : m1.flat)
 				Assert::AreEqual(f, -1.f);
 		}
 

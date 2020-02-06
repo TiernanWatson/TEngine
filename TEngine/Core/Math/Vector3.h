@@ -5,42 +5,42 @@
 namespace TEngine 
 {
 	/**
-	* Class describing a 3D vector, 12 size, leave 4 size to properly align
+	* Class describing a 3D vector, 12 size_, leave 4 size_ to properly align
 	**/
 	class Vector3
 	{
 	public:
-		const static Vector3 up;
-		const static Vector3 forward;
-		const static Vector3 right;
+		const static Vector3 kUp;
+		const static Vector3 kForward;
+		const static Vector3 kRight;
 
-		const static Vector3 down;
-		const static Vector3 back;
-		const static Vector3 left;
+		const static Vector3 kDown;
+		const static Vector3 kBack;
+		const static Vector3 kLeft;
 
-		const static Vector3 zero;
-		const static Vector3 one;
+		const static Vector3 kZero;
+		const static Vector3 kOne;
 
 	public:
-		float32 x, y, z;
+		F32 x, y, z;
 
 	public:
 		Vector3() : x(0), y(0), z(0) {};
-		Vector3(float32 x, float32 y, float32 z) : x(x), y(y), z(z) {};
+		Vector3(F32 x, F32 y, F32 z) : x(x), y(y), z(z) {};
 
 		// General functions
 
-		float32 Magnitude() const;
-		float32 SqrMagnitude() const;
+		F32 Magnitude() const;
+		F32 SqrMagnitude() const;
 
 		void Normalize();
 		Vector3 Normalized() const;
 
 		// Operator functions
 
-		Vector3 operator*(const float32& rhs) const;
+		Vector3 operator*(const F32& rhs) const;
 
-		Vector3& operator*=(const float32& rhs);
+		Vector3& operator*=(const F32& rhs);
 
 		Vector3 operator+(const Vector3& rhs) const;
 		Vector3 operator-(const Vector3& rhs) const;

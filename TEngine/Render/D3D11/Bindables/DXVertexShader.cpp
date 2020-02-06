@@ -9,14 +9,14 @@ namespace TEngine
 	{
 		HRESULT hr;
 		THROW_IF_FAIL(GetDevice()->CreateVertexShader(
-			blob->GetBufferPointer(),
-			blob->GetBufferSize(),
+			blob_->GetBufferPointer(),
+			blob_->GetBufferSize(),
 			nullptr,
-			&vertexShader));
+			&vertex_shader_));
 	}
 
 	void DXVertexShader::Bind()
 	{
-		GetContext()->VSSetShader(vertexShader.Get(), nullptr, 0);
+		GetContext()->VSSetShader(vertex_shader_.Get(), nullptr, 0);
 	}
 }

@@ -39,7 +39,7 @@ namespace TEngine
 	void D3D11Renderer::StartUp()
 	{
 		/*
-		* First get device, context and swapchain
+		* First get device_, context_ and swapchain
 		*/
 
 		DXGI_SWAP_CHAIN_DESC sd = {};
@@ -73,54 +73,54 @@ namespace TEngine
 			0,
 			D3D11_SDK_VERSION,
 			&sd,
-			&swapChain,
-			&device,
+			&swap_chain_,
+			&device_,
 			nullptr,
-			&context
+			&context_
 		));
 
 		/*
 		* Get the render target
 		*/
 
-		wrl::ComPtr<ID3D11Resource> backBuffer;
-		THROW_IF_FAIL(swapChain->GetBuffer(0, __uuidof(ID3D11Resource), &backBuffer));
-		THROW_IF_FAIL(device->CreateRenderTargetView(backBuffer.Get(), nullptr, &renderTarget));
+		wrl::ComPtr<ID3D11Resource> back_buffer;
+		THROW_IF_FAIL(swap_chain_->GetBuffer(0, __uuidof(ID3D11Resource), &back_buffer));
+		THROW_IF_FAIL(device_->CreateRenderTargetView(back_buffer.Get(), nullptr, &render_target_));
 
 		/*
 		* Setup Z-Buffering
 		*/
 
-		D3D11_DEPTH_STENCIL_DESC dDesc = {};
-		dDesc.DepthEnable = TRUE;
-		dDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-		dDesc.DepthFunc = D3D11_COMPARISON_LESS;
+		D3D11_DEPTH_STENCIL_DESC depth_stencil_desc = {};
+		depth_stencil_desc.DepthEnable = TRUE;
+		depth_stencil_desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+		depth_stencil_desc.DepthFunc = D3D11_COMPARISON_LESS;
 
-		wrl::ComPtr<ID3D11DepthStencilState> dsState;
-		THROW_IF_FAIL(device->CreateDepthStencilState(&dDesc, &dsState));
-		context->OMSetDepthStencilState(dsState.Get(), 1);
+		wrl::ComPtr<ID3D11DepthStencilState> depth_stencil_state;
+		THROW_IF_FAIL(device_->CreateDepthStencilState(&depth_stencil_desc, &depth_stencil_state));
+		context_->OMSetDepthStencilState(depth_stencil_state.Get(), 1);
 		
-		wrl::ComPtr<ID3D11Texture2D> depthStencilTex;
-		D3D11_TEXTURE2D_DESC dTexDesc = {};
-		dTexDesc.Width = WindowsOS::Get().GetWidth();
-		dTexDesc.Height = WindowsOS::Get().GetHeight();
-		dTexDesc.MipLevels = 1;
-		dTexDesc.ArraySize = 1;
-		dTexDesc.Format = DXGI_FORMAT_D32_FLOAT;
-		dTexDesc.SampleDesc.Count = 1;
-		dTexDesc.SampleDesc.Quality = 0;
-		dTexDesc.Usage = D3D11_USAGE_DEFAULT;
-		dTexDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-		THROW_IF_FAIL(device->CreateTexture2D(&dTexDesc, nullptr, &depthStencilTex));
+		wrl::ComPtr<ID3D11Texture2D> depth_stencil_tex;
+		D3D11_TEXTURE2D_DESC tex_desc = {};
+		tex_desc.Width = WindowsOS::Get().GetWidth();
+		tex_desc.Height = WindowsOS::Get().GetHeight();
+		tex_desc.MipLevels = 1;
+		tex_desc.ArraySize = 1;
+		tex_desc.Format = DXGI_FORMAT_D32_FLOAT;
+		tex_desc.SampleDesc.Count = 1;
+		tex_desc.SampleDesc.Quality = 0;
+		tex_desc.Usage = D3D11_USAGE_DEFAULT;
+		tex_desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+		THROW_IF_FAIL(device_->CreateTexture2D(&tex_desc, nullptr, &depth_stencil_tex));
 
-		D3D11_DEPTH_STENCIL_VIEW_DESC dDSV = {};
-		dDSV.Format = DXGI_FORMAT_D32_FLOAT;
-		dDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
-		dDSV.Texture2D.MipSlice = 0;
-		THROW_IF_FAIL(device->CreateDepthStencilView(depthStencilTex.Get(), &dDSV, &depthStencilView));
+		D3D11_DEPTH_STENCIL_VIEW_DESC ds_view_desc = {};
+		ds_view_desc.Format = DXGI_FORMAT_D32_FLOAT;
+		ds_view_desc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+		ds_view_desc.Texture2D.MipSlice = 0;
+		THROW_IF_FAIL(device_->CreateDepthStencilView(depth_stencil_tex.Get(), &ds_view_desc, &depth_stencil_view_));
 		
-		context->OMSetRenderTargets(1, renderTarget.GetAddressOf(), depthStencilView.Get());
-		//context->OMSetRenderTargets(1, renderTarget.GetAddressOf(), nullptr);
+		context_->OMSetRenderTargets(1, render_target_.GetAddressOf(), depth_stencil_view_.Get());
+		//context_->OMSetRenderTargets(1, render_target_.GetAddressOf(), nullptr);
 
 		D3D11_VIEWPORT vp;
 		vp.Width = (FLOAT)WindowsOS::Get().GetWidth();
@@ -129,11 +129,11 @@ namespace TEngine
 		vp.MinDepth = 0;
 		vp.TopLeftX = 0;
 		vp.TopLeftY = 0;
-		context->RSSetViewports(1, &vp);
+		context_->RSSetViewports(1, &vp);
 
-		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		context_->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		// Set up rasterizer state
+		// Set kUp rasterizer_ state
 		D3D11_RASTERIZER_DESC rd = {};
 		rd.FillMode = D3D11_FILL_SOLID;
 		rd.CullMode = D3D11_CULL_BACK;
@@ -146,9 +146,9 @@ namespace TEngine
 		rd.MultisampleEnable = FALSE;
 		rd.AntialiasedLineEnable = FALSE;
 
-		THROW_IF_FAIL(device->CreateRasterizerState(&rd, &rasterizer));
+		THROW_IF_FAIL(device_->CreateRasterizerState(&rd, &rasterizer_));
 
-		context->RSSetState(rasterizer.Get());
+		context_->RSSetState(rasterizer_.Get());
 
 		DXSampler sampler(*this);
 		sampler.Bind();
@@ -164,39 +164,39 @@ namespace TEngine
 		blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
 		blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 		blendDesc.RenderTarget[0].RenderTargetWriteMask = 0x0f;
-		device->CreateBlendState(&blendDesc, &blendState);
+		device_->CreateBlendState(&blendDesc, &blendState);
 
-		context->OMSetBlendState(blendState, NULL, 0xFFFFFFFF);
+		context_->OMSetBlendState(blendState, NULL, 0xFFFFFFFF);
 
 		//--------------
-		WorldSystem& worldSys = Engine::Get().GetWorldSys();
-		World* world = worldSys.GetCurrentWorld();
+		WorldSystem& world_sys = Engine::Get().GetWorldSys();
+		World* world = world_sys.GetCurrentWorld();
 
 		world->GetEntities().ForEach<Transform, MeshComponent>(
 			[this](Transform* t, MeshComponent* m)
 			{
-				m->meshInstance = new DXMeshInstance(*this, m->mesh);
+				m->mesh_instance = new DXMeshInstance(*this, m->mesh);
 			}
 		);
 	}
 
-	void D3D11Renderer::Render(float32 deltaTime)
+	void D3D11Renderer::Render(F32 deltaTime)
 	{
-		WorldSystem& worldSys = Engine::Get().GetWorldSys();
-		World* world = worldSys.GetCurrentWorld();
+		WorldSystem& world_sys = Engine::Get().GetWorldSys();
+		World* world = world_sys.GetCurrentWorld();
 
 		Camera& cam = world->GetEntities().GetComponent<Camera>(world->GetMainCameraEnt());
-		Transform& camTransform = world->GetEntities().GetComponent<Transform>(world->GetMainCameraEnt());
+		Transform& cam_transform = world->GetEntities().GetComponent<Transform>(world->GetMainCameraEnt());
 
 		/*
-		*  Setup shaders, input layout and viewport
+		*  Setup shaders, input_ layout and viewport
 		*/
 
-		DXVertexShader vertexShader(*this, L"VertexShader.cso");
-		vertexShader.Bind();
+		DXVertexShader vertex_shader(*this, L"VertexShader.cso");
+		vertex_shader.Bind();
 
-		DXPixelShader pixelShader(*this, L"PixelShader.cso");
-		pixelShader.Bind();
+		DXPixelShader pixel_shader(*this, L"PixelShader.cso");
+		pixel_shader.Bind();
 
 		// Create Input layout
 
@@ -207,8 +207,8 @@ namespace TEngine
 			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24u, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 		};
 
-		DXInputLayout inputLayout(*this, ed, (UINT)3, vertexShader.GetBlob());
-		inputLayout.Bind();
+		DXInputLayout input_layout(*this, ed, (UINT)3, vertex_shader.GetBlob());
+		input_layout.Bind();
 
 		struct CBuf
 		{
@@ -218,23 +218,23 @@ namespace TEngine
 		};
 
 		CBuf cb = {};
-		cb.view = Matrix4::ModelToWorld(camTransform.position, camTransform.scale, camTransform.rotation).Inverse().Transpose();
-		cb.proj = Matrix4::Projection(cam.FOV, cam.aspect, cam.farDist, cam.nearDist).Transpose();
+		cb.view = Matrix4::ModelToWorld(cam_transform.position, cam_transform.scale, cam_transform.rotation).Inverse().Transpose();
+		cb.proj = Matrix4::Projection(cam.fov, cam.aspect, cam.far_dist, cam.near_dist).Transpose();
 
 		std::stringstream ss;
-		ss << "Cam Position: " << camTransform.position.ToString() << "\n";
+		ss << "Cam Position: " << cam_transform.position.ToString() << "\n";
 		OutputDebugString(ss.str().c_str());
 
-		DXVSConstantBuffer<CBuf> constBuffer(*this, cb);
-		constBuffer.Bind();
+		DXVSConstantBuffer<CBuf> const_buffer(*this, cb);
+		const_buffer.Bind();
 
 		world->GetEntities().ForEach<Transform, MeshComponent>(
-			[this, &constBuffer, &cb](Transform* t, MeshComponent* m)
+			[this, &const_buffer, &cb](Transform* t, MeshComponent* m)
 			{
 				cb.model = Matrix4::ModelToWorld(t->position, t->scale, t->rotation).Transpose();
-				constBuffer.Update(cb);
+				const_buffer.Update(cb);
 
-				m->meshInstance->Draw();
+				m->mesh_instance->Draw();
 			}
 		);
 	}
@@ -242,28 +242,28 @@ namespace TEngine
 	void D3D11Renderer::ClearBuffer(float r, float g, float b)
 	{
 		const float color[] = { r, g, b, 1.f };
-		context->ClearRenderTargetView(renderTarget.Get(), color);
-		context->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.f, 0);
+		context_->ClearRenderTargetView(render_target_.Get(), color);
+		context_->ClearDepthStencilView(depth_stencil_view_.Get(), D3D11_CLEAR_DEPTH, 1.f, 0);
 	}
 
 	void D3D11Renderer::DrawIndexed(int count)
 	{
-		context->DrawIndexed(count, 0, 0);
+		context_->DrawIndexed(count, 0, 0);
 	}
 
 	void D3D11Renderer::Draw(int count)
 	{
-		context->Draw(count, 0);
+		context_->Draw(count, 0);
 	}
 
 	void D3D11Renderer::Present()
 	{
 		HRESULT hr;
-		if (FAILED(hr = swapChain->Present(0, 0)))
+		if (FAILED(hr = swap_chain_->Present(0, 0)))
 		{
 			if (hr == DXGI_ERROR_DEVICE_REMOVED)
 			{
-				throw DEVICE_REMOVED_EXCEPT(device->GetDeviceRemovedReason(), hr);
+				throw DEVICE_REMOVED_EXCEPT(device_->GetDeviceRemovedReason(), hr);
 			}
 			else 
 			{
@@ -282,12 +282,12 @@ namespace TEngine
 	}
 
 	HrD3D11Exception::HrD3D11Exception(HRESULT hr, const char* file, int line) noexcept
-		: hr(hr), D3D11Exception("HRESULT FAILED", file, line)
+		: hr_(hr), D3D11Exception("HRESULT FAILED", file, line)
 	{
 	}
 
 	DeviceRemovedException::DeviceRemovedException(HRESULT reason, HRESULT hr, const char* file, int line) noexcept
-		: reason(reason), HrD3D11Exception(hr, file, line)
+		: reason_(reason), HrD3D11Exception(hr, file, line)
 	{
 	}
 }

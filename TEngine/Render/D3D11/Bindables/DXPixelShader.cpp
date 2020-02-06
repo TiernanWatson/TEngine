@@ -8,14 +8,14 @@ namespace TEngine
 	{
 		HRESULT hr;
 		THROW_IF_FAIL(GetDevice()->CreatePixelShader(
-			blob->GetBufferPointer(),
-			blob->GetBufferSize(),
+			blob_->GetBufferPointer(),
+			blob_->GetBufferSize(),
 			nullptr,
-			&pixelShader));
+			&pixel_shader_));
 	}
 
 	void DXPixelShader::Bind()
 	{
-		GetContext()->PSSetShader(pixelShader.Get(), nullptr, 0);
+		GetContext()->PSSetShader(pixel_shader_.Get(), nullptr, 0);
 	}
 }

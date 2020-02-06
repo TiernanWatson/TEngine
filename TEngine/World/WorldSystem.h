@@ -9,13 +9,13 @@ namespace TEngine
 	{
 	public:
 		void StartUp();
-		void Update(float32 deltaTime);
-		void FixedUpdate(float32 timeStep);
+		void Update(F32 delta_time);
+		void FixedUpdate(F32 time_step);
 		void ShutDown();
 
 		World* GetCurrentWorld() const;
 
 	private:
-		World* currentWorld;
+		World* current_world_;
 	};
 }

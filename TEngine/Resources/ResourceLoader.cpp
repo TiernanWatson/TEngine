@@ -4,18 +4,18 @@
 namespace TEngine
 {
 	ResourceLoader::ResourceLoader()
-		: texImporter(100), modelImporter(100)
+		: tex_importer_(100), model_importer_(100)
 	{
 	}
 
 	Texture& ResourceLoader::GetTexture(const std::string& name, bool useCache)
 	{
-		return texImporter.Load(name, useCache);
+		return tex_importer_.Load(name, useCache);
 	}
 
 	Model& ResourceLoader::GetModel(const std::string& path, bool useCache)
 	{
-		return modelImporter.Load(path, useCache);
+		return model_importer_.Load(path, useCache);
 	}
 
 	ResourceLoader& ResourceLoader::Instance()

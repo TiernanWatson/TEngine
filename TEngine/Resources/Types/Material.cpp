@@ -3,32 +3,32 @@
 namespace TEngine
 {
 	Material::Material()
-		: diffuse(nullptr), specular(nullptr), normal(nullptr), height(nullptr)
+		: diffuse_(nullptr), specular_(nullptr), normal_(nullptr), height_(nullptr)
 	{
 	}
 
-	Material::Material(Texture* diffuse, Texture* specular, Texture* normal, Texture* height, uint32 rId, std::string path)
-		: diffuse(diffuse), specular(specular), normal(normal), height(height), Resource(rId, path)
+	Material::Material(Texture* diffuse, Texture* specular, Texture* normal, Texture* height, U32 rId, std::string path)
+		: diffuse_(diffuse), specular_(specular), normal_(normal), height_(height), Resource(rId, path)
 	{
 	}
 
 	Texture* Material::GetDiffuse() const
 	{
-		return diffuse;
+		return diffuse_;
 	}
 
 	Texture* Material::GetSpecular() const
 	{
-		return specular;
+		return specular_;
 	}
 	
 	Texture* Material::GetNormal() const
 	{
-		return normal;
+		return normal_;
 	}
 
 	Texture* Material::GetHeight() const
 	{
-		return height;
+		return height_;
 	}
 }

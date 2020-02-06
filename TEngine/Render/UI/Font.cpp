@@ -7,13 +7,13 @@
 namespace TEngine
 {
 	Font::Font(std::string name, std::string file)
-		: file(file), name(name)
+		: file_(file), name_(name)
 	{
 	}
 
 	Character Font::GetCharacter(char c) const
 	{
-		return characterMap.at(c);
+		return character_map_.at(c);
 	}
 
 	void Font::Load()
@@ -23,13 +23,13 @@ namespace TEngine
 			throw std::exception("FONT::Load: Could not init FreeType Library");
 
 		FT_Face face;
-		if (FT_New_Face(ft, file.c_str(), 0, &face))
-			throw std::exception("Font::Load: Failed to load font");
+		if (FT_New_Face(ft, file_.c_str(), 0, &face))
+			throw std::exception("Font::Load: Failed to load font_");
 
 		FT_Set_Pixel_Sizes(face, 0, 12);
 
 		// Load in the ASCII set
-		for (uint8 c = 0; c < 128; c++)
+		for (U8 c = 0; c < 128; c++)
 		{
 			if (FT_Load_Char(face, c, FT_LOAD_RENDER))
 			{
@@ -38,7 +38,7 @@ namespace TEngine
 			}
 
 			std::stringstream ss;
-			ss << "Creating Font Tex for: " << (char)c << "("<<(int)c<<")" << " with width: " << face->glyph->bitmap.width << "\n";
+			ss << "Creating Font Tex for: " << (char)c << "("<<(int)c<<")" << " with width_: " << face->glyph->bitmap.width << "\n";
 			OutputDebugString(ss.str().c_str());
 
 			Texture* tex = new Texture(
@@ -52,10 +52,10 @@ namespace TEngine
 			);
 
 			/*Texture tex(
-				face->glyph->bitmap.width,
+				face->glyph->bitmap.width_,
 				face->glyph->bitmap.rows,
 				TexFormat::R,
-				TexType::diffuse,
+				TexType::diffuse_,
 				face->glyph->bitmap.buffer,
 				0,
 				""
@@ -68,29 +68,29 @@ namespace TEngine
 				Vector2Int(face->glyph->bitmap.width, face->glyph->bitmap.rows)
 			};
 
-			characterMap[c] = character;
+			character_map_[c] = character;
 		}
 
 		FT_Done_Face(face);
 		FT_Done_FreeType(ft);
 
-		isLoaded = true;
+		is_loaded_ = true;
 	}
 
 	std::string Font::GetFilePath() const
 	{
-		return file;
+		return file_;
 	}
 
 	std::string Font::GetName() const
 	{
-		return name;
+		return name_;
 	}
 
 	Font* Font::GetDefaultFont()
 	{
 		static Font f("Lucida Consoles", "D:\\TEngine\\TEngine\\Resources\\Fonts\\lucon.ttf");
-		if (!f.isLoaded) f.Load();
+		if (!f.is_loaded_) f.Load();
 
 		return &f;
 	}

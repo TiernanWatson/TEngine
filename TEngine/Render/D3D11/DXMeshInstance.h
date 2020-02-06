@@ -17,12 +17,12 @@ namespace TEngine
 		void Draw();
 
 	private:
-		DXVertexBuffer vertexBuffer;
-		DXIndexBuffer indexBuffer;
-		DXTexture texture;
+		DXVertexBuffer vertex_buffer_;
+		DXIndexBuffer index_buffer_;
+		DXTexture texture_;
 
-		int indexCount;
+		int index_count_;
 		
-		D3D11Renderer& renderer;
+		D3D11Renderer& renderer_;
 	};
 }

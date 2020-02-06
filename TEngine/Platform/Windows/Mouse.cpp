@@ -5,22 +5,22 @@ namespace TEngine
 {
 	void Mouse::OnLeftDown(int x, int y) noexcept
 	{
-		isLeftPressed = true;
+		is_left_pressed_ = true;
 	}
 
 	void Mouse::OnLeftUp(int x, int y) noexcept
 	{
-		isLeftPressed = false;
+		is_left_pressed_ = false;
 	}
 
 	void Mouse::OnRightDown(int x, int y) noexcept
 	{
-		isRightPressed = true;
+		is_right_pressed_ = true;
 	}
 
 	void Mouse::OnRightUp(int x, int y) noexcept
 	{
-		isRightPressed = false;
+		is_right_pressed_ = false;
 	}
 
 	void Mouse::OnMouseMove(int x, int y) noexcept

@@ -23,7 +23,7 @@ namespace TEngineTests
 			PoolAllocator pool(8, 10);
 			void* ptr1 = pool.Alloc();
 			void* ptr2 = pool.Alloc();
-			int diff = (uintptr)ptr2 - (uintptr)ptr1;
+			int diff = (UPTR)ptr2 - (UPTR)ptr1;
 			Assert::AreEqual(diff, 8);
 		}
 	};

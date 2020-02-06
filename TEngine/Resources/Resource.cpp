@@ -3,22 +3,22 @@
 namespace TEngine
 {
 	Resource::Resource()
-		: rId(0), path("")
+		: r_id_(0), path_("")
 	{
 	}
 	
-	Resource::Resource(uint32 rId, std::string path)
-		: rId(rId), path(path)
+	Resource::Resource(U32 rId, std::string path)
+		: r_id_(rId), path_(path)
 	{
 	}
 
-	uint32 Resource::GetId() const
+	U32 Resource::GetId() const
 	{
-		return rId;
+		return r_id_;
 	}
 
 	std::string Resource::GetPath() const
 	{
-		return path;
+		return path_;
 	}
 }

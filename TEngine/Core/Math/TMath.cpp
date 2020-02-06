@@ -4,10 +4,10 @@
 
 namespace TEngine
 {
-	const float32 TMath::PI = float(M_PI);
-	const float32 TMath::PI_2 = float(M_PI_2);
-	const float32 TMath::PI_4 = float(M_PI_4);
-	const float32 TMath::EPSILON = FLT_EPSILON;
-	const float32 TMath::DEG2RAD = TMath::PI / 180.f;
-	const float32 TMath::RAD2DEG = 180.f / TMath::PI;
+	const F32 TMath::kPi = float(M_PI);
+	const F32 TMath::kPi_2 = float(M_PI_2);
+	const F32 TMath::kPi_4 = float(M_PI_4);
+	const F32 TMath::kEpsilon = FLT_EPSILON;
+	const F32 TMath::kDeg2Rad = TMath::kPi / 180.f;
+	const F32 TMath::kRad2Deg = 180.f / TMath::kPi;
 }

@@ -23,28 +23,28 @@ namespace TEngine
 	public:
 		Texture();
 		Texture(
-			uint32 width,
-			uint32 height,
+			U32 width,
+			U32 height,
 			TexFormat format,
 			TexType type,
 			unsigned char* data,
-			uint32 rId,
+			U32 r_id,
 			std::string path
 		);
 
 		TexType GetType() const;
 		TexFormat GetFormat() const;
-		uint32 GetWidth() const;
-		uint32 GetHeight() const;
+		U32 GetWidth() const;
+		U32 GetHeight() const;
 		unsigned char* GetDataPtr() const;
 
 		void SetType(TexType type);
 
 	protected:
-		TexType type;
-		TexFormat format;
-		uint32 width;
-		uint32 height;
-		unsigned char* data;
+		TexType type_;
+		TexFormat format_;
+		U32 width_;
+		U32 height_;
+		unsigned char* data_;
 	};
 }

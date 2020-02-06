@@ -10,14 +10,14 @@ namespace TEngine
 	class Vector4
 	{
 	public:
-		float32 x, y, z, w;
+		F32 x, y, z, w;
 
 	public:
 		Vector4() : x(0), y(0), z(0), w(0) {};
-		Vector4(float32 x, float32 y, float32 z, float32 w) : x(x), y(y), z(z), w(w) {};
+		Vector4(F32 x, F32 y, F32 z, F32 w) : x(x), y(y), z(z), w(w) {};
 
-		float32 Magnitude() const;
-		float32 SqrMagnitude() const;
+		F32 Magnitude() const;
+		F32 SqrMagnitude() const;
 
 		void Normalize();
 		Vector4 Normalized() const;

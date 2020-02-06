@@ -14,6 +14,6 @@ namespace TEngine
 		ID3DBlob* GetBlob() const;
 
 	protected:
-		wrl::ComPtr<ID3DBlob> blob;
+		wrl::ComPtr<ID3DBlob> blob_;
 	};
 }
