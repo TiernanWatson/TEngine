@@ -10,7 +10,11 @@ namespace TEngine
 	{
 	public:
 		PoolAllocator() = delete;
-		explicit PoolAllocator(maxint blockSize, maxint maxElements);
+		explicit PoolAllocator(maxint blockSize, 
+							maxint maxElements,
+							void* (*alloc)(maxint) = malloc);
+		PoolAllocator(const PoolAllocator&) = delete;
+		PoolAllocator& operator=(const PoolAllocator&) = delete;
 		~PoolAllocator();
 
 		void* Alloc();
@@ -19,7 +23,6 @@ namespace TEngine
 	private:
 		struct Block {
 			Block* next;
-			Block(Block* next) : next(next) {}
 		};
 
 		maxint blockSize;

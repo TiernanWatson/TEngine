@@ -5,21 +5,23 @@
 
 namespace TEngine
 {
-	PoolAllocator::PoolAllocator(maxint blockSize, maxint maxElements)
+	PoolAllocator::PoolAllocator(maxint blockSize, 
+								maxint maxElements,
+								void* (*alloc)(maxint))
 		: blockSize(blockSize), maxElements(maxElements)
 	{
-		assert(blockSize > sizeof(Block));
+		assert(blockSize >= sizeof(Block));
 		assert(maxElements >= 1);
 
-		top = malloc(blockSize * maxElements);
+		top = alloc(blockSize * maxElements);
 
 		// Init all the blocks
-		freeBlock = new (top) Block(nullptr);
+		freeBlock = new (top) Block{ nullptr };
 		Block* currentBlock = freeBlock;
 		for (int i = 1; i < maxElements; i++) 
 		{
-			uintptr nextAddress = reinterpret_cast<uintptr>(currentBlock) + blockSize;
-			Block* nextBlock = new (reinterpret_cast<void*>(nextAddress)) Block(nullptr);
+			void* nextAddress = (void*)((uintptr)currentBlock + blockSize);
+			Block* nextBlock = new (nextAddress) Block{ nullptr };
 			currentBlock->next = nextBlock;
 			currentBlock = nextBlock;
 		}
@@ -32,7 +34,7 @@ namespace TEngine
 
 	void* PoolAllocator::Alloc()
 	{
-		if (freeBlock->next == nullptr)
+		if (freeBlock == nullptr)
 			throw std::out_of_range("PoolAllocator::Alloc: No more free memory blocks left.");
 
 		void* alloc = freeBlock;
@@ -43,7 +45,7 @@ namespace TEngine
 
 	void PoolAllocator::Free(void* address)
 	{
-		Block* newBlock = new (address) Block(freeBlock);
+		Block* newBlock = new (address) Block{ freeBlock };
 		freeBlock = newBlock;
 	}
 }
