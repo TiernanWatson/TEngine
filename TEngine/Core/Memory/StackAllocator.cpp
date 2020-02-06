@@ -6,46 +6,47 @@
 
 namespace TEngine
 {
-	StackAllocator::StackAllocator(maxint stackSizeInBytes)
-		: stackSizeInBytes(stackSizeInBytes)
+	StackAllocator::StackAllocator(maxint size, void* (*alloc)(maxint))
+		: stackSize(size), basePtr(alloc(size)), stackPointer(basePtr)
 	{
-		topRawPtr = malloc(stackSizeInBytes);
-		topPtr = reinterpret_cast<uintptr>(topRawPtr);
 	}
 
 	StackAllocator::~StackAllocator()
 	{
-		free(topRawPtr);
+		free(basePtr);
 	}
 
-	void* StackAllocator::Alloc(maxint sizeInBytes, uint8 alignment)
+	void* StackAllocator::Alloc(maxint size, uint8 alignment)
 	{
-		assert((alignment & (alignment - 1)) == 0);
+		assert((alignment & (alignment - 1)) == 0); // Should be power of 2
 
-		uintptr testAddress = topPtr + currentMarker;
-		uintptr misalign = testAddress & (alignment - 1); // check for 1's to right of power of 2
+		uintptr testAddress = (uintptr)stackPointer;
+		uintptr misalign = testAddress & (alignment - 1);
 		ptrdiff correction = alignment - misalign;
 
-		correction = correction & (alignment - 1); // stops skipping block if misalign = 0
+		correction = correction & (alignment - 1); // Stops skipping block if misalign = 0
 
-		maxint newMarker = currentMarker + correction + sizeInBytes;
+		uintptr payload = testAddress + correction;
 
-		if (newMarker > topPtr + stackSizeInBytes)
+		uintptr newMarker = payload + size;
+
+		if (newMarker > (uintptr)basePtr + stackSize)
 			throw std::overflow_error("StackAllocator::Alloc not enough memory to allocate");
 
-		currentMarker = newMarker;
+		stackPointer = (void*)newMarker;
 		
-		uintptr alignedAddress = testAddress + correction;
-		return reinterpret_cast<void*>(alignedAddress);
+		return (void*)payload;
 	}
 
-	void StackAllocator::FreeUpTo(maxint marker)
+	void StackAllocator::Free(void* ptr)
 	{
-		currentMarker = marker;
+		assert(ptr > basePtr && ptr < stackPointer);
+
+		stackPointer = ptr;
 	}
 
 	void StackAllocator::Clear()
 	{
-		currentMarker = 0;
+		stackPointer = nullptr;
 	}
 }

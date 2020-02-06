@@ -10,39 +10,36 @@ namespace TEngine
 	{
 	public:
 		StackAllocator() = delete;
-		explicit StackAllocator(maxint stackSizeInBytes);
+		explicit StackAllocator(maxint size, void* (*alloc)(maxint) = malloc);
+		StackAllocator(const StackAllocator&) = delete;
+		StackAllocator& operator=(const StackAllocator&) = delete;
 		~StackAllocator();
 
 		template<typename T, typename ...Args>
-		T* NewOnStack(Args... args);
+		inline T* NewOnStack(Args... args);
 
-		void* Alloc(maxint sizeInBytes, uint8 alignment);
+		/*
+		* Allocates 'size' bytes with specified alignment at top of stack
+		*/
+		void* Alloc(maxint size, uint8 alignment);
 
-		maxint GetMarker() const { return currentMarker; }
-
-		void FreeUpTo(maxint marker);
+		/*
+		* Frees down to (and including) ptr from the stack
+		*/
+		void Free(void* ptr);
 
 		void Clear();
 
 	private:
-		// Maximum maxint of the stack
-		maxint stackSizeInBytes;
-
-		// Where the stack starts - doesn't change
-		uintptr topPtr;
-
-		// C style pointer used for clean up
-		void* topRawPtr;
-
-		// Relative to the stack, how many size in are we?
-		maxint currentMarker = 0;
+		maxint stackSize;
+		void* basePtr;
+		void* stackPointer;
 	};
 
 	template<typename T, typename ...Args>
 	inline T* StackAllocator::NewOnStack(Args ...args)
 	{
 		void* p = Alloc(sizeof(T), alignof(T));
-
 		return new (T) (args...);
 	}
 }
