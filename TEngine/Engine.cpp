@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include "Core/Config/Config.h"
 #include "Render/D3D11/D3D11Renderer.h"
+#include "Core/Memory/Memory.h"
 #ifdef _DEBUG
 #include "Helpers/DebugUIRenderer.h"
 #endif
@@ -16,10 +17,10 @@ namespace TEngine
 	Engine* Engine::instance_ = nullptr;
 
 	Engine::Engine() 
-		: systems_stack_(SYS_STACK_SIZE)
+		: systems_stack_(SYS_STACK_SIZE, Memory::Malloc)
 	{
-		max_fixed_steps_ = CONFIG_INT32("Loop", "max_fixed_steps", ConfigVar("8"));
-		fixed_time_step_ = CONFIG_FLOAT32("Loop", "fixed_time_step", ConfigVar("0.02"));
+		max_fixed_steps_ = CONFIG_INT32("Loop", "max_fixed_steps_", ConfigVar("8"));
+		fixed_time_step_ = CONFIG_FLOAT32("Loop", "fixed_time_step_", ConfigVar("0.02"));
 
 		input_system_ = systems_stack_.NewOnStack<InputSystem>();
 		world_system_ = systems_stack_.NewOnStack<WorldSystem>();
@@ -86,32 +87,31 @@ namespace TEngine
 
 		accumulated_time_ += game_clock_.GetDeltaTime();
 
-		// If game lags, make sure fixed update catches kUp
-		U8 stepCount = 0;
-		while (accumulated_time_ >= fixed_time_step_ && stepCount <= max_fixed_steps_) 
+		U8 step_count = 0;
+		while (accumulated_time_ >= fixed_time_step_ && step_count <= max_fixed_steps_) 
 		{
 			accumulated_time_ -= fixed_time_step_;
 			FixedUpdate(fixed_time_step_);
-			stepCount++;
+			step_count++;
 		}
 
 		VariableUpdate((F32)game_clock_.GetDeltaTime());
 	}
 
-	void Engine::FixedUpdate(const F32 timeStep)
+	void Engine::FixedUpdate(const F32 time_step)
 	{
-		world_system_->FixedUpdate(timeStep);
+		world_system_->FixedUpdate(time_step);
 	}
 
-	void Engine::VariableUpdate(const F32 deltaTime)
+	void Engine::VariableUpdate(const F32 delta_time)
 	{
 		input_system_->Update();
-		world_system_->Update(deltaTime);
+		world_system_->Update(delta_time);
 
 		renderer_->ClearBuffer(0.f, 0.f, 0.f);
-		renderer_->Render(deltaTime);
+		renderer_->Render(delta_time);
 #ifdef _DEBUG
-		debug_renderer_->VariableUpdate(deltaTime);
+		debug_renderer_->VariableUpdate(delta_time);
 #endif
 		renderer_->Present();
 	}

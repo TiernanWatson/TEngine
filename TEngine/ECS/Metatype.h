@@ -15,10 +15,6 @@ namespace TEngine
 		USIZE size;
 		U8 align;
 
-#if _DEBUG
-		std::string name;
-#endif
-
 		std::function<void(void*)> construct;
 		std::function<void(void*)> destruct;
 
@@ -49,10 +45,6 @@ namespace TEngine
 		t.copy = [](void* dest, void* src) {
 			memcpy(dest, src, sizeof(T));
 		};
-
-#if _DEBUG
-		t.name = info.name();
-#endif
 
 		return t;
 	}

@@ -163,6 +163,12 @@
     <Filter Include="Source Files\Render\D3D11\Bindables">
       <UniqueIdentifier>{85e2539d-a3ff-4887-b8c4-280667d3e3eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\DataStructures">
+      <UniqueIdentifier>{d356ba39-657f-42e3-a596-2d1c8fa4b557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\DataStructures">
+      <UniqueIdentifier>{393a68c0-8172-460f-943e-f7733abe4639}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Memory\StackAllocator.cpp">
@@ -288,9 +294,6 @@
     <ClCompile Include="Render\D3D11\D3D11Renderer.cpp">
       <Filter>Source Files\Render\D3D11</Filter>
     </ClCompile>
-    <ClCompile Include="Engine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Render\OpenGL\GLMeshInstance.cpp">
       <Filter>Source Files\Render\OpenGL</Filter>
     </ClCompile>
@@ -361,6 +364,15 @@
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
     <ClCompile Include="Core\Memory\HeapAllocator.cpp">
+      <Filter>Source Files\Core\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\DataStructures\ArrayChain.cpp">
+      <Filter>Source Files\Core\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Memory\RBTree.cpp">
       <Filter>Source Files\Core\Memory</Filter>
     </ClCompile>
   </ItemGroup>
@@ -588,6 +600,12 @@
       <Filter>Header Files\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Core\Memory\HeapAllocator.h">
+      <Filter>Header Files\Core\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\DataStructures\ArrayChain.h">
+      <Filter>Header Files\Core\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Memory\RBTree.h">
       <Filter>Header Files\Core\Memory</Filter>
     </ClInclude>
   </ItemGroup>

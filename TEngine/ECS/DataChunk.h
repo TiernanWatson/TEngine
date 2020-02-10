@@ -4,16 +4,16 @@
 
 namespace TEngine
 {
-	constexpr U32 kMem16kBytes = 16384;
+	constexpr USIZE kChunkDataSize = 16384;  // 16kB
 
 	/**
 	* A chunk of memory allocated to store a single archetype
 	**/
 	struct DataChunk
 	{
-		U8 data[kMem16kBytes];
+		U8 data[kChunkDataSize];
+		USIZE last_index = 0;
 		Archetype* archetype = nullptr;
 		DataChunk* next = nullptr;
-		USIZE last_index = 0;
 	};
 }

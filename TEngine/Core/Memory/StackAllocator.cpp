@@ -13,7 +13,7 @@ namespace TEngine
 
 	StackAllocator::~StackAllocator()
 	{
-		free(base_ptr_);
+		//free(base_ptr_);
 	}
 
 	void* StackAllocator::Alloc(USIZE size, U8 alignment)

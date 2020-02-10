@@ -40,7 +40,7 @@ namespace TEngine
 
 		main_loop_.ShutDown();
 
-		DestroyWindow(hWnd_);
+		DestroyWindow(hwnd);
 		UnregisterClass(wnd_cls_name_, hInstance_);
 	}
 
@@ -132,7 +132,7 @@ namespace TEngine
 
 		RegisterClass(&wc_);
 
-		hWnd_ = CreateWindowEx(
+		hwnd = CreateWindowEx(
 			0,
 			wnd_cls_name_,
 			CONFIG_STRING("Window", "title", ConfigVar("Odyssey Engine")).c_str(),
@@ -145,18 +145,18 @@ namespace TEngine
 			NULL  // Additional application data_
 		);
 
-		if (!hWnd_)
+		if (!hwnd)
 		{
 			throw EXCEPTION("Failed to initialize window!");
 		}
 
-		ShowWindow(hWnd_, nCmdShow_);
+		ShowWindow(hwnd, nCmdShow_);
 	}
 
 	void WindowsOS::HandleMessages()
 	{
 		MSG msg = { };
-		while (PeekMessage(&msg, hWnd_, 0, 0, PM_REMOVE))
+		while (PeekMessage(&msg, hwnd, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);

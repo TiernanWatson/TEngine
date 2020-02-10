@@ -28,21 +28,18 @@ namespace TEngine
 		Model& model = ResourceLoader::Instance().GetModel("D:\\3D Models\\muro\\muro.obj");
 		for (U32 i = 0; i < 10; i++)
 		{
-			/*for (U32 j = 0; j < 5; j++)
-			{*/
-				for (Mesh* m : model.GetMeshes())
-				{
-					U32 mId = e.NewEntityWith<Transform, MeshComponent>();
+			for (Mesh* m : model.GetMeshes())
+			{
+				U32 mId = e.NewEntityWith<Transform, MeshComponent>();
 
-					Transform& t = e.GetComponent<Transform>(mId);
-					Vector3 dir = (i % 2 == 0) ? Vector3::kRight : Vector3::kLeft;
-					t.position = Vector3::kDown * 1.75f + dir * 2.f /** (F32)j*/ + Vector3::kForward * 2.f * (F32)i;
-					t.scale = Vector3::kOne * 0.02f;
+				Transform& t = e.GetComponent<Transform>(mId);
+				Vector3 dir = (i % 2 == 0) ? Vector3::kRight : Vector3::kLeft;
+				t.position = Vector3::kDown * 1.75f + dir * 2.f + Vector3::kForward * 2.f * (F32)i;
+				t.scale = Vector3::kOne * 0.02f;
 
-					MeshComponent& mc = e.GetComponent<MeshComponent>(mId);
-					mc.mesh = m;
-				}
-			//}
+				MeshComponent& mc = e.GetComponent<MeshComponent>(mId);
+				mc.mesh = m;
+			}
 		}
 
 		// Main Camera
@@ -69,18 +66,18 @@ namespace TEngine
 		p.intensity = 1.f;*/
 	}
 
-	void WorldSystem::Update(F32 deltaTime)
+	void WorldSystem::Update(F32 delta_time)
 	{
 		if (current_world_ == nullptr) return;
 
-		current_world_->Update(deltaTime);
+		current_world_->Update(delta_time);
 	}
 
-	void WorldSystem::FixedUpdate(F32 timeStep)
+	void WorldSystem::FixedUpdate(F32 time_step)
 	{
 		if (current_world_ == nullptr) return;
 
-		current_world_->FixedUpdate(timeStep);
+		current_world_->FixedUpdate(time_step);
 	}
 
 	void WorldSystem::ShutDown()

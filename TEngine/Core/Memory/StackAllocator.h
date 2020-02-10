@@ -18,13 +18,13 @@ namespace TEngine
 		template<typename T, typename ...Args>
 		inline T* NewOnStack(Args... args);
 
-		/*
-		* Allocates 'size_' bytes with specified alignment at top_ of stack
+		/**
+		* Allocates 'payload_size' bytes with specified alignment at top of stack
 		*/
 		void* Alloc(USIZE size, U8 alignment);
 
-		/*
-		* Frees kDown to (and including) ptr from the stack
+		/**
+		* Frees down to (and including) ptr from the stack
 		*/
 		void Free(void* ptr);
 

@@ -7,21 +7,20 @@ namespace TEngine
 	{
 		if (texture == nullptr)
 		{
-			OutputDebugString("Was nullptr\n");
 			return;
 		}
 
 		HRESULT hr;
 
 		TexFormat format = texture->GetFormat();
-		DXGI_FORMAT dxFormat;
+		DXGI_FORMAT dx_format;
 		switch (format)
 		{
 		case TexFormat::R:
-			dxFormat = DXGI_FORMAT_R8_UNORM;
+			dx_format = DXGI_FORMAT_R8_UNORM;
 			break;
 		case TexFormat::RGBA:
-			dxFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
+			dx_format = DXGI_FORMAT_R8G8B8A8_UNORM;
 			break;
 		default:
 			throw EXCEPTION("DXTexture could not use specified TexFormat");
@@ -32,7 +31,7 @@ namespace TEngine
 		texDesc.Height = texture->GetHeight() > 0 ? texture->GetHeight() : 1;
 		texDesc.MipLevels = 1;
 		texDesc.ArraySize = 1;
-		texDesc.Format = dxFormat;
+		texDesc.Format = dx_format;
 		texDesc.SampleDesc.Count = 1;
 		texDesc.SampleDesc.Quality = 0;
 		texDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -56,8 +55,6 @@ namespace TEngine
 		wrl::ComPtr<ID3D11Texture2D> texture2D;
 		if (texture->GetDataPtr() != nullptr) 
 		{
-			OutputDebugString("was NOT null dataptr\n");
-
 			D3D11_SUBRESOURCE_DATA sr = {};
 			sr.pSysMem = texture->GetDataPtr();
 			sr.SysMemPitch = texture->GetWidth() * texelWidth;

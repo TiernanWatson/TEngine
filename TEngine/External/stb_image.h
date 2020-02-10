@@ -1069,7 +1069,7 @@ static void stbi__vertical_flip(void* image, int w, int h, int bytes_per_pixel)
 	for (row = 0; row < (h >> 1); row++) {
 		stbi_uc* row0 = bytes + row * bytes_per_row;
 		stbi_uc* row1 = bytes + (h - row - 1) * bytes_per_row;
-		// swap row0 with row1
+		// Swap row0 with row1
 		size_t bytes_left = bytes_per_row;
 		while (bytes_left) {
 			size_t bytes_copy = (bytes_left < sizeof(temp)) ? bytes_left : sizeof(temp);
@@ -5471,7 +5471,7 @@ static int stbi__tga_info(stbi__context* s, int* x, int* y, int* comp)
 			stbi__rewind(s);
 			return 0;
 		}
-		stbi__skip(s, 4);       // skip index of first colormap entry and number of entries
+		stbi__skip(s, 4);       // skip chunk_index of first colormap entry and number of entries
 		sz = stbi__get8(s);    //   check bits per palette color entry
 		if ((sz != 8) && (sz != 15) && (sz != 16) && (sz != 24) && (sz != 32)) {
 			stbi__rewind(s);
@@ -5532,7 +5532,7 @@ static int stbi__tga_test(stbi__context* s)
 	sz = stbi__get8(s);   //   image type_
 	if (tga_color_type == 1) { // colormapped (paletted) image
 		if (sz != 1 && sz != 9) goto errorEnd; // colortype 1 demands image type_ 1 or 9
-		stbi__skip(s, 4);       // skip index of first colormap entry and number of entries
+		stbi__skip(s, 4);       // skip chunk_index of first colormap entry and number of entries
 		sz = stbi__get8(s);    //   check bits per palette color entry
 		if ((sz != 8) && (sz != 15) && (sz != 16) && (sz != 24) && (sz != 32)) goto errorEnd;
 		stbi__skip(s, 4);       // skip image x and y origin
@@ -5544,7 +5544,7 @@ static int stbi__tga_test(stbi__context* s)
 	if (stbi__get16le(s) < 1) goto errorEnd;      //   test width_
 	if (stbi__get16le(s) < 1) goto errorEnd;      //   test height_
 	sz = stbi__get8(s);   //   bits per pixel
-	if ((tga_color_type == 1) && (sz != 8) && (sz != 16)) goto errorEnd; // for colormapped images, bpp is USIZE of an index
+	if ((tga_color_type == 1) && (sz != 8) && (sz != 16)) goto errorEnd; // for colormapped images, bpp is USIZE of an chunk_index
 	if ((sz != 8) && (sz != 15) && (sz != 16) && (sz != 24) && (sz != 32)) goto errorEnd;
 
 	res = 1; // if we got this far, everything's good and we can return 1 instead of 0
@@ -5695,10 +5695,10 @@ static void* stbi__tga_load(stbi__context* s, int* x, int* y, int* comp, int req
 				//   load however much data_ we did have
 				if (tga_indexed)
 				{
-					// read in index, then perform the lookup
+					// read in chunk_index, then perform the lookup
 					int pal_idx = (tga_bits_per_pixel == 8) ? stbi__get8(s) : stbi__get16le(s);
 					if (pal_idx >= tga_palette_len) {
-						// invalid index
+						// invalid chunk_index
 						pal_idx = 0;
 					}
 					pal_idx *= tga_comp;
@@ -5751,7 +5751,7 @@ static void* stbi__tga_load(stbi__context* s, int* x, int* y, int* comp, int req
 		}
 	}
 
-	// swap RGB - if the source data_ was RGB16, it already is in the kRight order
+	// Swap RGB - if the source data_ was RGB16, it already is in the kRight order
 	if (tga_comp >= 3 && !tga_rgb16)
 	{
 		unsigned char* tga_pixel = tga_data;
@@ -6040,7 +6040,7 @@ static void* stbi__psd_load(stbi__context* s, int* x, int* y, int* comp, int req
 // Softimage PIC loader
 // by Tom Seddon
 //
-// See http://softimage.wiki.softimage.com/index.php/INFO:_PIC_file_format
+// See http://softimage.wiki.softimage.com/chunk_index.php/INFO:_PIC_file_format
 // See http://ozviz.wasp.uwa.edu.au/~pbourke/dataformats/softimagepic/
 
 #ifndef STBI_NO_PIC

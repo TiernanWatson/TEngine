@@ -1,14 +1,9 @@
 #pragma once
 #include "../PortableTypes.h"
+#include "RBTree.h"
 
 namespace TEngine
 {
-	struct AllocHeader
-	{
-		// Lowest bit 1 if allocated
-		USIZE size;
-	};
-
 	/*
 	* Allocates a fixed-size_ of memory on the heap.
 	* Returns arbitrarily-sized memory without context_-switching
@@ -47,14 +42,8 @@ namespace TEngine
 		{
 			HeapHeader* prev;
 			HeapHeader* next;
-			USIZE size;  // Size of block excluding header
-			bool is_free;
+			USIZE payload_size;
 		};
-
-		void* data_;
-		HeapHeader* first_block_;
-		USIZE total_size_;
-		U32 expand_size_;  // TODO: EXPANSION
 
 #ifdef _DEBUG
 		USIZE active_ = 0;
@@ -62,6 +51,17 @@ namespace TEngine
 		USIZE active_size_ = 0;
 #endif
 
-		static constexpr I32 kHeaderSize = sizeof(HeapHeader);
+		void* data_;
+		HeapHeader* first_block_;
+		RBTree* free_tree_;
+
+		USIZE total_size_;
+		USIZE expand_size_;
+
+		RBNode* CreateNewBlock(void* location, USIZE size, HeapHeader* prev, HeapHeader* next);
+
+		static constexpr U32 kHeaderSize = sizeof(HeapHeader);
+		static constexpr U32 kNodeSize = sizeof(RBNode);
+		static constexpr U32 kMinBlockSize = kHeaderSize + kNodeSize;
 	};
 }

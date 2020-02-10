@@ -1,5 +1,7 @@
 #pragma once
 #include "../Core/PortableTypes.h"
+#include "../Core/Exception.h"
+#include "../Core/DataStructures/ArrayChain.h"
 #include "Metatype.h"
 #include "Archetype.h"
 #include "DataChunk.h"
@@ -10,97 +12,57 @@
 
 namespace TEngine
 {
-	/**
-	* Manages entities_ in the world_ - use to add/edit/remove comps/ents
-	**/
+	// Manges archetypes and entities in a world
 	class EntityManager
 	{
 	public:
 		EntityManager();
 		~EntityManager();
 
-		/**
-		* Creates a new entity with no components
-		**/
 		U32 NewEntity();
-
-		/**
-		* Creates an entity with the specified components
-		**/
 		template<typename ...Comps>
 		U32 NewEntityWith();
-
-		/**
-		* Creates an entity with the specified components and instances
-		**/
 		template<typename ...Comps>
 		U32 NewEntityWith(Comps* ...args);
-
-		/**
-		* Removes an entity and its associated components
-		**/
+		
 		void DeleteEntity(U32 id);
 
-		/**
-		* Adds a new component to an entity (warning: will change its archetype)
-		**/
 		template<typename Comp>
 		void AddToEntity(U32 id);
 
-		/**
-		* Applies the supplied function to the archetypes_ containing the specified types
-		**/
 		template<typename ...Comps>
 		void ForEach(std::function<void(Comps*...)> func);
 
-		/**
-		* Gets a reference the component of type_ T for entity index
-		**/
 		template<typename T>
 		T& GetComponent(U32 id) const;
 
 	private:
-		/**
-		* Instantiates an instance_ of an archetype in the next available slot
-		**/
-		void NewArchetypeInstance(Archetype* a, USIZE& out_chunk, USIZE& out_index);
+		void NewArchetypeInstance(Archetype* a, U32 entity_id);
 
-		/**
-		* Gets a component of type_ T from chunk at index index
-		**/
+		// Gets component of type T at index of chunk
 		template<typename T>
 		T* GetComponentChunkId(DataChunk* chunk, USIZE index);
 
-		/**
-		* Returns the archetype that exactly matches the list of metatypes, nullptr if none found
-		**/
 		Archetype* FindArchetype(Metatype* types, USIZE count) const;
 
-		/**
-		* Returns all the archetypes_ that contain the specified metatypes
-		**/
 		std::vector<Archetype*> MatchingArchetypes(Metatype* inc, USIZE count) const;
 
-		/**
-		* Adds a new archetype describing the metatypes and returns a pointer to it
-		**/
 		Archetype* AddArchetype(Metatype* types, USIZE count);
 
 		struct EntityDetails 
 		{
 			Archetype* archetype;
-			USIZE chunk;
-			USIZE index;
+			DataChunk* chunk;
+			USIZE chunk_index;
 		};
 
-		std::vector<Archetype*> archetypes_;
-
+		ArrayChain<Archetype> archetypes_;
 		std::unordered_map<U32, EntityDetails> entity_storage_map_;
-
 		std::queue<U32> unused_id_;
 
 		U32 entity_count_ = 0;
 	};
+
 
 	template<typename ...Comps>
 	inline U32 EntityManager::NewEntityWith()
@@ -111,13 +73,9 @@ namespace TEngine
 		Metatype types[] = { Metatype::Create<Comps>()... };
 
 		Archetype* a = FindArchetype(types, count);
-
 		if (a == nullptr) a = AddArchetype(types, count);
 		
-		USIZE chunk, index;
-		NewArchetypeInstance(a, chunk, index);
-
-		entity_storage_map_[id] = EntityDetails{ a, chunk, index };
+		NewArchetypeInstance(a, id);
 
 		return id;
 	}
@@ -134,10 +92,7 @@ namespace TEngine
 
 		if (a == nullptr) a = AddArchetype(types, count);
 
-		USIZE chunk, index;
-		NewArchetypeInstance(a, chunk, index);
-
-		entity_storage_map_[id] = EntityDetails{ a, chunk, index };
+		NewArchetypeInstance(a, id);
 
 		return id;
 	}
@@ -158,14 +113,14 @@ namespace TEngine
 		
 		for (Archetype* a : results)
 		{
-			DataChunk* d = a->first_chunk;
-			while (d != nullptr)
+			DataChunk* chunk = a->first_chunk_;
+			while (chunk != nullptr)
 			{
-				for (USIZE i = 0; i < d->last_index; i++)
+				for (USIZE i = 0; i < chunk->last_index; i++)
 				{
-					func(GetComponentChunkId<Comps>(d, i)...);
+					func(GetComponentChunkId<Comps>(chunk, i)...);
 				}
-				d = d->next;
+				chunk = chunk->next;
 			}
 		}
 	}
@@ -174,47 +129,36 @@ namespace TEngine
 	inline T& EntityManager::GetComponent(U32 id) const
 	{
 		const EntityDetails& detail = entity_storage_map_.at(id);
-		std::vector<Metatype>& types = detail.archetype->types;
-		DataChunk* chunk = detail.archetype->first_chunk;
-
+		Archetype* archetype = detail.archetype;
 		USIZE hash = typeid(T).hash_code();
 
-		USIZE index = 0;
-		for (USIZE i = 0; i < types.size(); i++)
+		if (archetype->hash_type_map_.find(hash) 
+			!= archetype->hash_type_map_.end())
 		{
-			if (hash == types[i].hash)
-			{
-				index = i;
-				break;
-			}
+			Archetype::Subtype& sub = archetype->hash_type_map_[hash];
+
+			U8* comp = (U8*)archetype->first_chunk_->data
+					+ (sub.type.size + sub.padding) * detail.chunk_index
+					+ sub.offset;
+
+			return *(T*)comp;
 		}
 
-		U8* p = (U8*)chunk->data			// data_ start
-			+ detail.archetype->offsets[index]  // subarray for T
-			+ detail.index * sizeof(T);			// entity position
-
-		return *(T*)p;
+		throw EXCEPTION("Could not find component requested!");
 	}
 
 	template<typename T>
 	inline T* EntityManager::GetComponentChunkId(DataChunk* chunk, USIZE index)
 	{
-		Archetype* a = chunk->archetype;
+		Archetype* archetype = chunk->archetype;
+		Metatype meta = Metatype::Create<T>();
 
-		USIZE hash = typeid(T).hash_code();
+		Archetype::Subtype& sub = archetype->hash_type_map_[meta.hash];
 
-		for (USIZE i = 0; i < a->types.size(); i++)
-		{
-			if (hash == a->types[i].hash)
-			{
-				U8* p = chunk->data		// data_ start
-					+ a->offsets[i]			// subarray for T
-					+ sizeof(T) * index;	// entity position
+		U8* comp = (U8*)chunk->data
+			+ (sub.type.size + sub.padding) * index
+			+ sub.offset;
 
-				return (T*)p;
-			}
-		}
-
-		return nullptr;
+		return (T*)comp;
 	}
 }

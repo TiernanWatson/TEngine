@@ -9,7 +9,9 @@
 #include "../Render/D3D11/Bindables/DXConstantBuffer.h"
 #include "../Render/D3D11/Bindables/DXVertexBuffer.h"
 #include "../Render/D3D11/Bindables/DXInputLayout.h"
+#include "../Core/Memory/Memory.h"
 #include <vector>
+#include <sstream>
 
 namespace TEngine
 {
@@ -47,6 +49,15 @@ namespace TEngine
 		std::string title = "Odyssey Debug Build: " + std::to_string((int)FPS) + "FPS";
 
 		RenderText(title, Vector2(0.f, 750.f), 1.f, Vector3(1.f, 1.f, 1.f));
+
+		RenderText("MAIN HEAP:", Vector2(0.0f, 730.0f), 1.0f, Vector3::kOne);
+
+		std::stringstream memstream;
+		memstream << "Total Allocations: " << Memory::GetHeap().GetActiveCnt() 
+			<< " Total Size: " << Memory::GetHeap().GetActiveSize();
+		std::string memstr = memstream.str();
+
+		RenderText(memstr, Vector2(0.0f, 710.0f), 1.f, Vector3::kOne);
 
 		F32 distance = 20.f;
 		for (int i = 0; i < Debug::screen_messages_.size(); i++)

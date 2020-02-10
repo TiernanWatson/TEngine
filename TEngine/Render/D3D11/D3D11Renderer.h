@@ -31,7 +31,7 @@ namespace TEngine
 		void Present();
 
 	private:
-		// DirectX 11 device_ info and swap chain
+		// DirectX 11 device_ info and Swap chain
 		Microsoft::WRL::ComPtr<ID3D11Device> device_;
 		Microsoft::WRL::ComPtr<IDXGISwapChain> swap_chain_;
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context_;

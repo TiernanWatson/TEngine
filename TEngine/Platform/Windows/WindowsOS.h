@@ -28,7 +28,7 @@ namespace TEngine
 
 		inline HWND GetHWND() const
 		{
-			return hWnd_;
+			return hwnd;
 		}
 
 		inline int GetWidth() const
@@ -53,7 +53,7 @@ namespace TEngine
 		int nCmdShow_;
 
 		WNDCLASS wc_;
-		HWND hWnd_;
+		HWND hwnd;
 
 		const char* wnd_cls_name_ = "OddWinCls";
 

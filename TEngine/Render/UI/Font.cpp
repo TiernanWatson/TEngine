@@ -37,10 +37,6 @@ namespace TEngine
 				continue;
 			}
 
-			std::stringstream ss;
-			ss << "Creating Font Tex for: " << (char)c << "("<<(int)c<<")" << " with width_: " << face->glyph->bitmap.width << "\n";
-			OutputDebugString(ss.str().c_str());
-
 			Texture* tex = new Texture(
 				face->glyph->bitmap.width,
 				face->glyph->bitmap.rows,

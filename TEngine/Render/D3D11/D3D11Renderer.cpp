@@ -221,10 +221,6 @@ namespace TEngine
 		cb.view = Matrix4::ModelToWorld(cam_transform.position, cam_transform.scale, cam_transform.rotation).Inverse().Transpose();
 		cb.proj = Matrix4::Projection(cam.fov, cam.aspect, cam.far_dist, cam.near_dist).Transpose();
 
-		std::stringstream ss;
-		ss << "Cam Position: " << cam_transform.position.ToString() << "\n";
-		OutputDebugString(ss.str().c_str());
-
 		DXVSConstantBuffer<CBuf> const_buffer(*this, cb);
 		const_buffer.Bind();
 
