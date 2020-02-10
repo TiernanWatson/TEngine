@@ -251,7 +251,6 @@
     <ClCompile Include="Resources\Types\Model.cpp" />
     <ClCompile Include="Resources\Types\Texture.cpp" />
     <ClCompile Include="WinMain.cpp" />
-    <ClCompile Include="Window\WindowManager.cpp" />
     <ClCompile Include="World\World.cpp" />
     <ClCompile Include="World\WorldScript.cpp" />
     <ClCompile Include="World\WorldSystem.cpp" />
@@ -330,7 +329,6 @@
     <ClInclude Include="Resources\Types\Mesh.h" />
     <ClInclude Include="Resources\Types\Model.h" />
     <ClInclude Include="Resources\Types\Texture.h" />
-    <ClInclude Include="Window\WindowManager.h" />
     <ClInclude Include="World\World.h" />
     <ClInclude Include="World\WorldScript.h" />
     <ClInclude Include="World\WorldSystem.h" />
@@ -341,10 +339,10 @@
     <None Include="Resources\ExampleScene\example.world" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="PixelShader.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+    <FxCompile Include="Shaders\PixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="Shaders\TextPixelShader.hlsl">

@@ -3,9 +3,7 @@
 
 namespace TEngine 
 {
-	/**
-	* Pool of pre-defined USIZE allocating fixed-USIZE memory with no order restrictions
-	**/
+	// Pool of pre-defined size allocating fixed-size memory with no order restrictions
 	class PoolAllocator
 	{
 	public:

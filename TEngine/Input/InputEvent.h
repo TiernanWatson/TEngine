@@ -9,6 +9,7 @@ namespace TEngine
 		Down
 	};
 
+	// Describes key events such as up/down
 	class InputEvent
 	{
 	public:

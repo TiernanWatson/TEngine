@@ -7,9 +7,7 @@ struct GLFWwindow;
 
 namespace TEngine
 {
-	/**
-	* Main input_ manager responsible for events
-	**/
+	// Main input manager responsible for storing state
 	class InputSystem
 	{
 	public:

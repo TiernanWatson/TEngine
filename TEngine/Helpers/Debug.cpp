@@ -17,6 +17,18 @@ namespace TEngine
 		OutputDebugString((message + "\n").c_str());
 	}
 
+	void Debug::LogDebugF(std::string message, ...)
+	{
+		char str[255];
+
+		va_list args;
+		va_start(args, message);
+		vsprintf_s(str, 255, message.c_str(), args);
+		va_end(args);
+
+		LogDebugText(std::string(str));
+	}
+
 	std::string Debug::Vec3ToStr(Vector3& v)
 	{
 		return "(" + std::to_string(v.x) 

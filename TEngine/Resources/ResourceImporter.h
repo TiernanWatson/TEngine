@@ -9,10 +9,8 @@ namespace TEngine
 {
 	class Resource;
 
-	/**
-	* Base class for importing code different types of resources
-	* Also contains the cache for faster imports/memory saving
-	**/
+	// Base class for importing code different types of resources
+	// Also contains the cache for faster imports/memory saving
 	template<typename T>
 	class ResourceImporter
 	{

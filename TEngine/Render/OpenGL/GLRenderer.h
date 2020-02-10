@@ -14,9 +14,7 @@ namespace TEngine
 	class Mesh;
 	class Matrix4;
 
-	/**
-	* Class responsible for updating visuals when using OpenGL
-	**/
+	// Class responsible for updating visuals when using OpenGL
 	class GLRenderer
 	{
 	public:

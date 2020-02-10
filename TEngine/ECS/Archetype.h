@@ -8,9 +8,7 @@ namespace TEngine
 {
 	struct DataChunk;
 
-	/**
-	* A collection of component metatypes e.g. <position, velocity>
-	**/
+	// A collection of component metatypes e.g. <position, velocity>
 	class Archetype
 	{
 	public:

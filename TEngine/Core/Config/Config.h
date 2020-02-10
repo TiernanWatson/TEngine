@@ -13,35 +13,26 @@ namespace TEngine
 {
 	class Config
 	{
-	private:
-		std::unordered_map<std::string, std::unordered_map<std::string, ConfigVar>> value_map_;
-
-		Config(); // singleton
-
 	public:
 		static Config& Instance();
 
 		ConfigVar GetVar(const std::string& section, const std::string& name, const ConfigVar& fallback = ConfigVar(0)) const;
 
-		/**
-		* Reads an INI file_ into memory and then calls ProcessString on it
-		**/
+		// Reads an INI file_ into memory and then calls ProcessString on it
 		void LoadFrom(const char* file_path);
 
-		/**
-		* Take an INI file_'s contents and fills the configuration map
-		**/
+		// Take an INI file_'s contents and fills the configuration map
 		void ProcessString(char* ini_string);
 
 	private:
-		/**
-		* Pulls a valid key and value from a line_ if possible (key=value)
-		**/
+		Config(); // Singleton
+
+		std::unordered_map<std::string, std::unordered_map<std::string, ConfigVar>> value_map_;
+
+		// Pulls a valid key and value from a line_ if possible (key=value)
 		bool ProcessLine(char* line, std::string& key, std::string& value) const;
 
-		/**
-		* Changes the current section name_ if the line_ contains [nameHere]
-		**/
+		// Changes the current section name if the line contains [nameHere]
 		bool CheckForSection(char* line, std::string& out_name) const;
 	};
 }

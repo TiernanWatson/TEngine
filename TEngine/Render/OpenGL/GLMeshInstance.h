@@ -10,10 +10,8 @@ namespace TEngine
 	class Mesh;
 	class Texture;
 
-	/**
-	* Represents an instance_ of a mesh on the GPU
-	* Useful for saving memory (only kOne copy needed)
-	**/
+	// Represents an instance_ of a mesh on the GPU
+	// Useful for saving memory (only one copy needed)
 	class GLMeshInstance
 	{
 	public:

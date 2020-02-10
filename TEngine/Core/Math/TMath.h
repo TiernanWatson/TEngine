@@ -4,9 +4,7 @@
 
 namespace TEngine
 {
-	/**
-	* Collection of common math functions
-	**/
+	// Collection of common math functions
 	namespace TMath
 	{
 		extern const F32 kPi;

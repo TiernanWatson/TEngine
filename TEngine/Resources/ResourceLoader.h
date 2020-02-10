@@ -12,9 +12,7 @@ namespace TEngine
 	class Texture;
 	class Model;
 
-	/**
-	* Main singleton class used to handle the loading of resources
-	**/
+	// Main singleton class used to handle the loading of resources
 	class ResourceLoader
 	{
 	public:

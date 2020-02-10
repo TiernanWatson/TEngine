@@ -5,8 +5,7 @@
 
 namespace TEngine
 {
-	// Contains a linked list of arrays of size arr_size
-	// Avoids having to copy elements if array expands
+	// Expanding linked list of arrays sized arr_size
 	template<typename Elem, USIZE arr_size = 16>
 	class ArrayChain
 	{
@@ -17,6 +16,7 @@ namespace TEngine
 		Elem& operator[](USIZE index);
 		const Elem& operator[](USIZE index) const;
 
+		// Creates a new space in the array and returns its pointer
 		Elem* RawSpace(USIZE index);
 
 		inline USIZE Count() const

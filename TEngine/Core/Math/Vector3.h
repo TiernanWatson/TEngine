@@ -4,9 +4,7 @@
 
 namespace TEngine 
 {
-	/**
-	* Class describing a 3D vector, 12 size_, leave 4 size_ to properly align
-	**/
+	// 3D vector, 12 bytes, 4 byte alignment
 	class Vector3
 	{
 	public:

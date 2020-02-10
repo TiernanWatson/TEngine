@@ -11,9 +11,7 @@ namespace TEngine
 	public:
 		static FileSystem& Instance();
 
-		/**
-		* Check if the file_ specified exists, can return false if folder doesnt exist
-		**/
+		// Check if the file_ specified exists, can return false if folder doesnt exist
 		bool FileExists(const char* file_path) const;
 
 		/**

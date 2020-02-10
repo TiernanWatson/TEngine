@@ -4,9 +4,7 @@
 
 namespace TEngine
 {
-	/**
-	* Configuration variable holding atomic types, 4-byte aligned
-	**/
+	// Configuration variable holding atomic types, 4-byte aligned
 	class ConfigVar
 	{
 	public:

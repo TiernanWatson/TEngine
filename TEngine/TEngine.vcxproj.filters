@@ -40,12 +40,6 @@
     <Filter Include="External">
       <UniqueIdentifier>{8b95cff9-f677-4bc0-8343-5640cbf7dcdc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Window">
-      <UniqueIdentifier>{f2adfa81-baa5-4c18-a2d9-b495c9fcd27b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Window">
-      <UniqueIdentifier>{f3d05e26-6a49-4362-bf7c-8f6b4b9d4701}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core\Time">
       <UniqueIdentifier>{9e2099da-9101-436b-9835-b015e6caeece}</UniqueIdentifier>
     </Filter>
@@ -197,9 +191,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Libs\glad\src\glad.c">
       <Filter>External</Filter>
-    </ClCompile>
-    <ClCompile Include="Window\WindowManager.cpp">
-      <Filter>Source Files\Window</Filter>
     </ClCompile>
     <ClCompile Include="Core\Time\Clock.cpp">
       <Filter>Source Files\Core\Time</Filter>
@@ -406,9 +397,6 @@
     </ClInclude>
     <ClInclude Include="Core\Core.h">
       <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Window\WindowManager.h">
-      <Filter>Header Files\Window</Filter>
     </ClInclude>
     <ClInclude Include="Core\Time\Clock.h">
       <Filter>Header Files\Core\Time</Filter>
@@ -618,13 +606,13 @@
     <FxCompile Include="Shaders\VertexShader.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="PixelShader.hlsl">
-      <Filter>Shaders</Filter>
-    </FxCompile>
     <FxCompile Include="Shaders\TextVertexShader.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
     <FxCompile Include="Shaders\TextPixelShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\PixelShader.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
   </ItemGroup>

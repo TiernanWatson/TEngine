@@ -5,9 +5,7 @@
 
 namespace TEngine
 {
-	/**
-	* Static class used to make input_ handling easy
-	**/
+	// Static class used to make input handling easy
 	class Input
 	{
 	public:

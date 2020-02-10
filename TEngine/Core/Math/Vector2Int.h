@@ -3,6 +3,7 @@
 
 namespace TEngine
 {
+	// 2-Dimensional vector of integers, 8-bytes
 	class Vector2Int
 	{
 	public:

@@ -6,9 +6,7 @@ namespace TEngine
 {
 	constexpr USIZE kChunkDataSize = 16384;  // 16kB
 
-	/**
-	* A chunk of memory allocated to store a single archetype
-	**/
+	// A chunk of memory allocated to store a single archetype
 	struct DataChunk
 	{
 		U8 data[kChunkDataSize];

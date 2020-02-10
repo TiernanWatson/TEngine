@@ -1,7 +1,6 @@
 #pragma once
 #include "Core/PortableTypes.h"
 #include "Core/Time/Clock.h"
-#include "Window/WindowManager.h"
 #include "Input/InputSystem.h"
 #include "World/WorldSystem.h"
 #include "Core/Memory/StackAllocator.h"

@@ -6,10 +6,8 @@
 
 namespace TEngine
 {
-	/**
-	* Represents an instance_ of this program on WindowsOS,
-	* there should only ever be kOne instance_ WindowsOS::Get
-	**/
+	// Represents an instance of this program on WindowsOS,
+	// there should only ever be one instance, WindowsOS::Get 
 	class WindowsOS
 	{
 	public:

@@ -4,9 +4,7 @@
 
 namespace TEngine
 {
-	/**
-	* Represents a quaternion, 16-size_
-	**/
+	// Represents a quaternion, 16 bytes
 	class Quat
 	{
 	public:

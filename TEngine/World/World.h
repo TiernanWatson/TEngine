@@ -8,9 +8,7 @@ namespace TEngine
 	class WorldScript;
 	struct Camera;
 
-	/**
-	* Describes a world_ in the game (i.e. all its entities_, etc..)
-	**/
+	// Describes a world in the game (i.e. all its entities, etc..)
 	class World
 	{
 	public:

@@ -4,10 +4,8 @@
 
 namespace TEngine
 {
-	/*
-	* Allocates a fixed-size_ of memory on the heap.
-	* Returns arbitrarily-sized memory without context_-switching
-	*/
+	// Allocates a fixed-size of memory on the heap.
+	// Returns arbitrarily-sized memory without context-switching
 	class HeapAllocator
 	{
 	public:

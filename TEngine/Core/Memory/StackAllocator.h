@@ -3,9 +3,7 @@
 
 namespace TEngine 
 {
-	/**
-	* Stack of fixed size_ allocating blocks of varying size_ memory
-	**/
+	// Stack of fixed size allocating blocks of varying size
 	class StackAllocator
 	{
 	public:
@@ -18,20 +16,17 @@ namespace TEngine
 		template<typename T, typename ...Args>
 		inline T* NewOnStack(Args... args);
 
-		/**
-		* Allocates 'payload_size' bytes with specified alignment at top of stack
-		*/
+		// Allocates 'size' bytes with specified alignment at top of stack
 		void* Alloc(USIZE size, U8 alignment);
 
-		/**
-		* Frees down to (and including) ptr from the stack
-		*/
+		// Frees down to (and including) ptr from the stack
 		void Free(void* ptr);
 
 		void Clear();
 
 	private:
 		USIZE stack_size_;
+
 		void* base_ptr_;
 		void* stack_pointer_;
 	};

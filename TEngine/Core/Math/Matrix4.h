@@ -3,11 +3,7 @@
 
 namespace TEngine
 {
-	class Vector3;
-
-	/**
-	* Class describing a 4x4 F32 matrix, 64 byte size_
-	**/
+	// Class describing a 4x4 F32 matrix, 64 byte size_
 	class Matrix4
 	{
 	public:
@@ -47,19 +43,13 @@ namespace TEngine
 		Matrix4& operator*=(const F32& rhs);
 
 	public:
-		/**
-		* Used to return the Camera-to-Clip space matrix for rendering
-		**/
+		// Used to return the Camera-to-Clip space matrix for rendering
 		static Matrix4 Projection(F32 fov_rad, F32 aspect, F32 far_dist, F32 near_dist);
 
-		/**
-		* Computes an orthographic projection matrix
-		**/
+		// Computes an orthographic projection matrix
 		static Matrix4 Orthographic(F32 near_dist, F32 far_dist, F32 left, F32 right, F32 bottom, F32 top);
 
-		/**
-		* Used to return the Model-to-World space matrix for rendering
-		**/
+		// Used to return the Model-to-World space matrix for rendering
 		static Matrix4 ModelToWorld(const Vector3& trans, const Vector3& scale, const Vector3& rotation);
 
 		static Matrix4 RotateX(F32 radians);

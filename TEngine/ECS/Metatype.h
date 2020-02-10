@@ -5,10 +5,8 @@
 
 namespace TEngine
 {
-	/**
-	* Represents a component type_ for use in an archetype
-	* Data chunk knows how much to allocate, etc...
-	**/
+	// Represents a component type for use in an archetype \
+		data chunk knows how much to allocate, etc...
 	struct Metatype
 	{
 		USIZE hash;

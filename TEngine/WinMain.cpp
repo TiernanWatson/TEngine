@@ -4,6 +4,9 @@
 #ifdef PLATFORM_WINDOWS
 #include "Platform/Windows/WindowsOS.h"
 #include "Core/Exception.h"
+#include "Core/Math/Vector3.h"
+#include "Core/Math/Vector4.h"
+#include <typeinfo>
 
 int WINAPI wWinMain(
 	_In_ HINSTANCE hInstance, 
