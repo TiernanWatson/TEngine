@@ -14,9 +14,13 @@ A world contains an entity manager (ECS) for all the entities in the world, as w
 * Pool allocator ~9.8% faster than malloc
 * Heap allocator work-in-progress
 * ECS system can add/remove entities
-..* ECS can loop over all matching archetypes with function
+  * ECS can loop over all matching archetypes with function
 * D3D11 renderer renders everything with mesh component
-..* Working on implementing render passes and queues
+  * Working on implementing render passes and queues
+* World system loops over world scripts
+  * Still need to add serialization
+* Windows platform sends input information to main engine
+  * Input is useable by world scripts
 
 ## Setup
 
