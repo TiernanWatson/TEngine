@@ -82,12 +82,6 @@
     <Filter Include="Source Files\World">
       <UniqueIdentifier>{2d5d18b5-66d7-419b-a7d5-955bbcb2b8d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Render\Material">
-      <UniqueIdentifier>{06d7f07f-e58e-4df3-b7a4-452aee529dbd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Render\Material">
-      <UniqueIdentifier>{c81239d6-599e-4a80-a4ae-4b5dfaa5b3c7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Render\UI">
       <UniqueIdentifier>{63e1ce34-2990-4ae0-9e10-fdb2bd557519}</UniqueIdentifier>
     </Filter>
@@ -249,9 +243,6 @@
     <ClCompile Include="Helpers\Debug.cpp">
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Material\Shaders.cpp">
-      <Filter>Source Files\Render\Material</Filter>
-    </ClCompile>
     <ClCompile Include="Resources\ExampleScene\Scripts\MoveCamera.cpp">
       <Filter>Source Files\Resources\ExampleScene\Scripts</Filter>
     </ClCompile>
@@ -308,9 +299,6 @@
     </ClCompile>
     <ClCompile Include="Platform\Windows\Mouse.cpp">
       <Filter>Source Files\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\D3D11\DXInfoManager.cpp">
-      <Filter>Source Files\Render\D3D11</Filter>
     </ClCompile>
     <ClCompile Include="Platform\Windows\WinExceptions.cpp">
       <Filter>Source Files\Platform\Windows</Filter>
@@ -470,9 +458,6 @@
     <ClInclude Include="ECS\Components\PointLight.h">
       <Filter>Header Files\ECS\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Material\Shaders.h">
-      <Filter>Header Files\Render\Material</Filter>
-    </ClInclude>
     <ClInclude Include="Resources\ExampleScene\Scripts\MoveCamera.h">
       <Filter>Header Files\Resources\ExampleScene\Scripts</Filter>
     </ClInclude>
@@ -538,9 +523,6 @@
     </ClInclude>
     <ClInclude Include="Platform\Windows\Mouse.h">
       <Filter>Header Files\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\D3D11\DXInfoManager.h">
-      <Filter>Header Files\Render\D3D11</Filter>
     </ClInclude>
     <ClInclude Include="Render\D3D11\DXGraphicsExceptions.h">
       <Filter>Header Files\Render\D3D11</Filter>

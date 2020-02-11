@@ -232,9 +232,7 @@
     <ClCompile Include="Render\D3D11\Bindables\DXVertexBuffer.cpp" />
     <ClCompile Include="Render\D3D11\Bindables\DXVertexShader.cpp" />
     <ClCompile Include="Render\D3D11\D3D11Renderer.cpp" />
-    <ClCompile Include="Render\D3D11\DXInfoManager.cpp" />
     <ClCompile Include="Render\D3D11\DXMeshInstance.cpp" />
-    <ClCompile Include="Render\Material\Shaders.cpp" />
     <ClCompile Include="Render\OpenGL\GLMeshInstance.cpp" />
     <ClCompile Include="Render\OpenGL\GLRenderer.cpp" />
     <ClCompile Include="Render\OpenGL\GLTextureInfo.cpp" />
@@ -310,9 +308,7 @@
     <ClInclude Include="Render\D3D11\Bindables\DXVertexShader.h" />
     <ClInclude Include="Render\D3D11\D3D11Renderer.h" />
     <ClInclude Include="Render\D3D11\DXGraphicsExceptions.h" />
-    <ClInclude Include="Render\D3D11\DXInfoManager.h" />
     <ClInclude Include="Render\D3D11\DXMeshInstance.h" />
-    <ClInclude Include="Render\Material\Shaders.h" />
     <ClInclude Include="Render\OpenGL\GLMeshInstance.h" />
     <ClInclude Include="Render\OpenGL\GLRenderer.h" />
     <ClInclude Include="Render\OpenGL\GLTextureInfo.h" />

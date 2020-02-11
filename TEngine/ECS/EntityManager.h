@@ -12,7 +12,7 @@
 
 namespace TEngine
 {
-	// Manges archetypes and entities in a world
+	// Manages archetypes and entities in a world
 	class EntityManager
 	{
 	public:

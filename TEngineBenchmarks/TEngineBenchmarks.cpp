@@ -27,20 +27,20 @@ int main()
 	}*/
 	std::chrono::high_resolution_clock clock;
 	
-	TEngine::HeapAllocator allocat(1024 * 1024);
+	//TEngine::HeapAllocator allocat(1024 * 1024);
 	//TEngine::StackAllocator allocat(1024 * 1024);
-	//TEngine::PoolAllocator allocat(8, 2000);
+	TEngine::PoolAllocator allocat(8, 100000);
 	TimePoint start = clock.now();
-	for (int i = 0; i < 10000; i++)
+	for (int i = 0; i < 100000; i++)
 	{
-		void* ptr = allocat.Alloc(24);
+		void* ptr = allocat.Alloc();
 	}
 	TimePoint end = clock.now();
 
 	TimePoint s2 = clock.now();
-	for (int i = 0; i < 10000; i++)
+	for (int i = 0; i < 100000; i++)
 	{
-		void* ptr = malloc(24);
+		void* ptr = malloc(8);
 	}
 	TimePoint e2 = clock.now();
 
