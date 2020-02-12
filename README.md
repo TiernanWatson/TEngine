@@ -7,3 +7,5 @@ The three main projects:
 * TEngineTests - unit tests for the main engine
 
 TEngine contains its own readme.
+
+Main portfolio: [tiernanwatson.com](https://tiernanwatson.com)
